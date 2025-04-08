@@ -1,0 +1,16 @@
+name: Restrict merges to main
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  only-allow-dev:
+    name: Only allow merge from dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PR is from dev
+        run: |
+          if [ "${{ github.event.pull_request.head.ref }}" != "dev" ]; then
+            echo "ERROR: Pull requests to main must come from the dev branch only."
+            echo "Current branch: ${{ github.event.pull_request.head.ref }}"
+            exit 1
+          fi
