@@ -3,8 +3,8 @@
 // ------------------------------------------------------------------------------
 // * This file contains the Google Secret Manager client config and initialization
 
-import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
-import chalk from "chalk";
+import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
+import chalk from 'chalk';
 
 const secretClient = new SecretManagerServiceClient(); // Initialize the Secret Manager client
 
@@ -17,7 +17,7 @@ const loadSecrets = async (
   if (!projectId) {
     throw new Error(
       chalk.bgRedBright(
-        "❌ Project ID not found. Please set the GCP_PROJECT_ID environment variable.",
+        '❌ Project ID not found. Please set the GCP_PROJECT_ID environment variable.',
       ),
     );
   }
@@ -41,7 +41,7 @@ const loadSecrets = async (
       }
     }),
   );
-  console.log("[Secret Manager] Secrets loaded successfully");
+  console.log('[Secret Manager] Secrets loaded successfully');
 
   return Object.fromEntries(secretResults); // Return all secrets as an object
 };

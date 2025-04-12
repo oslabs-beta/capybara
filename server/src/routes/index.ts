@@ -1,7 +1,7 @@
 // ------------------------------------------------------------------------------------------------
 // > ROUTES INDEX < //
 // ------------------------------------------------------------------------------------------------
-import express from "express";
+import express from 'express';
 // ie.
 // import authRoutes from "./authRoutes";
 // import userRoutes from "./userRoutes";

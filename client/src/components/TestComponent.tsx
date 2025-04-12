@@ -1,9 +1,9 @@
 // ----------------------------------------------------------
 // >> TEST COMPONENT << //
 // ----------------------------------------------------------
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Typewriter } from "react-simple-typewriter";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Typewriter } from 'react-simple-typewriter';
 
 const TestComponent: React.FC = () => {
   // Add notification when frontend connects to server
@@ -32,7 +32,7 @@ const TestComponent: React.FC = () => {
           clearInterval(intervalId);
         }
       } catch (error) {
-        console.error("Error connecting to server:", error);
+        console.error('Error connecting to server:', error);
       }
     };
 
@@ -59,23 +59,23 @@ const TestComponent: React.FC = () => {
           )}
         </p>
         <p className="ml-1 text-left text-2xl">
-          <Typewriter words={["Sit tight while my devs"]} typeSpeed={70} />
+          <Typewriter words={['Sit tight while my devs']} typeSpeed={70} />
           {showTypewriter && (
             <span className="ml-1 font-bold text-yellow-700">
               <Typewriter
                 words={[
-                  "Wenjun,",
-                  "Steven,",
-                  "& Amit...",
-                  "make some coffee!",
-                  "work their magic!",
-                  "invent new features!",
-                  "finalize the code!",
-                  "get ready to launch!",
-                  "fix one more bug!",
-                  "warm up the server!",
-                  "perform final checks!",
-                  "prepare for takeoff!",
+                  'Wenjun,',
+                  'Steven,',
+                  '& Amit...',
+                  'make some coffee!',
+                  'work their magic!',
+                  'invent new features!',
+                  'finalize the code!',
+                  'get ready to launch!',
+                  'fix one more bug!',
+                  'warm up the server!',
+                  'perform final checks!',
+                  'prepare for takeoff!',
                 ]}
                 cursor
                 loop
