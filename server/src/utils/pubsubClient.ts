@@ -3,14 +3,14 @@
 // ------------------------------------------------------------------------------
 // * This file contains the Google Pub/Sub client config and initialization
 
-import { PubSub } from "@google-cloud/pubsub";
-import chalk from "chalk";
-import getSecretKeys from "../appSecrets";
+import { PubSub } from '@google-cloud/pubsub';
+import chalk from 'chalk';
+import getSecretKeys from '../appSecrets';
 
 const secret = await getSecretKeys(); // Load secrets from Google Secret Manager
 
 if (!secret.GCP_KEY_FILE) {
-  throw new Error("GCP_KEY_FILE is not defined in secrets");
+  throw new Error('GCP_KEY_FILE is not defined in secrets');
 }
 
 const pubSubClient = new PubSub({

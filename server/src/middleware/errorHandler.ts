@@ -1,7 +1,7 @@
 // ------------------------------------------------------------------------------------------------
 // > MIDDLEWARE - ERROR HANDLER < //
 // ------------------------------------------------------------------------------------------------
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 
 const errorHandler = (
   err: Error,
@@ -11,7 +11,7 @@ const errorHandler = (
 ) => {
   console.error(err.stack); // Log the entire error stack
   res.status(500).send({
-    message: "Uh oh! Something went wrong! Take a nap and try again.",
+    message: 'Uh oh! Something went wrong! Take a nap and try again.',
     error: err.message,
   });
 };

@@ -3,11 +3,11 @@
 // ------------------------------------------------------------------------------
 // * This listens for Kubernetes events and publishes them to a Google Pub/Sub topic
 
-import * as k8s from "@kubernetes/client-node";
-import publishToTopic from "../utils/pubsubClient";
-import chalk from "chalk";
+import * as k8s from '@kubernetes/client-node';
+import publishToTopic from '../utils/pubsubClient';
+import chalk from 'chalk';
 
-const topicName = "kubernetes-error-events-oom-crashloop"; // !! Pub/Sub topic name.. testing this one !!
+const topicName = 'kubernetes-error-events-oom-crashloop'; // !! Pub/Sub topic name.. testing this one !!
 
 const startK8sEventWatcher = async () => {
   try {
@@ -16,15 +16,15 @@ const startK8sEventWatcher = async () => {
 
     const watch = new k8s.Watch(kc);
 
-    console.log(chalk.bgBlueBright("[K8sWatcher] K8s event watcher started"));
+    console.log(chalk.bgBlueBright('[K8sWatcher] K8s event watcher started'));
 
     await watch.watch(
-      "/api/v1/events",
+      '/api/v1/events',
       {},
       async (type, obj: any) => {
-        const reason = obj.reason || ""; //Extract reason from event object
+        const reason = obj.reason || ''; //Extract reason from event object
         const isError =
-          obj.type === "Warning" && /Crash|Backoff|OOM/i.test(reason); // Check if the event is a warning and reason matches regex
+          obj.type === 'Warning' && /Crash|Backoff|OOM/i.test(reason); // Check if the event is a warning and reason matches regex
 
         if (isError) {
           //   console.log(chalk.yellow(`[K8sWatcher] Detected error: ${obj.type}`));
@@ -44,10 +44,10 @@ const startK8sEventWatcher = async () => {
       }, // Error handling when watching events fails
     );
 
-    console.log(chalk.bgBlueBright("[K8sWatcher] Watching for events"));
+    console.log(chalk.bgBlueBright('[K8sWatcher] Watching for events'));
   } catch (error) {
     console.error(
-      chalk.redBright("[K8sWatcher] Error initializing watcher: "),
+      chalk.redBright('[K8sWatcher] Error initializing watcher: '),
       error,
     );
     setTimeout(() => startK8sEventWatcher(), 5000); // Retry after 5 seconds

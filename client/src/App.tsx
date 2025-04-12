@@ -1,7 +1,7 @@
 // ----------------------------------------------------------
 // >> APP COMPONENT << //
 // ----------------------------------------------------------
-import TestComponent from "./components/TestComponent";
+import TestComponent from './components/TestComponent';
 
 const App = () => {
   // ----------------------------------------------------------
