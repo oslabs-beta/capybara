@@ -139,3 +139,6 @@ dist
 .pnp.*
 
 coverage/
+
+*.json
+keys/

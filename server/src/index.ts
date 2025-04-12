@@ -8,9 +8,14 @@ import "dotenv/config";
 import chalk from "chalk";
 import errorHandler from "./middleware/errorHandler";
 import routes from "./routes";
+import startK8sEventWatcher from "./services/k8sEventWatcher"; // K8s event watcher
+import getSecretKeys from "./appSecrets"; // Google Secret Manager
 
 const app = express();
-const port = process.env.PORT;
+const secret = await getSecretKeys(); // Load secrets from Google Secret Manager
+const port = secret.PORT;
+
+startK8sEventWatcher(); // Start Kubernetes event watcher
 
 // ------------------------------------------------------------------------------------------------
 // * MIDDLEWARE
@@ -54,7 +59,7 @@ if (process.env.NODE_ENV !== "test") {
   app.listen(port, () =>
     console.log(
       chalk.bgGreenBright(
-        `Server is up and running @ http://localhost:${port}`,
+        `[Server] is up and running @ http://localhost:${port}`,
       ),
     ),
   );

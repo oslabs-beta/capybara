@@ -1,11 +1,13 @@
 {
   "name": "server",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec  NODE_NO_WARNINGS=1 ts-node src/index.ts",
-    "build": "tsc",
+    "dev": "nodemon --watch src --ext ts --exec vite-node src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "vite build",
     "start": "node dist/index.js",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -15,6 +17,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/pubsub": "^1.7.3",
+    "@google-cloud/secret-manager": "^6.0.1",
+    "@kubernetes/client-node": "^1.1.2",
     "axios": "^1.8.4",
     "chalk": "^5.4.1",
     "cors": "^2.8.5",
@@ -32,6 +37,8 @@
     "supertest": "^7.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
+    "vite": "^6.2.6",
+    "vite-node": "^3.1.1",
     "vitest": "^3.1.1"
   }
 }
