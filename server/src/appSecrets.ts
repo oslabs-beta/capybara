@@ -8,7 +8,7 @@ import loadSecrets from './utils/loadSecrets';
 
 // ----------------------------------------------------------------------------------------
 // TODO: ADD SECRET KEYS HERE FROM GOOGLE SECRET MANAGER
-const SECRET_KEYS = ['PORT', 'GCP_PROJECT_ID', 'GCP_KEY_FILE'];
+const SECRET_KEYS = ['PORT', 'GCP_PROJECT_ID', 'GCP_KEY_FILE', 'REDIS_URL'];
 // ----------------------------------------------------------------------------------------
 
 const getSecretKeys = async () => {
@@ -21,6 +21,7 @@ const getSecretKeys = async () => {
       PORT: parseInt(secrets.PORT || '3000'), // default to 300 if not found,
       GCP_PROJECT_ID: secrets.GCP_PROJECT_ID,
       GCP_KEY_FILE: secrets.GCP_KEY_FILE,
+      REDIS_URL: secrets.REDIS_URL
     };
   } catch (error) {
     console.error(chalk.red('[Secret Manager] Error loading secrets:'), error);
