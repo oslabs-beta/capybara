@@ -6,6 +6,8 @@
 import { PubSub } from '@google-cloud/pubsub';
 import chalk from 'chalk';
 import getSecretKeys from '../appSecrets';
+import { subscribe } from 'diagnostics_channel';
+import redisCache from '../services/processEvent';
 
 const secret = await getSecretKeys(); // Load secrets from Google Secret Manager
 
@@ -27,6 +29,10 @@ const publishToTopic = async (
   const messageBuffer = Buffer.from(JSON.stringify(data));
 
   await topic.publishMessage({ data: messageBuffer, attributes }); // Publish message to topic
+
+  // * Add the function of saving data into Redis
+  await redisCache(data);
+
   console.group(
     chalk.bgCyanBright(`[PubSub] Message published to ${topicName}`),
   );

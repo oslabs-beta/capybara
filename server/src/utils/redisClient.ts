@@ -4,12 +4,14 @@ import getSecretKeys from '../appSecrets';
 
 const connectRedis = async () => {
   const { REDIS_URL } = await getSecretKeys(); // Get saved URL from secrete manager
-  const redisClient = createClient({ url: REDIS_URL });
 
   if (!REDIS_URL) {
     throw new Error('REDIS_URL is not defined in secrets');
   }
-  
+
+  const redisClient = createClient({ url: REDIS_URL }); 
+
+  // Listen for connection error event asynchronously
   redisClient.on('error', (err) => {
     console.error(chalk.green('Redis Client Error', err));
   });
