@@ -29,13 +29,14 @@ const publishToTopic = async (
   const messageBuffer = Buffer.from(JSON.stringify(data));
 
   await topic.publishMessage({ data: messageBuffer, attributes }); // Publish message to topic
-
-  // * Add the function of saving data into Redis
-  await redisCache(data);
-
+  
   console.group(
     chalk.bgCyanBright(`[PubSub] Message published to ${topicName}`),
   );
+
+  // * Add the function of saving data into Redis
+  await redisCache(topicName, data);
+  
   console.log(data); // This will pretty-print the object
   console.groupEnd();
 };
