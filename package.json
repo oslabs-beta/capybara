@@ -11,6 +11,7 @@
     "prettier-plugin-tailwindcss": "^0.6.11"
   },
   "dependencies": {
-    "redis": "^4.7.0"
+    "redis": "^4.7.0",
+    "uuid": "^11.1.0"
   }
 }
