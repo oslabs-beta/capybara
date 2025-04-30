@@ -30,6 +30,10 @@ const redisCache = async (topicName: string, event: Record<string, any>) => {
         await redis.lTrim(listKey, 0, maxLength - 1); // Resize the length of list
     }
 
+    // Testing: GET event from the list
+    const Tevent = await redis.get(redisKey);
+    console.log(chalk.green(`TESTING ${Tevent}`));
+
     console.log(chalk.green(`[Redis] Event had been saved under key ${redisKey}.`));
   } catch (error) {
     console.error(chalk.redBright('[Redis] Error storing event: '), error);
@@ -43,13 +47,12 @@ const queryCache = async(topicName: string, amount=10) => {
     const redis = await connectRedis();
 
     const listKey = `${topicName}`; // Obtain list key
-    const errorKeys = await redis.lRange(listKey, 0, amount - 1); // Error event keys
+    const errorEvents = await redis.lRange(listKey, 0, amount - 1); // Error event keys
 
     // Get the results in batch
-    const events = await redis.mGet(errorKeys);
+    const events = await redis.mGet(errorEvents);
     
-    // ? FILTERING
     return events;
 }
 
-export default redisCache;
+export { redisCache, queryCache };
