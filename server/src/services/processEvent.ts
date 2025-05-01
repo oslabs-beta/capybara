@@ -8,7 +8,7 @@ import chalk from 'chalk';
 import { v4 as uuidv4 } from 'uuid';
 
 const TTL = 7 * 24 * 60 * 60; // Set expiration after 7 day
-const maxLength = 1000; // Save amount of records up to 1000
+const maxLength = 5; // Save amount of records up to 1000
 
 // ------------------------------------------------------------------------------------------------
 // * Store Error Events with TTL
@@ -16,6 +16,9 @@ const maxLength = 1000; // Save amount of records up to 1000
 const redisCache = async (topicName: string, event: Record<string, any>) => {
   try {
     const redis = await connectRedis();
+    console.log(
+      chalk.bgGreenBright('[Redis] You are connected to Redis Cloud now.'),
+    );
 
     const redisKey = `${topicName}:${uuidv4()}`; // Create unique error key
 
@@ -32,9 +35,9 @@ const redisCache = async (topicName: string, event: Record<string, any>) => {
 
     // Testing: GET event from the list
     const Tevent = await redis.get(redisKey);
-    console.log(chalk.green(`TESTING ${Tevent}`));
+    console.log(chalk.bgBlackBright(`TESTING ${Tevent}`));
 
-    console.log(chalk.green(`[Redis] Event had been saved under key ${redisKey}.`));
+    console.log(chalk.bgMagentaBright(`[Redis] Event had been saved under key ${redisKey}.`));
   } catch (error) {
     console.error(chalk.redBright('[Redis] Error storing event: '), error);
   }
