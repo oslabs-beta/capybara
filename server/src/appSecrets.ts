@@ -8,7 +8,13 @@ import loadSecrets from './utils/loadSecrets';
 
 // ----------------------------------------------------------------------------------------
 // TODO: ADD SECRET KEYS HERE FROM GOOGLE SECRET MANAGER
-const SECRET_KEYS = ['PORT', 'GCP_PROJECT_ID', 'GCP_KEY_FILE', 'PINECONE_API'];
+const SECRET_KEYS = [
+  'PORT',
+  'GCP_PROJECT_ID',
+  'GCP_KEY_FILE',
+  'PINECONE_API',
+  'REDIS_URL',
+];
 // ----------------------------------------------------------------------------------------
 
 const getSecretKeys = async () => {
