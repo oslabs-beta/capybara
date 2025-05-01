@@ -14,6 +14,8 @@ const SECRET_KEYS = [
   'GCP_KEY_FILE',
   'PINECONE_API',
   'REDIS_URL',
+  'SLACK_BOT_TOKEN',
+  'SLACK_CONVERSATION_ID'
 ];
 // ----------------------------------------------------------------------------------------
 
@@ -28,6 +30,8 @@ const getSecretKeys = async () => {
       GCP_PROJECT_ID: secrets.GCP_PROJECT_ID,
       GCP_KEY_FILE: secrets.GCP_KEY_FILE,
       PINECONE_API: secrets.PINECONE_API,
+      SLACK_BOT_TOKEN: secrets.SLACK_BOT_TOKEN,
+      SLACK_CONVERSATION_ID: secrets.SLACK_CONVERSATION_ID
     };
   } catch (error) {
     console.error(chalk.red('[Secret Manager] Error loading secrets:'), error);
