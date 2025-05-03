@@ -2,7 +2,6 @@
 // >> EVENT PROCESSOR
 // ------------------------------------------------------------------------------
 // * This process the error events with Redis (caching)
-
 import connectRedis from '../utils/redisClient';
 import chalk from 'chalk';
 import { v4 as uuidv4 } from 'uuid';
@@ -30,14 +29,18 @@ const redisCache = async (topicName: string, event: Record<string, any>) => {
     const currentLength = await redis.lLen(listKey); // Current length of Redis list
 
     if (currentLength > maxLength) {
-        await redis.lTrim(listKey, 0, maxLength - 1); // Resize the length of list
+      await redis.lTrim(listKey, 0, maxLength - 1); // Resize the length of list
     }
 
     // Testing: GET event from the list
     const Tevent = await redis.get(redisKey);
     console.log(chalk.bgBlackBright(`TESTING ${Tevent}`));
 
-    console.log(chalk.bgMagentaBright(`[Redis] Event had been saved under key ${redisKey}.`));
+    console.log(
+      chalk.bgMagentaBright(
+        `[Redis] Event had been saved under key ${redisKey}.`,
+      ),
+    );
   } catch (error) {
     console.error(chalk.redBright('[Redis] Error storing event: '), error);
   }
@@ -46,16 +49,16 @@ const redisCache = async (topicName: string, event: Record<string, any>) => {
 // ------------------------------------------------------------------------------------------------
 // * Query Error Events with Batching
 // ------------------------------------------------------------------------------------------------
-const queryCache = async(topicName: string, amount=10) => {
-    const redis = await connectRedis();
+const queryCache = async (topicName: string, amount = 10) => {
+  const redis = await connectRedis();
 
-    const listKey = `${topicName}`; // Obtain list key
-    const errorEvents = await redis.lRange(listKey, 0, amount - 1); // Error event keys
+  const listKey = `${topicName}`; // Obtain list key
+  const errorEvents = await redis.lRange(listKey, 0, amount - 1); // Error event keys
 
-    // Get the results in batch
-    const events = await redis.mGet(errorEvents);
-    
-    return events;
-}
+  // Get the results in batch
+  const events = await redis.mGet(errorEvents);
+
+  return events;
+};
 
 export { redisCache, queryCache };
