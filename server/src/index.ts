@@ -10,17 +10,26 @@ import errorHandler from './middleware/errorHandler';
 import routes from './routes';
 import startK8sEventWatcher from './services/k8sEventWatcher'; // K8s event watcher
 import getSecretKeys from './appSecrets'; // Google Secret Manager
+import startK8sEventProcessor from './services/k8sEventProcessor';
 
 const app = express();
 const secret = await getSecretKeys(); // Load secrets from Google Secret Manager
 const port = secret.PORT;
 
-startK8sEventWatcher(); // Start Kubernetes event watcher
+// ------------------------------------------------------------------------------------------------
+// * K8s EVENT WATCHER & PROCESSOR
+// ------------------------------------------------------------------------------------------------
+startK8sEventWatcher().catch((err) =>
+  console.error(chalk.redBright('Failed to start K8s watcher:', err)),
+); // Start Kubernetes event watcher
+
+startK8sEventProcessor().catch((err) =>
+  console.error(chalk.redBright('Failed to start K8s processor:', err)),
+); // Start Kubernetes event processor
 
 // ------------------------------------------------------------------------------------------------
 // * MIDDLEWARE
 // ------------------------------------------------------------------------------------------------
-
 app.use(cors());
 
 // ! Test to see if server is running

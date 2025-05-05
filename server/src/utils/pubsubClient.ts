@@ -26,12 +26,23 @@ const pubSubClient = new PubSub({
 const publishToTopic = async (
   topicName: string,
   data: Record<string, any>,
-  attributes: Record<string, string>,
+  attributes: Record<string, string> = {}, // Make attributes optional with default empty object
 ) => {
+  if (!topicName) {
+    throw new Error('Topic name is required for publishToTopic');
+  }
+
+  if (!data) {
+    throw new Error('Data object is required for publishToTopic');
+  }
+
   const topic = pubSubClient.topic(topicName); // Get topic by name
   const messageBuffer = Buffer.from(JSON.stringify(data));
 
-  await topic.publishMessage({ data: messageBuffer, attributes }); // Publish message to topic
+  const messageId = await topic.publishMessage({
+    data: messageBuffer,
+    attributes,
+  }); // Publish message to topic
 
   console.group(
     chalk.bgCyanBright(`[PubSub] Message published to ${topicName}`),
@@ -43,6 +54,8 @@ const publishToTopic = async (
 
   console.log(data); // This will pretty-print the object
   console.groupEnd();
+
+  return messageId;
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -59,6 +72,10 @@ const subscribeToTopic = async (
     autoAck?: boolean;
   } = { autoAck: true },
 ) => {
+  if (!subscriptionName) {
+    throw new Error('Subscription name is required for subscribeToTopic');
+  }
+
   try {
     const subscription = pubSubClient.subscription(subscriptionName, {
       flowControl: options.flowControl || { maxMessages: 10 },
@@ -106,7 +123,7 @@ const subscribeToTopic = async (
 
     console.log(
       chalk.greenBright(
-        `[PubSub] Successfully subscriber to ${subscriptionName}`,
+        `[PubSub] Successfully subscribed to ${subscriptionName}`,
       ),
     );
     console.groupEnd();
@@ -185,4 +202,5 @@ const createSubscription = async (
 // ------------------------------------------------------------------------------------------------
 // * MODULE EXPORT
 // ------------------------------------------------------------------------------------------------
+export { subscribeToTopic, createSubscription };
 export default publishToTopic;
