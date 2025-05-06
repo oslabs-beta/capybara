@@ -15,7 +15,8 @@ const SECRET_KEYS = [
   'PINECONE_API',
   'REDIS_URL',
   'SLACK_BOT_TOKEN',
-  'SLACK_CONVERSATION_ID'
+  'SLACK_CONVERSATION_ID',
+  'GEMINI_API',
 ];
 // ----------------------------------------------------------------------------------------
 
@@ -33,6 +34,7 @@ const getSecretKeys = async () => {
       SLACK_BOT_TOKEN: secrets.SLACK_BOT_TOKEN,
       SLACK_CONVERSATION_ID: secrets.SLACK_CONVERSATION_ID,
       REDIS_URL: secrets.REDIS_URL,
+      GEMINI_API: secrets.GEMINI_API,
     };
   } catch (error) {
     console.error(chalk.red('[Secret Manager] Error loading secrets:'), error);
