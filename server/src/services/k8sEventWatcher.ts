@@ -5,6 +5,7 @@
 
 import * as k8s from '@kubernetes/client-node';
 import publishToTopic from '../utils/pubsubClient';
+import { isDuplicateEvent } from './processEvent';
 import chalk from 'chalk';
 
 // Helper function to add timestamps to logs
@@ -76,6 +77,24 @@ const startK8sEventWatcher = async () => {
             ),
           );
           console.log(chalk.yellow(`[K8sWatcher] Message: ${message}`));
+
+          // ------------------------------------------------------------------------------
+          // * DEDUPLICATION Check
+          // ------------------------------------------------------------------------------
+          // If the event already occurred within 1 minute window, skip current event
+          const isDuplicate = await isDuplicateEvent(
+            namespace,
+            podName,
+            reason,
+          );
+          if (isDuplicate) {
+            console.log(
+              chalk.bgGreen(
+                `[Redis] 🔁 Duplicate event skipped: ${namespace}/${podName}/${reason}`,
+              ),
+            );
+            return;
+          }
 
           // Create event object with the structure expected by the K8s Event Processor
           const event = {
