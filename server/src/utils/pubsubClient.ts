@@ -50,7 +50,6 @@ const publishToTopic = async (
 
   // * Add the function of saving data into Redis
   await redisCache(topicName, data);
-  // await queryCache(topicName);
 
   console.log(data); // This will pretty-print the object
   console.groupEnd();
