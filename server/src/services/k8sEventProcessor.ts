@@ -216,7 +216,7 @@ CURRENT ERROR EVENT:
 
   // Add instructions for the AI
   prompt += `
-Please respond with a concise Slack-formatted message using the exact layout below. Use real line breaks (no literal "\\n") and add two spaces at the end of each line to enforce Slack formatting. Include a blank line between each section:
+Please respond with a concise Slack-formatted message using the exact layout below. Use real line breaks (no literal "\\n") and add two spaces at the end of each line to enforce Slack formatting. The AI Powered recommendation should take into consideration any similar events in the past to provide a solid resolution to fix the Kubernetes issue using best practice. Include a blank line between each section:
 
 :fire: *Anomaly Details*  
 {Anomaly Details}  
