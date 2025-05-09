@@ -14,7 +14,7 @@ const slack_message = async (
     channel: channel,
   });
 
-  console.log(`Successfully send message ${result}`);
+  // console.log(`Successfully send message ${result}`);
 };
 
 // slack_message('I can see Google Secrets!!! 🪵🪵🪵');

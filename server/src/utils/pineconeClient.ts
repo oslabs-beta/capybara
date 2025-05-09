@@ -121,12 +121,12 @@ const pineconeVector = async () => {
 
       // Namespace filtering utility
       createNamespaceFilter(namespace: string) {
-        return { 'metadata.namespace': { $eq: namespace } };
+        return { namespace: { $eq: namespace } };
       },
 
       // Kind filtering utility
       createKindFilter(kind: string) {
-        return { 'metadata.kind': { $eq: kind } };
+        return { kind: { $eq: kind } };
       },
     };
   } catch (error) {

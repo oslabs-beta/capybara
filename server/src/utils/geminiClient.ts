@@ -5,14 +5,6 @@ import { GoogleGenAI } from '@google/genai';
 import getSecretKeys from '../appSecrets';
 import chalk from 'chalk';
 
-// interface K8sEventData {
-//   reason: string;
-//   message: string;
-//   pod: string;
-//   namespace: string;
-//   timestamp: string;
-// }
-
 // const prompt = 'Explain how AI is reshaping the world in a few words';
 
 const gemini = async (eventData: string) => {
