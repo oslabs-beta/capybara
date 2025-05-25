@@ -16,7 +16,7 @@ const client = new Monitoring.MetricServiceClient();
 const fetchGCPMetric = async ({
   metricType, // ('container.googleapis.com/container/cpu/utilization')
   duration = 5,
-}: FetchMetricOptions): Promise<void> => {
+}: FetchMetricOptions): Promise<TimeSeries[]> => {
   try {
     const projectId = await client.getProjectId();
 
@@ -38,7 +38,7 @@ const fetchGCPMetric = async ({
       console.log(
         `[Metrics] No data found for ${metricType} in the last ${duration} minutes.`,
       );
-      return;
+      return [];
     }
 
     timeSeries.forEach((series: TimeSeries) => {
@@ -53,8 +53,10 @@ const fetchGCPMetric = async ({
         console.log(JSON.stringify(point.value)); // (e.g. Usage percentages)
       });
     });
+    return timeSeries;
   } catch (error) {
     console.error(`[Metrics] ❌ Failed to fetch ${metricType}:`, error);
+    throw error;
   }
 };
 
