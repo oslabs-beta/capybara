@@ -27,7 +27,7 @@ export const CpuChart = () => {
         data:
           data?.[0]?.points?.map((p) => (p.value?.doubleValue ?? 0) * 100) ||
           [],
-        borderColor: 'rgb(75, 192, 192)',
+        borderColor: 'rgb(0, 0, 0)',
         tension: 0.1,
       },
     ],
