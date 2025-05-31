@@ -38,7 +38,7 @@ const App = () => {
   // ----------------------------------------------------------
   return (
     <div
-      className="duration-800 transition-colors"
+      className="duration-800 scrollbar-hide transition-colors"
       style={{
         backgroundColor: 'var(--background)',
         color: 'var(--foreground)',

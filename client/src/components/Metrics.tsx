@@ -3,6 +3,8 @@
 // ----------------------------------------------------------
 import BarChartExample from './ExampleBarChart';
 import InteractiveAreaChartExample from './ExampleInteractiveAreaChart';
+import InteractiveLineChartExample from './ExampleInteractiveLineChart';
+import LineChartExample from './ExampleLineChart';
 import RadialChartExample from './ExampleRadialChart';
 
 const Metrics: React.FC = () => {
@@ -12,6 +14,8 @@ const Metrics: React.FC = () => {
       <BarChartExample />
       <InteractiveAreaChartExample />
       <RadialChartExample />
+      <InteractiveLineChartExample />
+      <LineChartExample />
       <h1>~~~~~~~~~~ Metrics TEST COMPONENTS END ~~~~~~~~~~</h1>
     </div>
   );
