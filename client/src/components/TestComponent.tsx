@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Typewriter } from 'react-simple-typewriter';
+import { Button } from '@/components/ui/button';
 
 const TestComponent: React.FC = () => {
   // Add notification when frontend connects to server
@@ -44,15 +45,31 @@ const TestComponent: React.FC = () => {
   }, []);
 
   // ----------------------------------------------------------
+  // * Theme toggle function
+  // ----------------------------------------------------------
+  const toggleTheme = () => {
+    document.documentElement.classList.toggle('dark');
+  };
+
+  // ----------------------------------------------------------
   // >> COMPONENT RENDERING << //
   // ----------------------------------------------------------
   return (
-    <div className="ml-32 grid h-screen grid-cols-2 items-center">
+    <div
+      className="duration-800 ml-32 grid h-screen grid-cols-2 items-center transition-colors"
+      style={{
+        backgroundColor: 'var(--background)',
+        color: 'var(--foreground)',
+      }}
+    >
       <div className="flex justify-end">
         <img src="/cofybara.png" alt="Cofybara" />
       </div>
       <div className="w-full justify-start">
-        <p className="text-left text-9xl font-extrabold text-yellow-700">
+        <p
+          className="text-left text-9xl font-extrabold"
+          style={{ color: 'var(--primary)' }}
+        >
           hello
           {isConnected && (
             <span className="ml-2 inline-block h-4 w-4 rounded-full bg-pink-200"></span>
@@ -61,7 +78,10 @@ const TestComponent: React.FC = () => {
         <p className="ml-1 text-left text-2xl">
           <Typewriter words={['Sit tight while my devs']} typeSpeed={70} />
           {showTypewriter && (
-            <span className="ml-1 font-bold text-yellow-700">
+            <span
+              className="ml-1 font-bold"
+              style={{ color: 'var(--primary)' }}
+            >
               <Typewriter
                 words={[
                   'Wenjun,',
@@ -86,6 +106,18 @@ const TestComponent: React.FC = () => {
             </span>
           )}
         </p>
+
+        {/* Theme Toggle Button */}
+        <Button onClick={toggleTheme}>Toggle Theme TEST</Button>
+
+        {/* Example to test toggle button
+        <div
+          className="mt-4 rounded border p-4"
+          style={{
+            backgroundColor: 'var(--background)',
+            color: 'var(--foreground)',
+          }}
+        ></div> */}
       </div>
     </div>
   );
