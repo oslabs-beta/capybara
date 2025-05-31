@@ -2,7 +2,7 @@
 // >> METRICS << //
 // ----------------------------------------------------------
 import BarChartExample from './ExampleBarChart';
-import InteractiveAreaChartExample from './ExampleInteractiveAreaChart';
+import CpuUtilization from './CpuUtilization';
 import RadialChartExample from './ExampleRadialChart';
 
 const Metrics: React.FC = () => {
@@ -10,7 +10,7 @@ const Metrics: React.FC = () => {
     <div>
       <h1>~~~~~~~~~~ Metrics TEST COMPONENTS START ~~~~~~~~~~</h1>
       <BarChartExample />
-      <InteractiveAreaChartExample />
+      <CpuUtilization />
       <RadialChartExample />
       <h1>~~~~~~~~~~ Metrics TEST COMPONENTS END ~~~~~~~~~~</h1>
     </div>
