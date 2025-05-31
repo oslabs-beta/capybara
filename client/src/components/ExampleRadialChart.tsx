@@ -36,6 +36,7 @@ const chartConfig = {
 const RadialChartExample: React.FC = () => {
   return (
     <Card className="flex flex-col">
+      <h1>Area Chart Example</h1>
       <CardHeader className="items-center pb-0">
         <CardTitle>Radial Chart - Shape</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
@@ -43,7 +44,7 @@ const RadialChartExample: React.FC = () => {
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="area-chart mx-auto aspect-square max-h-[250px]"
         >
           <RadialBarChart
             data={chartData}

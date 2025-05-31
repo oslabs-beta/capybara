@@ -45,13 +45,6 @@ const TestComponent: React.FC = () => {
   }, []);
 
   // ----------------------------------------------------------
-  // * Theme toggle function
-  // ----------------------------------------------------------
-  const toggleTheme = () => {
-    document.documentElement.classList.toggle('dark');
-  };
-
-  // ----------------------------------------------------------
   // >> COMPONENT RENDERING << //
   // ----------------------------------------------------------
   return (
@@ -106,18 +99,6 @@ const TestComponent: React.FC = () => {
             </span>
           )}
         </p>
-
-        {/* Theme Toggle Button */}
-        <Button onClick={toggleTheme}>Toggle Theme TEST</Button>
-
-        {/* Example to test toggle button
-        <div
-          className="mt-4 rounded border p-4"
-          style={{
-            backgroundColor: 'var(--background)',
-            color: 'var(--foreground)',
-          }}
-        ></div> */}
       </div>
     </div>
   );

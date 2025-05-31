@@ -152,7 +152,7 @@ const InteractiveAreaChartExample: React.FC = () => {
   });
   return (
     <Card className="pt-0">
-      <h1>Radial Chart Example</h1>
+      <h1>Area Chart Example</h1>
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
           <CardTitle>Area Chart - Interactive</CardTitle>
@@ -245,6 +245,7 @@ const InteractiveAreaChartExample: React.FC = () => {
               dataKey="mobile"
               type="natural"
               fill="url(#fillMobile)"
+              className="area-mobile"
               stroke="var(--color-mobile)"
               stackId="a"
             />
