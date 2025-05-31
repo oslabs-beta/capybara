@@ -4,7 +4,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Typewriter } from 'react-simple-typewriter';
-import { Button } from '@/components/ui/button';
 
 const TestComponent: React.FC = () => {
   // Add notification when frontend connects to server
