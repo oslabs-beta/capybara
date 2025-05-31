@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach, test } from 'vitest';
 import loadSecrets from './loadSecrets';
 
 // * Mock the Google Secret Manager module
