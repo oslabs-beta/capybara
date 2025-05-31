@@ -185,3 +185,13 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+.area-chart path,
+.area-chart circle,
+.area-chart rect,
+.area-chart text,
+.area-chart stop {
+  transition:
+    fill 0.8s,
+    stroke 0.8s;
+}

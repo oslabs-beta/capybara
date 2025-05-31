@@ -1,22 +1,15 @@
 // ----------------------------------------------------------
 // >> APP COMPONENT << //
 // ----------------------------------------------------------
-<<<<<<< HEAD
 import { useEffect } from 'react';
 import TestComponent from './components/TestComponent';
-import Metrics from './components/Metrics';
-=======
-import { Container } from '@mui/material';
-import { Box } from '@mui/system';
-import Grid from '@mui/material/Grid';
-
-// import TestComponent from './components/TestComponent';
-import {CpuChart} from './components/GcpMetric';
->>>>>>> dev
+import Dashboard from './components/Dashboard';
+import { Button } from './components/ui/button';
 
 const App = () => {
-  // ** Saved Theme To Local Storage
-  //  !! To be completed //
+  // ----------------------------------------------------------
+  // ** SAVE THEME TO LOCAL STORAGE ** //
+  // ----------------------------------------------------------
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
@@ -25,37 +18,38 @@ const App = () => {
       document.documentElement.classList.remove('dark');
     }
   }, []);
-  //  !! To be completed //
+
+  // ----------------------------------------------------------
+  // ** TOGGLE THEME ** //
+  // ----------------------------------------------------------
+  const toggleTheme = () => {
+    const htmlClasses = document.documentElement.classList;
+    if (htmlClasses.contains('dark')) {
+      htmlClasses.remove('dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      htmlClasses.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  };
 
   // ----------------------------------------------------------
   // >> COMPONENT RENDERING << //
   // ----------------------------------------------------------
   return (
-<<<<<<< HEAD
-    <>
+    <div
+      className="duration-800 transition-colors"
+      style={{
+        backgroundColor: 'var(--background)',
+        color: 'var(--foreground)',
+      }}
+    >
+      <Button className="fixed right-4 top-4 z-50" onClick={toggleTheme}>
+        Toggle Theme
+      </Button>
       <TestComponent />
-      <Metrics />
-    </>
-=======
-    <Container maxWidth="md" sx={{ mt: 10, mb: 0 }}>
-    <Grid container justifyContent="center" spacing={2}>
-      <Grid size={{ xs: 5, sm: 0, md: 0 }}>
-        <Box
-          sx={{
-            bgcolor: 'background.paper',
-            boxShadow: 1,
-            borderRadius: 2,
-            p: 3,
-            minWidth: 600,
-          }}
-        >
-          <CpuChart />
-        </Box>
-      </Grid>
-    </Grid>
-  </Container>
-  
->>>>>>> dev
+      <Dashboard />
+    </div>
   );
 };
 

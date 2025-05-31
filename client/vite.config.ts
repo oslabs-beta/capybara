@@ -19,11 +19,11 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/test/setupTests.ts'],
   },
-<<<<<<< HEAD
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-=======
+    },
+  },
   server: {
     proxy: {
       '/api': {
@@ -31,7 +31,6 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
->>>>>>> dev
     },
   },
 });
