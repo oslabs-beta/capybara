@@ -26,12 +26,12 @@ import {
 } from '@/components/ui/select';
 import { useFetchMetrics } from '../hooks/hookMetric';
 
-type Range = '1d' | '7d' | '30d';
+type Range = '1d' | '7d' | '14d';
 
 const rangeToMinutes: Record<Range, number> = {
   '1d': 1440,
   '7d': 10080,
-  '30d': 43200,
+  '14d': 43200,
 };
 
 const chartConfig: ChartConfig = {
