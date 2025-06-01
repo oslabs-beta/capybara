@@ -31,6 +31,14 @@ const fetchGCPMetric = async ({
         startTime: { seconds: startTimeSeconds },
         endTime: { seconds: endTimeSeconds },
       },
+      aggregation: {
+        alignmentPeriod: {
+          seconds: 60, // Align data points to 1-minute intervals
+        },
+        perSeriesAligner: 'ALIGN_SUM', // Sum values within each alignment period
+        crossSeriesReducer: 'REDUCE_SUM', // Sum across all time series
+        groupByFields: [], // Empty array to sum all series together
+      },
       view: 'FULL', // Return full data including labels and points
     });
 
@@ -41,18 +49,19 @@ const fetchGCPMetric = async ({
       return [];
     }
 
-    timeSeries.forEach((series: TimeSeries) => {
-      const metric: Metric = series.metric!;
-      const resource: Resource = series.resource!;
-      const points: Point[] = series.points!;
+    // timeSeries.forEach((series: TimeSeries) => {
+    //   const metric: Metric = series.metric!;
+    //   const resource: Resource = series.resource!;
+    //   const points: Point[] = series.points!;
 
-      // * CONSOLE LOGS
-      console.log('Metric:', metric?.labels); // (e.g. container name, namespace)
-      console.log('Resource:', resource?.labels); // (e.g. instance ID, zone)
-      points.forEach((point) => {
-        console.log(JSON.stringify(point.value)); // (e.g. Usage percentages)
-      });
-    });
+    //   // * CONSOLE LOGS
+    //   console.log('Metric:', metric?.labels); // (e.g. container name, namespace)
+    //   console.log('Resource:', resource?.labels); // (e.g. instance ID, zone)
+    //   points.forEach((point) => {
+    //     console.log(JSON.stringify(point.value)); // (e.g. Usage percentages)
+    //   });
+    // });
+    
     return timeSeries;
   } catch (error) {
     console.error(`[Metrics] ❌ Failed to fetch ${metricType}:`, error);
