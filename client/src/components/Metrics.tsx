@@ -14,15 +14,15 @@ import RadialChartExample from './ExampleRadialChart';
 const Metrics: React.FC = () => {
   return (
     <div>
-      <h1>~~~~~~~~~~ Metrics TEST COMPONENTS START ~~~~~~~~~~</h1>
       <RecentUsage />
       <CpuMemoryUtilization />
+      <h1>~~~~~~~~~~ Metrics TEST COMPONENTS START ~~~~~~~~~~</h1>
       {/* <EventLog /> */}
-      <BarChartExample />
+      {/* <BarChartExample />
       <InteractiveAreaChartExample />
       <RadialChartExample />
       <InteractiveLineChartExample />
-      <LineChartExample />
+      <LineChartExample /> */}
       <h1>~~~~~~~~~~ Metrics TEST COMPONENTS END ~~~~~~~~~~</h1>
     </div>
   );
