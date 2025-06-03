@@ -12,6 +12,7 @@ import {
   IconAi,
   IconHistory,
   IconBellCheck,
+  IconX,
 } from '@tabler/icons-react';
 import {
   AnimatePresence,
@@ -21,8 +22,12 @@ import {
   useTransform,
   MotionValue,
 } from 'motion/react';
+import { useClerk, UserProfile } from '@clerk/clerk-react';
 
 const NavigationBar: React.FC = () => {
+  const { signOut } = useClerk();
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+
   const links = [
     {
       title: 'Home',
@@ -55,9 +60,15 @@ const NavigationBar: React.FC = () => {
     {
       title: 'Profile',
       icon: (
-        <IconUser className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
+        <button
+          onClick={() => setIsProfileModalOpen(true)}
+          className="flex h-full w-full items-center justify-center"
+        >
+          <IconUser className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
+        </button>
       ),
       href: '#',
+      onClick: () => setIsProfileModalOpen(true),
     },
     {
       title: 'Settings',
@@ -69,20 +80,66 @@ const NavigationBar: React.FC = () => {
     {
       title: 'Log Out',
       icon: (
-        <IconLogout className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
+        <button
+          onClick={() => signOut(() => (window.location.href = '/'))}
+          className="flex h-full w-full items-center justify-center"
+        >
+          <IconLogout className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
+        </button>
       ),
-      href: 'https://github.com/oslabs-beta/capybara',
+      href: '#',
     },
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <FloatingDock
-        items={links}
-        desktopClassName="fixed bottom-4"
-        mobileClassName="fixed bottom-4 right-4"
-      />
-    </div>
+    <>
+      <div className="flex flex-col items-center justify-center">
+        <FloatingDock
+          items={links}
+          desktopClassName="fixed bottom-4"
+          mobileClassName="fixed bottom-4 right-4"
+        />
+      </div>
+
+      {/* Profile Modal */}
+      <AnimatePresence>
+        {isProfileModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center"
+            onClick={() => setIsProfileModalOpen(false)}
+          >
+            {/* Background overlay */}
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+
+            {/* Modal content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="relative z-10 max-h-[90vh] max-w-[90vw] overflow-auto rounded-2xl bg-[var(--background)] shadow-2xl dark:bg-[var(--background-dark)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setIsProfileModalOpen(false)}
+                className="bg-[var(--background-muted)]/80 dark:bg-[var(--background-muted-dark)]/80 absolute right-4 top-4 z-20 rounded-full p-2 text-[var(--foreground-muted)] transition-colors hover:bg-[var(--background-muted)] dark:text-[var(--foreground-muted-dark)] dark:hover:bg-[var(--background-muted-dark)]"
+              >
+                <IconX className="h-4 w-4" />
+              </button>
+
+              {/* UserProfile component */}
+              <div className="p-6">
+                <UserProfile />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
@@ -95,7 +152,12 @@ export const FloatingDock = ({
   desktopClassName,
   mobileClassName,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: {
+    title: string;
+    icon: React.ReactNode;
+    href: string;
+    onClick?: () => void;
+  }[];
   desktopClassName?: string;
   mobileClassName?: string;
 }) => {
@@ -111,7 +173,12 @@ const FloatingDockMobile = ({
   items,
   className,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: {
+    title: string;
+    icon: React.ReactNode;
+    href: string;
+    onClick?: () => void;
+  }[];
   className?: string;
 }) => {
   const [open, setOpen] = useState(false);
@@ -140,13 +207,25 @@ const FloatingDockMobile = ({
                 }}
                 transition={{ delay: (items.length - 1 - idx) * 0.05 }}
               >
-                <a
-                  href={item.href}
-                  key={item.title}
-                  className="bg-[var(--background)]/80 dark:bg-[var(--background-dark)]/80 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
-                >
-                  <div className="h-7 w-7">{item.icon}</div>
-                </a>
+                {item.onClick ? (
+                  <button
+                    onClick={() => {
+                      item.onClick?.();
+                      setOpen(false);
+                    }}
+                    className="bg-[var(--background)]/80 dark:bg-[var(--background-dark)]/80 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
+                  >
+                    <div className="h-7 w-7">{item.icon}</div>
+                  </button>
+                ) : (
+                  <a
+                    href={item.href}
+                    key={item.title}
+                    className="bg-[var(--background)]/80 dark:bg-[var(--background-dark)]/80 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
+                  >
+                    <div className="h-7 w-7">{item.icon}</div>
+                  </a>
+                )}
               </motion.div>
             ))}
           </motion.div>
@@ -166,7 +245,12 @@ const FloatingDockDesktop = ({
   items,
   className,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: {
+    title: string;
+    icon: React.ReactNode;
+    href: string;
+    onClick?: () => void;
+  }[];
   className?: string;
 }) => {
   const mouseX = useMotionValue(Infinity);
@@ -191,11 +275,13 @@ function IconContainer({
   title,
   icon,
   href,
+  onClick,
 }: {
   mouseX: MotionValue;
   title: string;
   icon: React.ReactNode;
   href: string;
+  onClick?: () => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -243,8 +329,21 @@ function IconContainer({
 
   const [hovered, setHovered] = useState(false);
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (onClick) {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
+  const Wrapper = onClick ? 'button' : 'a';
+
   return (
-    <a href={href}>
+    <Wrapper
+      href={onClick ? undefined : href}
+      onClick={handleClick}
+      className="block"
+    >
       <motion.div
         ref={ref}
         style={{ width, height }}
@@ -271,6 +370,6 @@ function IconContainer({
           {icon}
         </motion.div>
       </motion.div>
-    </a>
+    </Wrapper>
   );
 }

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Typewriter } from 'react-simple-typewriter';
 
-const TestComponent: React.FC = () => {
+const Welcome: React.FC = () => {
   // Add notification when frontend connects to server
   const [isConnected, setIsConnected] = useState(false);
   const [showTypewriter, setShowTypewriter] = useState(false);
@@ -55,14 +55,14 @@ const TestComponent: React.FC = () => {
       }}
     >
       <div className="flex justify-end">
-        <img src="/cofybara.png" alt="Cofybara" />
+        <img src="/coffybara.png" alt="Coffybara" />
       </div>
       <div className="w-full justify-start">
         <p
           className="text-left text-9xl font-extrabold"
           style={{ color: 'var(--primary)' }}
         >
-          hello
+          coffybara
           {isConnected && (
             <span className="ml-2 inline-block h-4 w-4 rounded-full bg-pink-200"></span>
           )}
@@ -103,4 +103,4 @@ const TestComponent: React.FC = () => {
   );
 };
 
-export default TestComponent;
+export default Welcome;
