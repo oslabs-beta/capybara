@@ -74,7 +74,7 @@ const Bytes: React.FC = () => {
     'compute.googleapis.com/instance/network/sent_bytes_count',
     rangeToMinutes[range],
   );
-  
+
   // Combine and transform data
   const chartData = React.useMemo(() => {
     if (readLoading || writeLoading || receivedLoading || sentLoading)
@@ -106,7 +106,8 @@ const Bytes: React.FC = () => {
       const dateKey = timestamp.toISOString();
       const bytes = Number(point.value?.int64Value ?? 0);
       const intervalSeconds =
-        Number(point.interval?.endTime?.seconds) - Number(point.interval?.startTime?.seconds) || 60;
+        Number(point.interval?.endTime?.seconds) -
+          Number(point.interval?.startTime?.seconds) || 60;
       const value = calculateKibPerSecond(bytes, intervalSeconds);
 
       if (!dataMap.has(dateKey)) {
@@ -137,7 +138,7 @@ const Bytes: React.FC = () => {
       const bytes = Number(point.value?.int64Value ?? 0);
       const intervalSeconds =
         Number(point.interval?.endTime?.seconds) -
-        Number(point.interval?.startTime?.seconds) || 60;
+          Number(point.interval?.startTime?.seconds) || 60;
       const value = calculateKibPerSecond(bytes, intervalSeconds);
 
       if (!dataMap.has(dateKey)) {
@@ -168,7 +169,7 @@ const Bytes: React.FC = () => {
       const bytes = Number(point.value?.int64Value ?? 0);
       const intervalSeconds =
         Number(point.interval?.endTime?.seconds) -
-        Number(point.interval?.startTime?.seconds) || 60;
+          Number(point.interval?.startTime?.seconds) || 60;
       const value = calculateKibPerSecond(bytes, intervalSeconds);
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
@@ -186,7 +187,7 @@ const Bytes: React.FC = () => {
       }
 
       const entry = dataMap.get(dateKey);
-      if (entry) entry.write = value;
+      if (entry) entry.received = value;
     });
 
     // Process network sent data
@@ -198,7 +199,7 @@ const Bytes: React.FC = () => {
       const bytes = Number(point.value?.int64Value ?? 0);
       const intervalSeconds =
         Number(point.interval?.endTime?.seconds) -
-        Number(point.interval?.startTime?.seconds) || 60;
+          Number(point.interval?.startTime?.seconds) || 60;
       const value = calculateKibPerSecond(bytes, intervalSeconds);
 
       if (!dataMap.has(dateKey)) {
@@ -217,7 +218,7 @@ const Bytes: React.FC = () => {
       }
 
       const entry = dataMap.get(dateKey);
-      if (entry) entry.write = value;
+      if (entry) entry.sent = value;
     });
 
     // Sort by date and filter recent data
@@ -239,7 +240,7 @@ const Bytes: React.FC = () => {
     readLoading,
     writeLoading,
     receivedLoading,
-    sentLoading
+    sentLoading,
   ]);
 
   return (
