@@ -51,7 +51,7 @@ const Header: React.FC = () => {
       </SignedOut>
       <SignedIn>
         <div
-          className="text-3xl"
+          className="text-3xl font-semibold"
           style={{
             color: 'var(--primary)',
           }}
