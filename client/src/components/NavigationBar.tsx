@@ -23,26 +23,13 @@ import {
   MotionValue,
 } from 'motion/react';
 import { useClerk, UserProfile } from '@clerk/clerk-react';
+import { Link } from 'react-router-dom';
 
 const NavigationBar: React.FC = () => {
   const { signOut } = useClerk();
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   const links = [
-    {
-      title: 'Home',
-      icon: (
-        <IconHome className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
-      ),
-      href: '/client/src/App.tsx',
-    },
-    {
-      title: 'Historical Data',
-      icon: (
-        <IconHistory className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
-      ),
-      href: '#',
-    },
     {
       title: 'AI Assistant',
       icon: (
@@ -56,6 +43,24 @@ const NavigationBar: React.FC = () => {
         <IconBellCheck className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
       ),
       href: '#',
+    },
+    {
+      title: 'Historical Data',
+      icon: (
+        <IconHistory className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
+      ),
+      href: '/historical',
+    },
+    {
+      title: 'Home',
+      icon: (
+        <img
+          src="/coffybara2.png"
+          alt="Home Icon"
+          className="scale-200 h-full w-full object-contain"
+        />
+      ),
+      href: '/',
     },
     {
       title: 'Profile',
@@ -128,13 +133,13 @@ const NavigationBar: React.FC = () => {
                 onClick={() => setIsProfileModalOpen(false)}
                 className="bg-[var(--background-muted)]/80 dark:bg-[var(--background-muted-dark)]/80 absolute right-4 top-4 z-20 rounded-full p-2 text-[var(--foreground-muted)] transition-colors hover:bg-[var(--background-muted)] dark:text-[var(--foreground-muted-dark)] dark:hover:bg-[var(--background-muted-dark)]"
               >
-                <IconX className="h-4 w-4" />
+                {/* <IconX className="h-4 w-4" /> */}
               </button>
 
               {/* UserProfile component */}
-              <div className="p-6">
-                <UserProfile />
-              </div>
+              {/* <div className="p-10"> */}
+              <UserProfile />
+              {/* </div> */}
             </motion.div>
           </motion.div>
         )}
@@ -218,13 +223,13 @@ const FloatingDockMobile = ({
                     <div className="h-7 w-7">{item.icon}</div>
                   </button>
                 ) : (
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     key={item.title}
                     className="bg-[var(--background)]/80 dark:bg-[var(--background-dark)]/80 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
                   >
                     <div className="h-7 w-7">{item.icon}</div>
-                  </a>
+                  </Link>
                 )}
               </motion.div>
             ))}
@@ -336,14 +341,10 @@ function IconContainer({
     }
   };
 
-  const Wrapper = onClick ? 'button' : 'a';
+  const Wrapper = onClick ? 'button' : Link;
 
   return (
-    <Wrapper
-      href={onClick ? undefined : href}
-      onClick={handleClick}
-      className="block"
-    >
+    <Wrapper to={onClick ? '/' : href} onClick={handleClick} className="block">
       <motion.div
         ref={ref}
         style={{ width, height }}
