@@ -1,11 +1,17 @@
+// ----------------------------------------------------------
+// >> APPLICATION << //
+// ----------------------------------------------------------
+
 import { useEffect, useState } from 'react';
 import Welcome from './components/Welcome';
 import Dashboard from './components/Dashboard';
+import HistoricalData from './components/HistoricalData';
+import NavigationBar from './components/NavigationBar';
 import sunIcon from './assets/sun.svg';
-import moonIcon from './assets/moon.svg';
+// import moonIcon from './assets/moon.svg';
 import Header from './components/Header';
-
 import { SignedIn, SignedOut } from '@clerk/clerk-react';
+import { Routes, Route } from 'react-router-dom';
 
 const App = () => {
   const [isDark, setIsDark] = useState(() => {
@@ -32,17 +38,17 @@ const App = () => {
 
   return (
     <div
-      className="duration-800 scrollbar-hide transition-colors"
+      className="duration-800 scrollbar-hide min-h-screen transition-colors"
       style={{
         backgroundColor: 'var(--background)',
         color: 'var(--foreground)',
       }}
     >
       {/* DARK MODE TOGGLE */}
-      <label className="swap swap-rotate text-foreground fixed right-4 top-4 z-50">
+      <label className="swap swap-rotate text-foreground fixed right-4 top-4 z-[60]">
         <input type="checkbox" checked={isDark} onChange={toggleTheme} />
         <svg
-          className="swap-on h-8 w-8"
+          className="swap-on h-6 w-6"
           viewBox="0 0 1080 1080"
           fill="currentColor"
         >
@@ -56,7 +62,7 @@ const App = () => {
         <img
           src={sunIcon}
           alt="Light Mode"
-          className="swap-off h-8 w-8"
+          className="swap-off h-6 w-6"
           style={{
             filter:
               'brightness(0) saturate(100%) invert(27%) sepia(18%) saturate(1156%) hue-rotate(329deg) brightness(94%) contrast(93%)',
@@ -67,12 +73,24 @@ const App = () => {
       {/* CLERK AUTH CONTROLS */}
       <Header />
 
-      {/* CONDITIONAL CONTENT */}
+      {/* CONDITIONAL CONTENT WITH ROUTES */}
       <SignedOut>
-        <Welcome />
+        <div className="pt-16">
+          {' '}
+          {/* Add top padding for header */}
+          <Welcome />
+        </div>
       </SignedOut>
       <SignedIn>
-        <Dashboard />
+        <div className="pb-24 pt-16">
+          {' '}
+          {/* Add top padding for header and bottom padding for nav */}
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/historical" element={<HistoricalData />} />
+          </Routes>
+        </div>
+        <NavigationBar />
       </SignedIn>
     </div>
   );

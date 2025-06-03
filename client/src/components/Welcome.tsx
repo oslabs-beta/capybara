@@ -48,56 +48,115 @@ const Welcome: React.FC = () => {
   // ----------------------------------------------------------
   return (
     <div
-      className="duration-800 ml-32 grid h-screen grid-cols-2 items-center transition-colors"
+      className="duration-800 fixed inset-0 overflow-hidden px-4 py-8 transition-colors md:px-8 lg:px-16"
       style={{
         backgroundColor: 'var(--background)',
         color: 'var(--foreground)',
+        paddingTop: '5rem', // Account for header height
       }}
     >
-      <div className="flex justify-end">
-        <img src="/coffybara.png" alt="Coffybara" />
-      </div>
-      <div className="w-full justify-start">
-        <p
-          className="text-left text-9xl font-extrabold"
-          style={{ color: 'var(--primary)' }}
-        >
-          coffybara
-          {isConnected && (
-            <span className="ml-2 inline-block h-4 w-4 rounded-full bg-pink-200"></span>
-          )}
-        </p>
-        <p className="ml-1 text-left text-2xl">
-          <Typewriter words={['Sit tight while my devs']} typeSpeed={70} />
-          {showTypewriter && (
-            <span
-              className="ml-1 font-bold"
+      <div className="mx-auto h-full max-w-7xl">
+        {/* Mobile Layout - Stacked */}
+        <div className="flex h-full flex-col items-center justify-center gap-1 md:hidden">
+          <div className="flex justify-center">
+            <img
+              src="/coffybara.png"
+              alt="Coffybara"
+              className="h-auto w-full max-w-xs"
+            />
+          </div>
+          <div className="w-full px-4 text-center">
+            <p
+              className="mb-4 text-4xl font-extrabold sm:text-6xl"
               style={{ color: 'var(--primary)' }}
             >
-              <Typewriter
-                words={[
-                  'Wenjun,',
-                  'Steven,',
-                  '& Amit...',
-                  'make some coffee!',
-                  'work their magic!',
-                  'invent new features!',
-                  'finalize the code!',
-                  'get ready to launch!',
-                  'fix one more bug!',
-                  'warm up the server!',
-                  'perform final checks!',
-                  'prepare for takeoff!',
-                ]}
-                cursor
-                loop
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={1000}
-              />
-            </span>
-          )}
-        </p>
+              coffybara
+              {isConnected && (
+                <span className="ml-2 inline-block h-3 w-3 rounded-full bg-pink-200"></span>
+              )}
+            </p>
+            <p className="text-lg sm:text-xl">
+              {showTypewriter && (
+                <span
+                  className="ml-1 mt-2 block font-bold"
+                  style={{ color: 'var(--secondary)' }}
+                >
+                  <Typewriter
+                    words={[
+                      "We're here to keep your Kubernetes in check!",
+                      'Real-time event detection? Check!',
+                      'AI-powered insights? Double-check!',
+                      'Slack notifications at your service!',
+                      "Sit back and relax, we've got your back!",
+                      'Trouble brewing? Not on our watch!',
+                      "Let's keep those clusters healthy!",
+                      "We've got the caffeine for your code!",
+                      'Infrastructure hiccups? Not anymore!',
+                      'Enjoy the peace of mind, your cluster is in good paws!',
+                      'Your life, simplified by me!',
+                    ]}
+                    cursor
+                    loop
+                    typeSpeed={70}
+                    deleteSpeed={50}
+                    delaySpeed={1000}
+                  />
+                </span>
+              )}
+            </p>
+          </div>
+        </div>
+
+        {/* Desktop Layout - Side by Side */}
+        <div className="hidden md:grid md:h-full md:grid-cols-2 md:items-center md:justify-center md:gap-8">
+          <div className="flex justify-center lg:justify-end">
+            <img
+              src="/coffybara.png"
+              alt="Coffybara"
+              className="h-auto w-full max-w-md lg:max-w-lg xl:max-w-xl"
+            />
+          </div>
+          <div className="flex w-full flex-col justify-center">
+            <p
+              className="mb-4 text-left text-6xl font-extrabold lg:text-8xl xl:text-9xl"
+              style={{ color: 'var(--primary)' }}
+            >
+              coffybara
+              {isConnected && (
+                <span className="ml-2 inline-block h-4 w-4 rounded-full bg-pink-200"></span>
+              )}
+            </p>
+            <p className="ml-1 text-left text-xl lg:text-2xl">
+              {showTypewriter && (
+                <span
+                  className="ml-1 font-bold"
+                  style={{ color: 'var(--secondary)' }}
+                >
+                  <Typewriter
+                    words={[
+                      "We're here to keep your Kubernetes in check!",
+                      'Real-time event detection? Check!',
+                      'AI-powered insights? Double-check!',
+                      'Slack notifications at your service!',
+                      "Sit back and relax, we've got your back!",
+                      'Trouble brewing? Not on our watch!',
+                      "Let's keep those clusters healthy!",
+                      "We've got the caffeine for your code!",
+                      'Infrastructure hiccups? Not anymore!',
+                      'Enjoy the peace of mind, your cluster is in good paws!',
+                      'Your life, simplified by me!',
+                    ]}
+                    cursor
+                    loop
+                    typeSpeed={70}
+                    deleteSpeed={50}
+                    delaySpeed={1000}
+                  />
+                </span>
+              )}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
