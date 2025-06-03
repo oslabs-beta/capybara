@@ -1,27 +1,21 @@
-// ----------------------------------------------------------
-// >> APP COMPONENT << //
-// ----------------------------------------------------------
 import { useEffect, useState } from 'react';
-import TestComponent from './components/TestComponent';
+import Welcome from './components/Welcome';
 import Dashboard from './components/Dashboard';
 import sunIcon from './assets/sun.svg';
 import moonIcon from './assets/moon.svg';
+import Header from './components/Header';
+
+import { SignedIn, SignedOut } from '@clerk/clerk-react';
 
 const App = () => {
-  // Initialize state directly from localStorage, preventing a flicker.
   const [isDark, setIsDark] = useState(() => {
-    // Check for the saved theme and also respect user's system preference
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       return savedTheme === 'dark';
     }
-    // If no theme is saved, check the system preference
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
-  // ----------------------------------------------------------
-  // ** UPDATE CLASS AND LOCAL STORAGE ON STATE CHANGE ** //
-  // ----------------------------------------------------------
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add('dark');
@@ -30,18 +24,12 @@ const App = () => {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
-  }, [isDark]); // This effect runs only when 'isDark' changes.
+  }, [isDark]);
 
-  // ----------------------------------------------------------
-  // ** SIMPLIFIED TOGGLE FUNCTION ** //
-  // ----------------------------------------------------------
   const toggleTheme = () => {
     setIsDark((prevIsDark) => !prevIsDark);
   };
 
-  // ----------------------------------------------------------
-  // >> COMPONENT RENDERING << //
-  // ----------------------------------------------------------
   return (
     <div
       className="duration-800 scrollbar-hide transition-colors"
@@ -50,11 +38,9 @@ const App = () => {
         color: 'var(--foreground)',
       }}
     >
+      {/* DARK MODE TOGGLE */}
       <label className="swap swap-rotate text-foreground fixed right-4 top-4 z-50">
-        {/* The 'checked' state now correctly drives the UI from the start */}
         <input type="checkbox" checked={isDark} onChange={toggleTheme} />
-
-        {/* swap-on is shown when checkbox is checked (isDark = true) */}
         <svg
           className="swap-on h-8 w-8"
           viewBox="0 0 1080 1080"
@@ -67,8 +53,6 @@ const App = () => {
             />
           </g>
         </svg>
-
-        {/* swap-off is shown when checkbox is unchecked (isDark = false) */}
         <img
           src={sunIcon}
           alt="Light Mode"
@@ -79,8 +63,17 @@ const App = () => {
           }}
         />
       </label>
-      <TestComponent />
-      <Dashboard />
+
+      {/* CLERK AUTH CONTROLS */}
+      <Header />
+
+      {/* CONDITIONAL CONTENT */}
+      <SignedOut>
+        <Welcome />
+      </SignedOut>
+      <SignedIn>
+        <Dashboard />
+      </SignedIn>
     </div>
   );
 };
