@@ -35,8 +35,8 @@ const rangeToMinutes: Record<Range, number> = {
 };
 
 const chartConfig: ChartConfig = {
-  request: {
-    label: 'CPU Request',
+  memory: {
+    label: 'Memory Utilization',
     color: 'var(--chart-1)',
   },
   utilization: {
@@ -45,13 +45,13 @@ const chartConfig: ChartConfig = {
   },
 };
 
-const CpuRequestUtilization: React.FC = () => {
+const CpuMemoryUtilization: React.FC = () => {
   const [range, setRange] = React.useState<Range>('1d');
   const now = React.useMemo(() => new Date(), []);
 
   // Fetch both metrics
-  const { data: requestData, loading: requestLoading } = useFetchMetrics(
-    'kubernetes.io/container/cpu/request_utilization',
+  const { data: memoryData, loading: memoryLoading } = useFetchMetrics(
+    'kubernetes.io/container/memory/limit_utilization',
     rangeToMinutes[range],
   );
   const { data: utilizationData, loading: utilizationLoading } =
@@ -62,20 +62,20 @@ const CpuRequestUtilization: React.FC = () => {
 
   // Combine and transform data
   const chartData = React.useMemo(() => {
-    if (requestLoading || utilizationLoading) return [];
+    if (memoryLoading || utilizationLoading) return [];
 
     const dataMap = new Map<
       string,
       {
         date: string;
-        request: number;
+        memory: number;
         utilization: number;
         displayTime: string;
       }
     >();
 
-    // Process CPU Request data
-    requestData?.[0]?.points?.forEach((point) => {
+    // Process CPU memory data
+    memoryData?.[0]?.points?.forEach((point) => {
       const timestamp = new Date(
         Number(point.interval?.endTime?.seconds) * 1000,
       );
@@ -85,7 +85,7 @@ const CpuRequestUtilization: React.FC = () => {
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
           date: dateKey,
-          request: 0,
+          memory: 0,
           utilization: 0,
           displayTime: timestamp.toLocaleString('en-US', {
             month: 'short',
@@ -96,7 +96,7 @@ const CpuRequestUtilization: React.FC = () => {
       }
 
       const entry = dataMap.get(dateKey);
-      if (entry) entry.request = value;
+      if (entry) entry.memory = value;
     });
 
     // Process CPU Utilization data
@@ -110,7 +110,7 @@ const CpuRequestUtilization: React.FC = () => {
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
           date: dateKey,
-          request: 0,
+          memory: 0,
           utilization: 0,
           displayTime: timestamp.toLocaleString('en-US', {
             month: 'short',
@@ -134,11 +134,11 @@ const CpuRequestUtilization: React.FC = () => {
         );
       });
   }, [
-    requestData,
+    memoryData,
     utilizationData,
     range,
     now,
-    requestLoading,
+    memoryLoading,
     utilizationLoading,
   ]);
 
@@ -146,8 +146,8 @@ const CpuRequestUtilization: React.FC = () => {
     <Card className="pt-0">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
-          <CardTitle>Historical GKE CPU Metrics</CardTitle>
-          <CardDescription>CPU Request and Utilization</CardDescription>
+          <CardTitle>Historical GKE Metrics</CardTitle>
+          <CardDescription>CPU Utilization and Memory Utilization</CardDescription>
         </div>
         <Select value={range} onValueChange={(v) => setRange(v as Range)}>
           <SelectTrigger
@@ -172,7 +172,7 @@ const CpuRequestUtilization: React.FC = () => {
       </CardHeader>
 
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        {requestLoading || utilizationLoading ? (
+        {memoryLoading || utilizationLoading ? (
           <div className="text-muted-foreground flex h-[250px] items-center justify-center text-sm">
             Loading metrics...
           </div>
@@ -183,7 +183,7 @@ const CpuRequestUtilization: React.FC = () => {
           >
             <AreaChart data={chartData}>
               <defs>
-                <linearGradient id="fillRequest" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="fillMemory" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
                     stopColor="var(--chart-1)"
@@ -195,7 +195,13 @@ const CpuRequestUtilization: React.FC = () => {
                     stopOpacity={0.1}
                   />
                 </linearGradient>
-                <linearGradient id="fillUtilization" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient
+                  id="fillUtilization"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
                   <stop
                     offset="5%"
                     stopColor="var(--chart-2)"
@@ -226,7 +232,7 @@ const CpuRequestUtilization: React.FC = () => {
                 tickFormatter={(value) => `${value}%`}
               />
 
-              {/* Right Y-axis (0-1) for CPU Request */}
+              {/* Right Y-axis (0-1) for CPU memory */}
               <YAxis
                 yAxisId="right"
                 orientation="right"
@@ -249,11 +255,11 @@ const CpuRequestUtilization: React.FC = () => {
               />
 
               <Area
-                dataKey="request"
+                dataKey="memory"
                 type="natural"
-                fill="url(#fillRequest)"
-                className="area-request"
-                stroke="var(--color-request)"
+                fill="url(#fillMemory)"
+                className="area-memory"
+                stroke="var(--color-memory)"
                 stackId="a"
               />
               <Area
@@ -261,7 +267,7 @@ const CpuRequestUtilization: React.FC = () => {
                 type="natural"
                 fill="url(#fillUtilization)"
                 stroke="var(--color-utilization)"
-                stackId="a"
+                stackId="b"
               />
               <ChartLegend content={<ChartLegendContent />} />
             </AreaChart>
@@ -272,4 +278,4 @@ const CpuRequestUtilization: React.FC = () => {
   );
 };
 
-export default CpuRequestUtilization;
+export default CpuMemoryUtilization;
