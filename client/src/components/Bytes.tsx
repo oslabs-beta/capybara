@@ -92,13 +92,22 @@ const Bytes: React.FC = () => {
       }
     >();
 
+    // Helper function to calculate Kib/s
+    const calculateKibPerSecond = (bytes: number, intervalSeconds: number) => {
+      if (intervalSeconds <= 0) return 0;
+      return bytes / 1024 / intervalSeconds; // Convert bytes to Kibibytes and then to per second
+    };
+
     // Process disk read data
     readData?.[0]?.points?.forEach((point) => {
       const timestamp = new Date(
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const value = Number(point.value?.int64Value ?? 0);
+      const bytes = Number(point.value?.int64Value ?? 0);
+      const intervalSeconds =
+        Number(point.interval?.endTime?.seconds) - Number(point.interval?.startTime?.seconds) || 60;
+      const value = calculateKibPerSecond(bytes, intervalSeconds);
 
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
@@ -125,7 +134,11 @@ const Bytes: React.FC = () => {
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const value = Number(point.value?.int64Value ?? 0);
+      const bytes = Number(point.value?.int64Value ?? 0);
+      const intervalSeconds =
+        Number(point.interval?.endTime?.seconds) -
+        Number(point.interval?.startTime?.seconds) || 60;
+      const value = calculateKibPerSecond(bytes, intervalSeconds);
 
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
@@ -152,8 +165,11 @@ const Bytes: React.FC = () => {
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const value = Number(point.value?.int64Value ?? 0);
-
+      const bytes = Number(point.value?.int64Value ?? 0);
+      const intervalSeconds =
+        Number(point.interval?.endTime?.seconds) -
+        Number(point.interval?.startTime?.seconds) || 60;
+      const value = calculateKibPerSecond(bytes, intervalSeconds);
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
           date: dateKey,
@@ -179,7 +195,11 @@ const Bytes: React.FC = () => {
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const value = Number(point.value?.int64Value ?? 0);
+      const bytes = Number(point.value?.int64Value ?? 0);
+      const intervalSeconds =
+        Number(point.interval?.endTime?.seconds) -
+        Number(point.interval?.startTime?.seconds) || 60;
+      const value = calculateKibPerSecond(bytes, intervalSeconds);
 
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
@@ -227,7 +247,9 @@ const Bytes: React.FC = () => {
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
           <CardTitle>Historical GKE Metrics</CardTitle>
-          <CardDescription>CPU write and read write</CardDescription>
+          <CardDescription>
+            Disk I/O Operations and Network Traffic
+          </CardDescription>
         </div>
         <Select value={range} onValueChange={(v) => setRange(v as Range)}>
           <SelectTrigger
@@ -252,7 +274,7 @@ const Bytes: React.FC = () => {
       </CardHeader>
 
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        {readLoading || writeLoading ? (
+        {readLoading || writeLoading || receivedLoading || sentLoading ? (
           <div className="text-muted-foreground flex h-[250px] items-center justify-center text-sm">
             Loading metrics...
           </div>
@@ -287,7 +309,7 @@ const Bytes: React.FC = () => {
                     stopOpacity={0.1}
                   />
                 </linearGradient>
-                <linearGradient id="fillWrite" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="fillReceived" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
                     stopColor="var(--chart-3)"
@@ -299,7 +321,7 @@ const Bytes: React.FC = () => {
                     stopOpacity={0.1}
                   />
                 </linearGradient>
-                <linearGradient id="fillWrite" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="fillSent" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
                     stopColor="var(--chart-4)"
@@ -327,7 +349,7 @@ const Bytes: React.FC = () => {
                 tickLine={false}
                 axisLine={false}
                 domain={[0, 'auto']}
-                tickFormatter={(value) => `${value}%`}
+                tickFormatter={(value) => `${value.toFixed(2)}`}
               />
 
               <ChartTooltip
@@ -348,14 +370,14 @@ const Bytes: React.FC = () => {
                 fill="url(#fillRead)"
                 className="area-read"
                 stroke="var(--color-read)"
-                stackId="a"
+                stackId="1"
               />
               <Area
                 dataKey="write"
                 type="natural"
                 fill="url(#fillWrite)"
                 stroke="var(--color-write)"
-                stackId="a"
+                stackId="2"
               />
               <Area
                 dataKey="received"

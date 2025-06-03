@@ -267,7 +267,7 @@ const CpuMemoryUtilization: React.FC = () => {
                 type="natural"
                 fill="url(#fillUtilization)"
                 stroke="var(--color-utilization)"
-                stackId="a"
+                stackId="b"
               />
               <ChartLegend content={<ChartLegendContent />} />
             </AreaChart>
