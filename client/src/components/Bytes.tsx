@@ -35,58 +35,78 @@ const rangeToMinutes: Record<Range, number> = {
 };
 
 const chartConfig: ChartConfig = {
-  request: {
-    label: 'CPU Request',
+  read: {
+    label: 'Disk Read Bytes',
     color: 'var(--chart-1)',
   },
-  utilization: {
-    label: 'CPU Utilization (%)',
+  write: {
+    label: 'Disk Write Bytes',
     color: 'var(--chart-2)',
+  },
+  received: {
+    label: 'Network Received Bytes Count',
+    color: 'var(--chart-3)',
+  },
+  sent: {
+    label: 'Network Sent Bytes Count',
+    color: 'var(--chart-4)',
   },
 };
 
-const CpuRequestUtilization: React.FC = () => {
+const Bytes: React.FC = () => {
   const [range, setRange] = React.useState<Range>('1d');
   const now = React.useMemo(() => new Date(), []);
 
-  // Fetch both metrics
-  const { data: requestData, loading: requestLoading } = useFetchMetrics(
-    'kubernetes.io/container/cpu/request_utilization',
+  // Fetch metrics
+  const { data: readData, loading: readLoading } = useFetchMetrics(
+    'compute.googleapis.com/instance/disk/read_bytes_count',
     rangeToMinutes[range],
   );
-  const { data: utilizationData, loading: utilizationLoading } =
-    useFetchMetrics(
-      'compute.googleapis.com/instance/cpu/utilization',
-      rangeToMinutes[range],
-    );
-
+  const { data: writeData, loading: writeLoading } = useFetchMetrics(
+    'compute.googleapis.com/instance/disk/write_bytes_count',
+    rangeToMinutes[range],
+  );
+  const { data: receivedData, loading: receivedLoading } = useFetchMetrics(
+    'compute.googleapis.com/instance/network/received_bytes_count',
+    rangeToMinutes[range],
+  );
+  const { data: sentData, loading: sentLoading } = useFetchMetrics(
+    'compute.googleapis.com/instance/network/sent_bytes_count',
+    rangeToMinutes[range],
+  );
+  
   // Combine and transform data
   const chartData = React.useMemo(() => {
-    if (requestLoading || utilizationLoading) return [];
+    if (readLoading || writeLoading || receivedLoading || sentLoading)
+      return [];
 
     const dataMap = new Map<
       string,
       {
         date: string;
-        request: number;
-        utilization: number;
+        read: number;
+        write: number;
+        received: number;
+        sent: number;
         displayTime: string;
       }
     >();
 
-    // Process CPU Request data
-    requestData?.[0]?.points?.forEach((point) => {
+    // Process disk read data
+    readData?.[0]?.points?.forEach((point) => {
       const timestamp = new Date(
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const value = point.value?.doubleValue ?? 0; // Convert to percentage
+      const value = Number(point.value?.int64Value ?? 0);
 
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
           date: dateKey,
-          request: 0,
-          utilization: 0,
+          read: 0,
+          write: 0,
+          received: 0,
+          sent: 0,
           displayTime: timestamp.toLocaleString('en-US', {
             month: 'short',
             day: 'numeric',
@@ -96,22 +116,24 @@ const CpuRequestUtilization: React.FC = () => {
       }
 
       const entry = dataMap.get(dateKey);
-      if (entry) entry.request = value;
+      if (entry) entry.read = value;
     });
 
-    // Process CPU Utilization data
-    utilizationData?.[0]?.points?.forEach((point) => {
+    // Process disk write data
+    writeData?.[0]?.points?.forEach((point) => {
       const timestamp = new Date(
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const value = (point.value?.doubleValue ?? 0) * 100; // Convert to percentage
+      const value = Number(point.value?.int64Value ?? 0);
 
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
           date: dateKey,
-          request: 0,
-          utilization: 0,
+          read: 0,
+          write: 0,
+          received: 0,
+          sent: 0,
           displayTime: timestamp.toLocaleString('en-US', {
             month: 'short',
             day: 'numeric',
@@ -121,7 +143,61 @@ const CpuRequestUtilization: React.FC = () => {
       }
 
       const entry = dataMap.get(dateKey);
-      if (entry) entry.utilization = value;
+      if (entry) entry.write = value;
+    });
+
+    // Process network received data
+    receivedData?.[0]?.points?.forEach((point) => {
+      const timestamp = new Date(
+        Number(point.interval?.endTime?.seconds) * 1000,
+      );
+      const dateKey = timestamp.toISOString();
+      const value = Number(point.value?.int64Value ?? 0);
+
+      if (!dataMap.has(dateKey)) {
+        dataMap.set(dateKey, {
+          date: dateKey,
+          read: 0,
+          write: 0,
+          received: 0,
+          sent: 0,
+          displayTime: timestamp.toLocaleString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            ...(range === '1d' && { hour: '2-digit', minute: '2-digit' }),
+          }),
+        });
+      }
+
+      const entry = dataMap.get(dateKey);
+      if (entry) entry.write = value;
+    });
+
+    // Process network sent data
+    sentData?.[0]?.points?.forEach((point) => {
+      const timestamp = new Date(
+        Number(point.interval?.endTime?.seconds) * 1000,
+      );
+      const dateKey = timestamp.toISOString();
+      const value = Number(point.value?.int64Value ?? 0);
+
+      if (!dataMap.has(dateKey)) {
+        dataMap.set(dateKey, {
+          date: dateKey,
+          read: 0,
+          write: 0,
+          received: 0,
+          sent: 0,
+          displayTime: timestamp.toLocaleString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            ...(range === '1d' && { hour: '2-digit', minute: '2-digit' }),
+          }),
+        });
+      }
+
+      const entry = dataMap.get(dateKey);
+      if (entry) entry.write = value;
     });
 
     // Sort by date and filter recent data
@@ -134,20 +210,24 @@ const CpuRequestUtilization: React.FC = () => {
         );
       });
   }, [
-    requestData,
-    utilizationData,
+    readData,
+    writeData,
+    receivedData,
+    sentData,
     range,
     now,
-    requestLoading,
-    utilizationLoading,
+    readLoading,
+    writeLoading,
+    receivedLoading,
+    sentLoading
   ]);
 
   return (
     <Card className="pt-0">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
-          <CardTitle>Historical GKE CPU Metrics</CardTitle>
-          <CardDescription>CPU Request and Utilization</CardDescription>
+          <CardTitle>Historical GKE Metrics</CardTitle>
+          <CardDescription>CPU write and read write</CardDescription>
         </div>
         <Select value={range} onValueChange={(v) => setRange(v as Range)}>
           <SelectTrigger
@@ -172,7 +252,7 @@ const CpuRequestUtilization: React.FC = () => {
       </CardHeader>
 
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        {requestLoading || utilizationLoading ? (
+        {readLoading || writeLoading ? (
           <div className="text-muted-foreground flex h-[250px] items-center justify-center text-sm">
             Loading metrics...
           </div>
@@ -183,7 +263,7 @@ const CpuRequestUtilization: React.FC = () => {
           >
             <AreaChart data={chartData}>
               <defs>
-                <linearGradient id="fillRequest" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="fillRead" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
                     stopColor="var(--chart-1)"
@@ -195,7 +275,7 @@ const CpuRequestUtilization: React.FC = () => {
                     stopOpacity={0.1}
                   />
                 </linearGradient>
-                <linearGradient id="fillUtilization" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="fillWrite" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
                     stopColor="var(--chart-2)"
@@ -204,6 +284,30 @@ const CpuRequestUtilization: React.FC = () => {
                   <stop
                     offset="95%"
                     stopColor="var(--chart-2)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+                <linearGradient id="fillWrite" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--chart-3)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--chart-3)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+                <linearGradient id="fillWrite" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--chart-4)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--chart-4)"
                     stopOpacity={0.1}
                   />
                 </linearGradient>
@@ -218,22 +322,12 @@ const CpuRequestUtilization: React.FC = () => {
                 tickMargin={8}
                 minTickGap={Math.max(1, Math.floor(chartData.length / 5))}
               />
-              {/* Left Y-axis for CPU Utilization */}
+
               <YAxis
                 tickLine={false}
                 axisLine={false}
                 domain={[0, 'auto']}
                 tickFormatter={(value) => `${value}%`}
-              />
-
-              {/* Right Y-axis (0-1) for CPU Request */}
-              <YAxis
-                yAxisId="right"
-                orientation="right"
-                tickLine={false}
-                axisLine={false}
-                domain={[0, 50]}
-                tickFormatter={(value: number) => value.toFixed(2)}
               />
 
               <ChartTooltip
@@ -249,19 +343,33 @@ const CpuRequestUtilization: React.FC = () => {
               />
 
               <Area
-                dataKey="request"
+                dataKey="read"
                 type="natural"
-                fill="url(#fillRequest)"
-                className="area-request"
-                stroke="var(--color-request)"
+                fill="url(#fillRead)"
+                className="area-read"
+                stroke="var(--color-read)"
                 stackId="a"
               />
               <Area
-                dataKey="utilization"
+                dataKey="write"
                 type="natural"
-                fill="url(#fillUtilization)"
-                stroke="var(--color-utilization)"
+                fill="url(#fillWrite)"
+                stroke="var(--color-write)"
                 stackId="a"
+              />
+              <Area
+                dataKey="received"
+                type="natural"
+                fill="url(#fillReceived)"
+                stroke="var(--chart-3)"
+                stackId="3"
+              />
+              <Area
+                dataKey="sent"
+                type="natural"
+                fill="url(#fillSent)"
+                stroke="var(--chart-4)"
+                stackId="4"
               />
               <ChartLegend content={<ChartLegendContent />} />
             </AreaChart>
@@ -272,4 +380,4 @@ const CpuRequestUtilization: React.FC = () => {
   );
 };
 
-export default CpuRequestUtilization;
+export default Bytes;

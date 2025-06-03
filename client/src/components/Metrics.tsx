@@ -6,10 +6,10 @@ import BarChartExample from './ExampleBarChart';
 import InteractiveLineChartExample from './ExampleInteractiveLineChart';
 import InteractiveAreaChartExample from './ExampleInteractiveAreaChart';
 import LineChartExample from './ExampleLineChart';
-import CpuMemoryUtilization from './CpuRequestUtilization';
+import CpuMemoryUtilization from './Utilization';
 import RecentUsage from './RecentUsage';
-// import EventLog from './EventLog';
 import RadialChartExample from './ExampleRadialChart';
+import Bytes from './Bytes';
 
 const Metrics: React.FC = () => {
   return (
@@ -17,7 +17,7 @@ const Metrics: React.FC = () => {
       <h1>~~~~~~~~~~ Metrics TEST COMPONENTS START ~~~~~~~~~~</h1>
       <RecentUsage />
       <CpuMemoryUtilization />
-      {/* <EventLog /> */}
+      <Bytes />
       <BarChartExample />
       <InteractiveAreaChartExample />
       <RadialChartExample />
