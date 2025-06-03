@@ -8,36 +8,31 @@ import {
   ResponsiveContainer,
   RadialBarChart,
 } from 'recharts';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 import { useFetchMetrics } from '../hooks/hookMetric';
 
 const metricConfigs = [
   {
-    name: 'CPU Utilization',
+    name: 'CPU',
     metricType: 'compute.googleapis.com/instance/cpu/utilization',
     fill: 'var(--chart-1)',
     convertToPercentage: true,
   },
   {
-    name: 'Memory Usage',
+    name: 'Memory',
     metricType: 'kubernetes.io/container/memory/limit_utilization',
     fill: 'var(--chart-2)',
     convertToPercentage: false,
   },
   {
-    name: 'Request Utilization',
+    name: 'Request',
     metricType: 'kubernetes.io/container/cpu/request_utilization',
     fill: 'var(--chart-3)',
     convertToPercentage: false,
   },
   {
-    name: 'Limit Utilization',
+    name: 'Limit',
     metricType: 'kubernetes.io/container/cpu/limit_utilization',
     fill: 'var(--chart-4)',
     convertToPercentage: true,
@@ -102,14 +97,17 @@ const ResourceUsageRadialCharts: React.FC = () => {
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {/* <CardTitle className="text-sm font-medium">
+        System Resource Utilization
+      </CardTitle> */}
       {metricsData.map((metric) => {
         const endAngle = 180 - 360 * (metric.value / 100);
         return (
           <Card key={metric.name} className="flex flex-col">
             <CardHeader className="items-center pb-0">
-              <CardTitle className="text-sm font-medium">
+              {/* <CardTitle className="text-sm font-medium">
                 {metric.name}
-              </CardTitle>
+              </CardTitle> */}
             </CardHeader>
             <CardContent className="flex-1 pb-0">
               <ChartContainer
@@ -152,7 +150,14 @@ const ResourceUsageRadialCharts: React.FC = () => {
                                   y={viewBox.cy}
                                   className="fill-foreground text-3xl font-bold"
                                 >
-                                  {metric.value.toFixed(1)}%
+                                  {metric.value.toFixed(0)}
+                                </tspan>
+                                <tspan
+                                  x={viewBox.cx}
+                                  y={(viewBox.cy || 0) + 24}
+                                  className="fill-muted-foreground"
+                                >
+                                  {metric.name}
                                 </tspan>
                               </text>
                             );
