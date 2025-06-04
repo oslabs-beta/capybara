@@ -32,7 +32,7 @@ const useClusterInfo = () => {
       setLoading(true);
       try {
         const baseUrl = import.meta.env.VITE_API_URL || '';
-        const res = await axios.get<ClusterInfo>(`${''}/api/gke/cluster`);
+        const res = await axios.get<ClusterInfo>(`${baseUrl}/api/gke/cluster`);
         setData(res.data);
       } catch (err) {
         setError(`Failed to fetch cluster info, ${err}`);
