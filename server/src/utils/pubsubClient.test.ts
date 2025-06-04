@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest';
 
 // --- Mocks needed BEFORE pubsubClient is imported ---
 
@@ -48,7 +48,23 @@ vi.mock('@google-cloud/pubsub', () => {
   };
 });
 
-// 3. Mock ../services/processEvent (redisCache)
+// 3. Mock redis module to prevent module loading issues
+vi.mock('redis', () => ({
+  createClient: vi.fn().mockReturnValue({
+    isOpen: true,
+    on: vi.fn(),
+    connect: vi.fn().mockResolvedValue(undefined),
+    set: vi.fn().mockResolvedValue('OK'),
+    get: vi.fn().mockResolvedValue(null),
+    lPush: vi.fn().mockResolvedValue(1),
+    lLen: vi.fn().mockResolvedValue(1),
+    lTrim: vi.fn().mockResolvedValue('OK'),
+    lRange: vi.fn().mockResolvedValue([]),
+    mGet: vi.fn().mockResolvedValue([]),
+  }),
+}));
+
+// 4. Mock ../services/processEvent (redisCache)
 const mockRedisCache = vi.fn().mockResolvedValue(undefined);
 vi.mock('../services/processEvent', async (importOriginal) => {
   const actual = (await importOriginal()) as any;

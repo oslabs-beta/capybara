@@ -45,6 +45,11 @@ jobs:
         run: |
           npm ci
           npm install @rollup/rollup-linux-x64-gnu --save-optional || true
+      - name: Set test environment
+        working-directory: server
+        run: echo "NODE_ENV=test" >> $GITHUB_ENV
       - name: Run server tests
         working-directory: server
         run: npm test
+        env:
+          NODE_ENV: test
