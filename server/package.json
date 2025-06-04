@@ -7,7 +7,6 @@
   "scripts": {
     "dev": "nodemon --watch src --ext ts --exec vite-node src/index.ts",
     "typecheck": "tsc --noEmit",
-    "prebuild": "rm -rf node_modules package-lock.json && npm install",
     "build": "vite build",
     "start": "node dist/index.js",
     "test": "vitest run",
@@ -47,5 +46,8 @@
     "vite": "^6.2.6",
     "vite-node": "^3.1.1",
     "vitest": "^3.1.1"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.22.5"
   }
 }
