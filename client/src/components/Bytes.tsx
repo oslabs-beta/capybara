@@ -26,6 +26,22 @@ import {
 } from '@/components/ui/select';
 import { useFetchMetrics } from '../hooks/hookMetric';
 
+// Add proper type definitions
+interface Point {
+  interval?: {
+    endTime?: {
+      seconds?: string | number | null;
+    } | null;
+    startTime?: {
+      seconds?: string | number | null;
+    } | null;
+  } | null;
+  value?: {
+    int64Value?: string;
+    doubleValue?: number;
+  };
+}
+
 type Range = '1d' | '7d' | '14d';
 
 const rangeToMinutes: Record<Range, number> = {
@@ -99,7 +115,7 @@ const Bytes: React.FC = () => {
     };
 
     // Process disk read data
-    readData?.[0]?.points?.forEach((point) => {
+    (readData?.[0]?.points as Point[])?.forEach((point: Point) => {
       const timestamp = new Date(
         Number(point.interval?.endTime?.seconds) * 1000,
       );
@@ -130,7 +146,7 @@ const Bytes: React.FC = () => {
     });
 
     // Process disk write data
-    writeData?.[0]?.points?.forEach((point) => {
+    (writeData?.[0]?.points as Point[])?.forEach((point: Point) => {
       const timestamp = new Date(
         Number(point.interval?.endTime?.seconds) * 1000,
       );
@@ -161,7 +177,7 @@ const Bytes: React.FC = () => {
     });
 
     // Process network received data
-    receivedData?.[0]?.points?.forEach((point) => {
+    (receivedData?.[0]?.points as Point[])?.forEach((point: Point) => {
       const timestamp = new Date(
         Number(point.interval?.endTime?.seconds) * 1000,
       );
@@ -191,7 +207,7 @@ const Bytes: React.FC = () => {
     });
 
     // Process network sent data
-    sentData?.[0]?.points?.forEach((point) => {
+    (sentData?.[0]?.points as Point[])?.forEach((point: Point) => {
       const timestamp = new Date(
         Number(point.interval?.endTime?.seconds) * 1000,
       );
