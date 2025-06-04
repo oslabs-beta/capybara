@@ -2,13 +2,19 @@
 
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CpuIcon, HardHatIcon, MemoryStickIcon, NetworkIcon, ServerIcon } from 'lucide-react';
+import {
+  CpuIcon,
+  HardHatIcon,
+  MemoryStickIcon,
+  NetworkIcon,
+  ServerIcon,
+} from 'lucide-react';
 import { useFetchMetrics } from '../hooks/hookMetric';
 import axios from 'axios';
 
 const duration = 5;
 
- interface ClusterInfo {
+interface ClusterInfo {
   name: string;
   location: string;
   status: string;
@@ -25,7 +31,8 @@ const useClusterInfo = () => {
     const fetchCluster = async () => {
       setLoading(true);
       try {
-        const res = await axios.get<ClusterInfo>('/api/gke/cluster');
+        const baseUrl = import.meta.env.VITE_API_URL || '';
+        const res = await axios.get<ClusterInfo>(`${''}/api/gke/cluster`);
         setData(res.data);
       } catch (err) {
         setError(`Failed to fetch cluster info, ${err}`);
@@ -63,7 +70,7 @@ const GKEClusterCard: React.FC = () => {
     const memVal = memData?.[0]?.points?.[0]?.value?.doubleValue;
 
     if (cpuVal != null) setCpu(`${(cpuVal * 100).toFixed(2)}%`);
-    if (memVal != null) setMemory(`${(memVal).toFixed(2)}%`);
+    if (memVal != null) setMemory(`${memVal.toFixed(2)}%`);
   }, [cpuData, memData]);
 
   if (clusterLoading) return <p>Loading cluster info...</p>;
