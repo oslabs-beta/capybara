@@ -38,14 +38,14 @@ const Header: React.FC = () => {
         >
           <SignInButton
             mode="modal" // opens in popup
-            afterSignInUrl="/" // redirect
-            redirectUrl="/" // Optional redirect
+            // afterSignInUrl="/" // redirect
+            // redirectUrl="/" // Optional redirect
           />{' '}
           /
           <SignUpButton
             mode="modal" // opens in popup
-            afterSignUpUrl="/" // redirect
-            redirectUrl="/" // Optional redirect
+            // afterSignUpUrl="/" // redirect
+            // redirectUrl="/" // Optional redirect
           />
         </div>
       </SignedOut>
