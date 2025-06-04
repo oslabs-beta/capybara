@@ -1,0 +1,26 @@
+# Exclude node_modules to force clean install in Cloud Build
+node_modules/
+package-lock.json
+
+# Exclude development files
+.env
+.env.local
+.DS_Store
+coverage/
+*.log
+npm-debug.log*
+
+# Exclude test artifacts
+vitest
+client@0.0.0
+
+# Exclude git files
+.git/
+.gitignore
+
+# Exclude IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
