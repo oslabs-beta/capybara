@@ -5,7 +5,7 @@
 const AiInsights: React.FC = () => {
   return (
     <div>
-      <h1>AI Insights</h1>
+      <h1>AI Insights Coming Soon</h1>
     </div>
   );
 };
