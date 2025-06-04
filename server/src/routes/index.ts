@@ -29,9 +29,6 @@ router.get('/metrics', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-// ie.
-// router.use("/auth", authRoutes);
-// router.use("/users", userRoutes);
 
 // ------------------------------------------------------------------------------------------------
 // * MODULE EXPORT
