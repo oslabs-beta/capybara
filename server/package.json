@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "nodemon --watch src --ext ts --exec vite-node src/index.ts",
     "typecheck": "tsc --noEmit",
+    "prebuild": "rm -rf node_modules package-lock.json && npm install",
     "build": "vite build",
     "start": "node dist/index.js",
     "test": "vitest run",
