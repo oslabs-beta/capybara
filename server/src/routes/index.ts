@@ -3,6 +3,7 @@
 // ------------------------------------------------------------------------------------------------
 import express from 'express';
 import fetchGCPMetric from '../utils/metricService';
+import clusterRouter from './clusterInfo';
 
 // ie.
 // import authRoutes from "./authRoutes";
@@ -11,6 +12,7 @@ import fetchGCPMetric from '../utils/metricService';
 // const router = express.Router();
 const router = express.Router();
 
+router.use('/gke/cluster', clusterRouter);
 // ------------------------------------------------------------------------------------------------
 // * ATTACH EACH SUB-ROUTER UNDER ITS OWN PATH
 // ------------------------------------------------------------------------------------------------
@@ -29,9 +31,6 @@ router.get('/metrics', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-// ie.
-// router.use("/auth", authRoutes);
-// router.use("/users", userRoutes);
 
 // ------------------------------------------------------------------------------------------------
 // * MODULE EXPORT
