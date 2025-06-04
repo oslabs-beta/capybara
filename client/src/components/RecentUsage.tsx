@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
   RadialBarChart,
 } from 'recharts';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 import { useFetchMetrics } from '../hooks/hookMetric';
 
