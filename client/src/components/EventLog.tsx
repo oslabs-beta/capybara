@@ -10,7 +10,18 @@ import {
 } from './ui/chart';
 
 import { useFetchMetrics } from '../hooks/hookMetric';
-import { Point } from '../../../server/src/types/metricTypes';
+
+// Add proper type definitions
+interface Point {
+  interval?: {
+    endTime?: { seconds?: string };
+    startTime?: { seconds?: string };
+  };
+  value?: {
+    int64Value?: string;
+    doubleValue?: number;
+  };
+}
 
 const chartConfig: ChartConfig = {
   bytes: {
@@ -56,61 +67,64 @@ const EventLog: React.FC = () => {
     >();
 
     // Process bytes data
-    bytesData?.[0]?.points?.forEach((point) => {
-      const timestamp = new Date(
-        Number(point.interval?.endTime?.seconds) * 1000,
-      );
-      const dateKey = timestamp.toISOString();
-      const value = getMetricValue(point);
+    (bytesData?.[0]?.points as Point[])
+      ?.filter(Boolean)
+      .forEach((point: Point) => {
+        const timestamp = new Date(
+          Number(point.interval?.endTime?.seconds) * 1000,
+        );
+        const dateKey = timestamp.toISOString();
+        const value = getMetricValue(point);
 
-      if (!dataMap.has(dateKey)) {
-        dataMap.set(dateKey, {
-          date: dateKey,
-          bytes: value,
-          entries: 0,
-          displayTime: timestamp.toLocaleString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-          }),
-        });
-      } else {
-        const entry = dataMap.get(dateKey);
-        if (entry) entry.bytes = value;
-      }
-    });
+        if (!dataMap.has(dateKey)) {
+          dataMap.set(dateKey, {
+            date: dateKey,
+            bytes: value,
+            entries: 0,
+            displayTime: timestamp.toLocaleString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            }),
+          });
+        } else {
+          const entry = dataMap.get(dateKey);
+          if (entry) entry.bytes = value;
+        }
+      });
 
     // Process entries data
-    entriesData?.[0]?.points?.forEach((point) => {
-      const timestamp = new Date(
-        Number(point.interval?.endTime?.seconds) * 1000,
-      );
-      const dateKey = timestamp.toISOString();
-      const value = getMetricValue(point);
+    (entriesData?.[0]?.points as Point[])
+      ?.filter(Boolean)
+      .forEach((point: Point) => {
+        const timestamp = new Date(
+          Number(point.interval?.endTime?.seconds) * 1000,
+        );
+        const dateKey = timestamp.toISOString();
+        const value = getMetricValue(point);
 
-      if (!dataMap.has(dateKey)) {
-        dataMap.set(dateKey, {
-          date: dateKey,
-          bytes: 0,
-          entries: value,
-          displayTime: timestamp.toLocaleString('en-US', {
-            month: 'short',
-            day: 'numeric',
-          }),
-        });
-      } else {
-        const entry = dataMap.get(dateKey);
-        if (entry) entry.entries = value;
-      }
-    });
+        if (!dataMap.has(dateKey)) {
+          dataMap.set(dateKey, {
+            date: dateKey,
+            bytes: 0,
+            entries: value,
+            displayTime: timestamp.toLocaleString('en-US', {
+              month: 'short',
+              day: 'numeric',
+            }),
+          });
+        } else {
+          const entry = dataMap.get(dateKey);
+          if (entry) entry.entries = value;
+        }
+      });
 
     // Sort by date and return array
     return Array.from(dataMap.values()).sort(
       (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
     );
   }, [bytesData, entriesData, bytesLoading, entriesLoading]);
-
 
   return (
     <div>
