@@ -27,9 +27,12 @@ export const useFetchMetrics = (metricType: string, duration: number) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get<TimeSeries[]>('/api/metrics', {
-          params: { metricType, duration },
-        });
+        const res = await axios.get<TimeSeries[]>(
+          `${import.meta.env.VITE_API_URL}/api/metrics`,
+          {
+            params: { metricType, duration },
+          },
+        );
         setData(res.data);
       } catch (err) {
         setError(`Failed to fetch metrics, ${err}`);
