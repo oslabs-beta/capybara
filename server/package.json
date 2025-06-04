@@ -5,9 +5,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec  NODE_NO_WARNINGS=1 ts-node src/index.ts",
-    "build": "tsc",
-    "gcp-build": "tsc",
+    "dev": "nodemon --watch src --ext ts --exec vite-node src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "vite build",
     "start": "node dist/index.js",
     "test": "vitest run",
     "test:watch": "vitest",
