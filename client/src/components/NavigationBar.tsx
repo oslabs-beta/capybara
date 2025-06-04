@@ -8,11 +8,9 @@ import {
   IconLogout,
   IconSettings,
   IconUser,
-  IconHome,
   IconAi,
   IconHistory,
   IconBellCheck,
-  IconX,
 } from '@tabler/icons-react';
 import {
   AnimatePresence,
@@ -86,7 +84,11 @@ const NavigationBar: React.FC = () => {
       title: 'Log Out',
       icon: (
         <button
-          onClick={() => signOut(() => (window.location.href = '/'))}
+          onClick={() =>
+            signOut(() => {
+              window.location.href = '/';
+            })
+          }
           className="flex h-full w-full items-center justify-center"
         >
           <IconLogout className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
