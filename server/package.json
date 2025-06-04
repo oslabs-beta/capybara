@@ -30,8 +30,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.18.2",
-    "redis": "^5.5.5",
-    "@rollup/rollup-linux-x64-gnu": "^4.22.5"
+    "redis": "^5.5.5"
   },
   "devDependencies": {
     "@types/axios": "^0.9.36",
@@ -47,5 +46,8 @@
     "vite": "^6.2.6",
     "vite-node": "^3.1.1",
     "vitest": "^3.1.1"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.22.5"
   }
 }
