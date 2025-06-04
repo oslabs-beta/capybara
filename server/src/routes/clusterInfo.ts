@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { ClusterManagerClient } from '@google-cloud/container';
 import loadSecrets from '../utils/loadSecrets';
 import chalk from 'chalk';
@@ -6,7 +6,7 @@ import chalk from 'chalk';
 const clusterRouter = express.Router();
 const client = new ClusterManagerClient();
 
-clusterRouter.get('/', async (req, res) => {
+clusterRouter.get('/cluster', async (req: Request, res: Response) => {
   try {
     const secrets = await loadSecrets(['GCP_PROJECT_ID']);
     const projectId = secrets['GCP_PROJECT_ID'];
@@ -31,8 +31,6 @@ clusterRouter.get('/', async (req, res) => {
       nodeCount: cluster.currentNodeCount,
       network: cluster.network,
     };
-
-    console.log(chalk.green('[GKE] Cluster Info Fetched:'), clusterData);
     res.json(clusterData);
   } catch (err) {
     console.error(chalk.red('[GKE ERROR] Failed to fetch cluster info:'), err);

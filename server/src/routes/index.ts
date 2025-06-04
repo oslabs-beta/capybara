@@ -3,7 +3,6 @@
 // ------------------------------------------------------------------------------------------------
 import express from 'express';
 import fetchGCPMetric from '../utils/metricService';
-import clusterRouter from './clusterInfo';
 
 // ie.
 // import authRoutes from "./authRoutes";
@@ -12,7 +11,6 @@ import clusterRouter from './clusterInfo';
 // const router = express.Router();
 const router = express.Router();
 
-router.use('/gke/cluster', clusterRouter);
 // ------------------------------------------------------------------------------------------------
 // * ATTACH EACH SUB-ROUTER UNDER ITS OWN PATH
 // ------------------------------------------------------------------------------------------------

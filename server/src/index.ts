@@ -11,6 +11,7 @@ import routes from './routes';
 import startK8sEventWatcher from './services/k8sEventWatcher'; // K8s event watcher
 import getSecretKeys from './appSecrets'; // Google Secret Manager
 import startK8sEventProcessor from './services/k8sEventProcessor';
+import clusterRouter from './routes/clusterInfo';
 
 const app = express();
 const secret = await getSecretKeys(); // Load secrets from Google Secret Manager
@@ -44,6 +45,7 @@ app.get('/status', (req, res) => {
 
 app.use(express.json()); // EXPRESS
 app.use('/api', routes); // ROUTES
+app.use('/api/gke', clusterRouter);
 
 // ----------------------------------------------------------------------------------------
 // * 404 HANDLER

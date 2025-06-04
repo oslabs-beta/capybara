@@ -6,9 +6,9 @@ import GKEClusterCard from './InfoCard';
 
 const Metrics: React.FC = () => {
   return (
-    <div>
-      <RecentUsage />
+    <div className="space-y-3">
       <GKEClusterCard />
+      <RecentUsage />
     </div>
   );
 };
