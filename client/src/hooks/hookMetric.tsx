@@ -2,7 +2,21 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-import type { TimeSeries } from '../../../server/src/types/metricTypes';
+// Define types locally instead of importing from server
+interface MetricPoint {
+  interval?: {
+    endTime?: {
+      seconds?: string;
+    };
+  };
+  value?: {
+    doubleValue?: number;
+  };
+}
+
+export interface TimeSeries {
+  points?: MetricPoint[];
+}
 
 export const useFetchMetrics = (metricType: string, duration: number) => {
   const [data, setData] = useState<TimeSeries[]>([]);
