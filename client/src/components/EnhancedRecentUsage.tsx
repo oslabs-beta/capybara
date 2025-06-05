@@ -76,7 +76,7 @@ const calculatePeak24h = (
   if (points.length === 0) return 0;
 
   // Get all values and find the maximum
-  const values = points.map((point) => {
+  const values = points.map((point: any) => {
     const rawValue = point.value?.doubleValue ?? 0;
     return convertToPercentage ? rawValue * 100 : rawValue;
   });
@@ -94,12 +94,12 @@ const calculateAverage24h = (
   const points = timeSeries[0].points;
   if (points.length === 0) return 0;
 
-  const values = points.map((point) => {
+  const values = points.map((point: any) => {
     const rawValue = point.value?.doubleValue ?? 0;
     return convertToPercentage ? rawValue * 100 : rawValue;
   });
 
-  const sum = values.reduce((acc, val) => acc + val, 0);
+  const sum = values.reduce((acc: number, val: number) => acc + val, 0);
   return sum / values.length;
 };
 

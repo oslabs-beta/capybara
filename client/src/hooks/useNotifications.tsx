@@ -20,14 +20,12 @@ export interface K8sNotification {
 
 export const useNotifications = () => {
   const [notifications, setNotifications] = useState<K8sNotification[]>([]);
-  const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     const socketInstance = io(
       import.meta.env.VITE_API_URL || 'http://localhost:3000',
     );
-    setSocket(socketInstance);
 
     socketInstance.on('connect', () => {
       setIsConnected(true);
