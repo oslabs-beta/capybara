@@ -1,4 +1,6 @@
-'use client';
+// ----------------------------------------------------------
+// >> DISK I/O OPERATIONS AND NETWORK TRAFFIC << //
+// ----------------------------------------------------------
 
 import * as React from 'react';
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
@@ -263,10 +265,7 @@ const Bytes: React.FC = () => {
     <Card className="pt-0">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
-          <CardTitle>Historical GKE Metrics</CardTitle>
-          <CardDescription>
-            Disk I/O Operations and Network Traffic
-          </CardDescription>
+          <CardTitle>Disk I/O Operations and Network Traffic</CardTitle>
         </div>
         <Select value={range} onValueChange={(v) => setRange(v as Range)}>
           <SelectTrigger

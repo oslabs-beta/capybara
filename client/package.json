@@ -30,6 +30,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "framer-motion": "^12.16.0",
     "lucide-react": "^0.511.0",
     "motion": "^12.15.0",
     "react": "^18.3.1",
@@ -38,6 +39,7 @@
     "react-router-dom": "^7.6.2",
     "react-simple-typewriter": "^5.0.1",
     "recharts": "^2.15.3",
+    "socket.io-client": "^4.8.1",
     "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {

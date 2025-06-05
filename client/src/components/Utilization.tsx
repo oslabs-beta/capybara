@@ -1,14 +1,10 @@
-'use client';
+// ----------------------------------------------------------
+// >> CPU & MEMORY UTILIZATION << //
+// ----------------------------------------------------------
 
 import * as React from 'react';
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
@@ -146,8 +142,7 @@ const CpuMemoryUtilization: React.FC = () => {
     <Card className="pt-0">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
-          <CardTitle>Historical GKE Metrics</CardTitle>
-          <CardDescription>CPU Utilization and Memory Utilization</CardDescription>
+          <CardTitle>CPU and Memory Utilization</CardTitle>
         </div>
         <Select value={range} onValueChange={(v) => setRange(v as Range)}>
           <SelectTrigger

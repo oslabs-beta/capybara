@@ -3,12 +3,15 @@
 // ----------------------------------------------------------
 
 import React from 'react';
-import Metrics from './Metrics';
+import EnhancedMetrics from './EnhancedMetrics';
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="flex flex-col">
-      <Metrics />
+    <div className="mx-10 mt-2 flex max-w-full flex-col">
+      {/* Remove height constraints and let it flow naturally in the scroll container */}
+      <div className="space-y-3">
+        <EnhancedMetrics />
+      </div>
     </div>
   );
 };
