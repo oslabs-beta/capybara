@@ -12,10 +12,16 @@ import startK8sEventWatcher from './services/k8sEventWatcher'; // K8s event watc
 import getSecretKeys from './appSecrets'; // Google Secret Manager
 import startK8sEventProcessor from './services/k8sEventProcessor';
 import clusterRouter from './routes/clusterInfo';
+import { createServer } from 'http';
+import { initializeWebSocket } from './services/websocketService';
 
 const app = express();
 const secret = await getSecretKeys(); // Load secrets from Google Secret Manager
 const port = secret.PORT;
+const server = createServer(app);
+
+// Initialize WebSocket
+initializeWebSocket(server);
 
 // ------------------------------------------------------------------------------------------------
 // * K8s EVENT WATCHER & PROCESSOR
@@ -67,7 +73,7 @@ app.use(errorHandler);
 // * This prevents the server from starting during tests
 
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(port, () =>
+  server.listen(port, () =>
     console.log(
       chalk.bgGreenBright(
         `[Server] is up and running @ http://localhost:${port}`,

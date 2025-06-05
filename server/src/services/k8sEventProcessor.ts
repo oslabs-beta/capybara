@@ -11,7 +11,8 @@ import { subscribeToTopic, createSubscription } from '../utils/pubsubClient';
 import generateEmbedding from '../utils/geminiEmbeddingClient';
 import pineconeVector from '../utils/pineconeClient';
 import gemini from '../utils/geminiClient';
-import slack_message from '../utils/slackClient';
+// import slack_message from '../utils/slackClient';
+import { sendNotifications } from './notificationService';
 
 // ! Prevent processing of past events and throttle Slack notifications !
 const SUBSCRIPTION_START_TIME = Date.now();
@@ -110,19 +111,35 @@ const processK8sEvent = async (
     const aiResponse = await gemini(prompt);
     console.log(chalk.cyan('[K8sProcessor] Received AI response'));
 
-    // 8. Format and send Slack notification (with rate limiting)
-    const slackMessage = formatSlackMessage(event, aiResponse, similarEvents);
+    // // 8. Format and send Slack notification (with rate limiting)
+    // const slackMessage = formatSlackMessage(event, aiResponse, similarEvents);
+    // const now = Date.now();
+    // if (now - lastNotificationTime >= RATE_LIMIT_INTERVAL) {
+    //   await slack_message(slackMessage);
+    //   lastNotificationTime = now;
+    //   console.log(
+    //     chalk.green('[K8sProcessor] Successfully sent message to Slack'),
+    //   );
+    // } else {
+    //   console.log(
+    //     chalk.yellow(
+    //       '[K8sProcessor] Rate limit reached, skipping Slack notification',
+    //     ),
+    //   );
+    // }
+
+    // 8. Send notifications to both dashboard and Slack (with rate limiting)
     const now = Date.now();
     if (now - lastNotificationTime >= RATE_LIMIT_INTERVAL) {
-      await slack_message(slackMessage);
+      await sendNotifications(event, aiResponse, similarEvents);
       lastNotificationTime = now;
       console.log(
-        chalk.green('[K8sProcessor] Successfully sent message to Slack'),
+        chalk.green('[K8sProcessor] Successfully sent notifications'),
       );
     } else {
       console.log(
         chalk.yellow(
-          '[K8sProcessor] Rate limit reached, skipping Slack notification',
+          '[K8sProcessor] Rate limit reached, skipping notifications',
         ),
       );
     }
