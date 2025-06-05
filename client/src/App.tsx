@@ -38,7 +38,7 @@ const App = () => {
 
   return (
     <div
-      className="duration-800 scrollbar-hide min-h-screen transition-colors"
+      className="duration-800 min-h-screen transition-colors"
       style={{
         backgroundColor: 'var(--background)',
         color: 'var(--foreground)',
@@ -76,19 +76,19 @@ const App = () => {
       {/* CONDITIONAL CONTENT WITH ROUTES */}
       <SignedOut>
         <div className="pt-16">
-          {' '}
-          {/* Add top padding for header */}
           <Welcome />
         </div>
       </SignedOut>
       <SignedIn>
-        <div className="pb-24 pt-16">
-          {' '}
-          {/* Add top padding for header and bottom padding for nav */}
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/historical" element={<HistoricalData />} />
-          </Routes>
+        {/* Create a fixed viewport container that accounts for header and nav */}
+        <div className="fixed bottom-0 left-0 right-0 top-16 flex flex-col">
+          {/* Scrollable content area that stops at navigation bar */}
+          <div className="flex-1 overflow-y-auto pb-24">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/historical" element={<HistoricalData />} />
+            </Routes>
+          </div>
         </div>
         <NavigationBar />
       </SignedIn>
