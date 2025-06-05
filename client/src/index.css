@@ -207,3 +207,484 @@ html {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* Glassmorphism effects */
+.glassmorphism {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.dark .glassmorphism {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced gradient utilities using your existing color system */
+.gradient-primary {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--secondary)) 100%
+  );
+}
+
+.gradient-accent {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--accent)) 0%,
+    hsl(var(--muted)) 100%
+  );
+}
+
+.gradient-chart-1 {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--chart-1)) 0%,
+    hsl(var(--chart-2)) 100%
+  );
+}
+
+.gradient-chart-2 {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--chart-2)) 0%,
+    hsl(var(--chart-3)) 100%
+  );
+}
+
+.gradient-chart-3 {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--chart-3)) 0%,
+    hsl(var(--chart-4)) 100%
+  );
+}
+
+.gradient-chart-4 {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--chart-4)) 0%,
+    hsl(var(--chart-1)) 100%
+  );
+}
+
+/* Enhanced shadows using your existing color system */
+.shadow-primary {
+  box-shadow: 0 4px 14px 0 hsla(var(--primary), 0.15);
+}
+
+.shadow-accent {
+  box-shadow: 0 4px 14px 0 hsla(var(--accent), 0.15);
+}
+
+.shadow-chart {
+  box-shadow: 0 4px 14px 0 hsla(var(--chart-1), 0.15);
+}
+
+/* Animated gradients */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+/* Enhanced card hover effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dark .card-hover:hover {
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.25),
+    0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Metric card specific enhancements */
+.metric-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.metric-card:hover::before {
+  left: 100%;
+}
+
+/* Enhanced pulse animation for loading states */
+@keyframes enhanced-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-enhanced-pulse {
+  animation: enhanced-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Status indicator animations */
+@keyframes status-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.status-indicator {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+/* Enhanced chart animations */
+.chart-container {
+  transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+  transform: scale(1.02);
+}
+
+/* Trend indicator styles */
+.trend-up {
+  color: hsl(var(--chart-3));
+}
+
+.trend-down {
+  color: hsl(var(--chart-1));
+}
+
+.trend-neutral {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Enhanced scrollbar styling that respects your theme */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--accent));
+}
+
+/* Enhanced button hover effects using your theme colors */
+.btn-enhanced {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(
+    circle,
+    hsla(var(--primary-foreground), 0.1) 0%,
+    transparent 70%
+  );
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.btn-enhanced:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+  .card-hover:hover {
+    transform: none;
+  }
+
+  .metric-card::before {
+    display: none;
+  }
+}
+
+/* Dark mode specific enhancements */
+.dark .glassmorphism {
+  background-color: rgba(45, 37, 33, 0.1);
+  border: 1px solid rgba(241, 240, 229, 0.1);
+}
+
+/* Additional chart color variations using your existing system */
+:root {
+  --chart-gradient-1: linear-gradient(
+    135deg,
+    hsl(var(--chart-1)),
+    hsl(var(--chart-2))
+  );
+  --chart-gradient-2: linear-gradient(
+    135deg,
+    hsl(var(--chart-2)),
+    hsl(var(--chart-3))
+  );
+  --chart-gradient-3: linear-gradient(
+    135deg,
+    hsl(var(--chart-3)),
+    hsl(var(--chart-4))
+  );
+  --chart-gradient-4: linear-gradient(
+    135deg,
+    hsl(var(--chart-4)),
+    hsl(var(--chart-1))
+  );
+}
+
+/* Enhanced focus states for accessibility */
+.focus-enhanced:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Motion-safe preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient,
+  .status-indicator,
+  .animate-enhanced-pulse {
+    animation: none;
+  }
+
+  .card-hover {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glassmorphism {
+    background-color: hsl(var(--background));
+    border: 2px solid hsl(var(--border));
+  }
+
+  .gradient-primary,
+  .gradient-accent,
+  .gradient-chart-1,
+  .gradient-chart-2,
+  .gradient-chart-3,
+  .gradient-chart-4 {
+    background: hsl(var(--background));
+    border: 2px solid hsl(var(--primary));
+  }
+}
+
+/* Enhanced loading skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 25%,
+    hsl(var(--accent)) 50%,
+    hsl(var(--muted)) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Interactive element states */
+.interactive-element {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.interactive-element:hover {
+  transform: scale(1.02);
+}
+
+.interactive-element:active {
+  transform: scale(0.98);
+}
+
+/* Toast notification enhancements */
+.toast-success {
+  background: linear-gradient(135deg, hsl(var(--chart-3)), hsl(142 76% 36%));
+  border: 1px solid hsl(142 76% 36% / 0.3);
+}
+
+.toast-error {
+  background: linear-gradient(135deg, hsl(0 84% 60%), hsl(0 84% 50%));
+  border: 1px solid hsl(0 84% 60% / 0.3);
+}
+
+.toast-warning {
+  background: linear-gradient(135deg, hsl(38 92% 50%), hsl(32 95% 44%));
+  border: 1px solid hsl(38 92% 50% / 0.3);
+}
+
+/* Enhanced metric value animations */
+@keyframes metric-value-change {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.metric-value-updated {
+  animation: metric-value-change 0.3s ease-in-out;
+}
+
+/* Improved chart hover effects */
+.recharts-surface:hover {
+  filter: brightness(1.05);
+  transition: filter 0.2s ease;
+}
+
+/* Enhanced navigation elements */
+.nav-item-enhanced {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item-enhanced::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: hsl(var(--primary));
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-item-enhanced:hover::after {
+  width: 100%;
+}
+
+/* Status badge enhancements */
+.status-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.status-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.status-badge:hover::before {
+  left: 100%;
+}
+
+/* Enhanced typography scale */
+.text-display {
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.text-hero {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+/* Responsive spacing utilities */
+.space-responsive > * + * {
+  margin-top: clamp(1rem, 2vw, 2rem);
+}
+
+/* Enhanced border styles using theme colors */
+.border-gradient {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(hsl(var(--background)), hsl(var(--background))) padding-box,
+    linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)))
+      border-box;
+}
+
+/* Utility classes for the enhanced components */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
