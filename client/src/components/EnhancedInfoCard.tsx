@@ -9,6 +9,7 @@ import {
   NetworkIcon,
   ServerIcon,
   Activity,
+  MapPinIcon,
 } from 'lucide-react';
 import { useFetchMetrics } from '../hooks/hookMetric';
 import { motion } from 'motion/react';
@@ -43,7 +44,11 @@ const StatusBadge = ({ status }: { status: string }) => {
 };
 
 const GKEClusterCard: React.FC = () => {
-  const { selectedCluster: cluster, loading: clusterLoading, error } = useCluster();
+  const {
+    selectedCluster: cluster,
+    loading: clusterLoading,
+    error,
+  } = useCluster();
 
   const cpuMetric = 'kubernetes.io/container/cpu/limit_utilization';
   const memMetric = 'kubernetes.io/container/memory/request_utilization';
