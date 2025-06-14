@@ -9,7 +9,6 @@ import {
   NetworkIcon,
   ServerIcon,
   Activity,
-  MapPinIcon,
 } from 'lucide-react';
 import { useFetchMetrics } from '../hooks/hookMetric';
 import { motion } from 'motion/react';
