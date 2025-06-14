@@ -18,7 +18,16 @@ export interface TimeSeries {
   points?: MetricPoint[];
 }
 
-export const useFetchMetrics = (metricType: string, duration: number) => {
+interface ClusterInfo {
+  name: string;
+  location: string;
+}
+
+export const useFetchMetrics = (
+  metricType: string, 
+  duration: number, 
+  cluster?: ClusterInfo | null
+) => {
   const [data, setData] = useState<TimeSeries[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -28,8 +37,16 @@ export const useFetchMetrics = (metricType: string, duration: number) => {
       setLoading(true);
       try {
         const baseUrl = import.meta.env.VITE_API_URL || '';
+        const params: any = { metricType, duration };
+        
+        // Add cluster parameters if cluster is provided
+        if (cluster) {
+          params.clusterName = cluster.name;
+          params.clusterLocation = cluster.location;
+        }
+        
         const res = await axios.get<TimeSeries[]>(`${baseUrl}/api/metrics`, {
-          params: { metricType, duration },
+          params,
         });
         setData(res.data);
       } catch (err) {
@@ -40,7 +57,7 @@ export const useFetchMetrics = (metricType: string, duration: number) => {
     };
 
     if (metricType) fetchData();
-  }, [metricType, duration]);
+  }, [metricType, duration, cluster?.name, cluster?.location]);
 
   return { data, loading, error };
 };

@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useFetchMetrics } from '../hooks/hookMetric';
+import { useCluster } from '@/contexts/ClusterContext';
 
 type Range = '1d' | '7d' | '14d';
 
@@ -44,16 +45,19 @@ const chartConfig: ChartConfig = {
 const CpuMemoryUtilization: React.FC = () => {
   const [range, setRange] = React.useState<Range>('1d');
   const now = React.useMemo(() => new Date(), []);
+  const { selectedCluster } = useCluster();
 
-  // Fetch both metrics
+  // Fetch both metrics with cluster filtering
   const { data: memoryData, loading: memoryLoading } = useFetchMetrics(
     'kubernetes.io/container/memory/limit_utilization',
     rangeToMinutes[range],
+    selectedCluster,
   );
   const { data: utilizationData, loading: utilizationLoading } =
     useFetchMetrics(
       'compute.googleapis.com/instance/cpu/utilization',
       rangeToMinutes[range],
+      selectedCluster,
     );
 
   // Combine and transform data
