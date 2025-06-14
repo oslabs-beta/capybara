@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useFetchMetrics } from '../hooks/hookMetric';
+import { useCluster } from '@/contexts/ClusterContext';
 
 // Add proper type definitions
 interface Point {
@@ -73,23 +74,28 @@ const chartConfig: ChartConfig = {
 const Bytes: React.FC = () => {
   const [range, setRange] = React.useState<Range>('1d');
   const now = React.useMemo(() => new Date(), []);
+  const { selectedCluster } = useCluster();
 
-  // Fetch metrics
+  // Fetch metrics with cluster filtering
   const { data: readData, loading: readLoading } = useFetchMetrics(
     'compute.googleapis.com/instance/disk/read_bytes_count',
     rangeToMinutes[range],
+    selectedCluster,
   );
   const { data: writeData, loading: writeLoading } = useFetchMetrics(
     'compute.googleapis.com/instance/disk/write_bytes_count',
     rangeToMinutes[range],
+    selectedCluster,
   );
   const { data: receivedData, loading: receivedLoading } = useFetchMetrics(
     'compute.googleapis.com/instance/network/received_bytes_count',
     rangeToMinutes[range],
+    selectedCluster,
   );
   const { data: sentData, loading: sentLoading } = useFetchMetrics(
     'compute.googleapis.com/instance/network/sent_bytes_count',
     rangeToMinutes[range],
+    selectedCluster,
   );
 
   // Combine and transform data

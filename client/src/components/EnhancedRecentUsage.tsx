@@ -14,6 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 import { useFetchMetrics } from '../hooks/hookMetric';
 import { motion } from 'motion/react';
+import { useCluster } from '@/contexts/ClusterContext';
 
 const metricConfigs = [
   {
@@ -222,11 +223,14 @@ const EnhancedOriginalMetricCard = ({
 };
 
 const ResourceUsageRadialCharts: React.FC = () => {
+  const { selectedCluster } = useCluster();
+  
   // Fetch metrics using the custom hook for each metric (24 hours = 1440 minutes)
-  const cpuMetrics = useFetchMetrics(metricConfigs[0].metricType, 1440);
-  const memoryMetrics = useFetchMetrics(metricConfigs[1].metricType, 1440);
-  const requestMetrics = useFetchMetrics(metricConfigs[2].metricType, 1440);
-  const limitMetrics = useFetchMetrics(metricConfigs[3].metricType, 1440);
+  // Now passing the selected cluster to make metrics cluster-specific
+  const cpuMetrics = useFetchMetrics(metricConfigs[0].metricType, 1440, selectedCluster);
+  const memoryMetrics = useFetchMetrics(metricConfigs[1].metricType, 1440, selectedCluster);
+  const requestMetrics = useFetchMetrics(metricConfigs[2].metricType, 1440, selectedCluster);
+  const limitMetrics = useFetchMetrics(metricConfigs[3].metricType, 1440, selectedCluster);
 
   // Process metrics data
   const metricsData = metricConfigs.map((config, index) => {
