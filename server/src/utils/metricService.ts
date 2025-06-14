@@ -49,7 +49,7 @@ const fetchGCPMetric = async ({
           seconds: 60, // Align data points to 1-minute intervals
         },
         perSeriesAligner: 'ALIGN_MEAN', // Use mean instead of sum for better representation
-        crossSeriesReducer: 'REDUCE_MEAN', // Use mean across time series for more realistic values
+        crossSeriesReducer: 'REDUCE_SUM', // Sum across all time series for cluster totals
         groupByFields: ['resource.label.cluster_name'], // Group by cluster to maintain separation
       },
       view: 'FULL', // Return full data including labels and points
