@@ -31,7 +31,10 @@ export default defineConfig({
         'cors',
         'dotenv',
         'express',
-        'redis'
+        'google-auth-library',
+        'js-yaml', 
+        'redis',
+        'socket.io'
       ],
       output: {
         dir: 'dist',
