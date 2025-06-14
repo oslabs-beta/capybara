@@ -47,17 +47,17 @@ const CpuMemoryUtilization: React.FC = () => {
   const now = React.useMemo(() => new Date(), []);
   const { selectedCluster } = useCluster();
 
-  // Fetch both metrics with cluster filtering
+  // Fetch metrics with appropriate filtering
   const { data: memoryData, loading: memoryLoading } = useFetchMetrics(
     'kubernetes.io/container/memory/limit_utilization',
     rangeToMinutes[range],
-    selectedCluster,
+    selectedCluster, // Kubernetes metrics ARE cluster-specific
   );
   const { data: utilizationData, loading: utilizationLoading } =
     useFetchMetrics(
       'compute.googleapis.com/instance/cpu/utilization',
       rangeToMinutes[range],
-      selectedCluster,
+      // Instance metrics are NOT cluster-specific
     );
 
   // Combine and transform data
