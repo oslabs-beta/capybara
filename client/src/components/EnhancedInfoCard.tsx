@@ -50,7 +50,7 @@ const GKEClusterCard: React.FC = () => {
   } = useCluster();
 
   const cpuMetric = 'kubernetes.io/container/cpu/limit_utilization';
-  const memMetric = 'kubernetes.io/container/memory/request_utilization';
+  const memMetric = 'kubernetes.io/container/memory/limit_utilization';
 
   const { data: cpuData, loading: cpuLoading } = useFetchMetrics(
     cpuMetric,
