@@ -10,6 +10,7 @@ import {
   ServerIcon,
 } from 'lucide-react';
 import { useFetchMetrics } from '../hooks/hookMetric';
+import { useCluster } from '@/contexts/ClusterContext';
 import axios from 'axios';
 
 const duration = 5;
@@ -48,6 +49,7 @@ const useClusterInfo = () => {
 };
 
 const GKEClusterCard: React.FC = () => {
+  const { selectedCluster } = useCluster();
   const { data: cluster, loading: clusterLoading } = useClusterInfo();
 
   const cpuMetric = 'kubernetes.io/container/cpu/limit_utilization';
@@ -56,10 +58,12 @@ const GKEClusterCard: React.FC = () => {
   const { data: cpuData, loading: cpuLoading } = useFetchMetrics(
     cpuMetric,
     duration,
+    selectedCluster,
   );
   const { data: memData, loading: memLoading } = useFetchMetrics(
     memMetric,
     duration,
+    selectedCluster,
   );
 
   const [cpu, setCpu] = useState('...');
