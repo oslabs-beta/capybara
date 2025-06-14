@@ -226,11 +226,11 @@ const ResourceUsageRadialCharts: React.FC = () => {
   const { selectedCluster } = useCluster();
   
   // Fetch metrics using the custom hook for each metric (24 hours = 1440 minutes)
-  // Now passing the selected cluster to make metrics cluster-specific
-  const cpuMetrics = useFetchMetrics(metricConfigs[0].metricType, 1440, selectedCluster);
-  const memoryMetrics = useFetchMetrics(metricConfigs[1].metricType, 1440, selectedCluster);
-  const requestMetrics = useFetchMetrics(metricConfigs[2].metricType, 1440, selectedCluster);
-  const limitMetrics = useFetchMetrics(metricConfigs[3].metricType, 1440, selectedCluster);
+  // Apply cluster filtering only to Kubernetes metrics, not instance metrics
+  const cpuMetrics = useFetchMetrics(metricConfigs[0].metricType, 1440); // Instance metric - no cluster filtering
+  const memoryMetrics = useFetchMetrics(metricConfigs[1].metricType, 1440, selectedCluster); // Kubernetes metric
+  const requestMetrics = useFetchMetrics(metricConfigs[2].metricType, 1440, selectedCluster); // Kubernetes metric
+  const limitMetrics = useFetchMetrics(metricConfigs[3].metricType, 1440, selectedCluster); // Kubernetes metric
 
   // Process metrics data
   const metricsData = metricConfigs.map((config, index) => {
