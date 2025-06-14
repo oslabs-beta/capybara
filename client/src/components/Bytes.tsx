@@ -4,12 +4,7 @@
 
 import * as React from 'react';
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
@@ -26,7 +21,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useFetchMetrics } from '../hooks/hookMetric';
-import { useCluster } from '@/contexts/ClusterContext';
 
 // Add proper type definitions
 interface Point {
@@ -74,7 +68,6 @@ const chartConfig: ChartConfig = {
 const Bytes: React.FC = () => {
   const [range, setRange] = React.useState<Range>('1d');
   const now = React.useMemo(() => new Date(), []);
-  const { selectedCluster } = useCluster();
 
   // Fetch metrics (instance-level metrics don't need cluster filtering)
   const { data: readData, loading: readLoading } = useFetchMetrics(
@@ -122,7 +115,9 @@ const Bytes: React.FC = () => {
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const bytes = Number(point.value?.doubleValue ?? point.value?.int64Value ?? 0);
+      const bytes = Number(
+        point.value?.doubleValue ?? point.value?.int64Value ?? 0,
+      );
       const value = convertBytesToKib(bytes);
 
       if (!dataMap.has(dateKey)) {
@@ -150,7 +145,9 @@ const Bytes: React.FC = () => {
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const bytes = Number(point.value?.doubleValue ?? point.value?.int64Value ?? 0);
+      const bytes = Number(
+        point.value?.doubleValue ?? point.value?.int64Value ?? 0,
+      );
       const value = convertBytesToKib(bytes);
 
       if (!dataMap.has(dateKey)) {
@@ -178,7 +175,9 @@ const Bytes: React.FC = () => {
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const bytes = Number(point.value?.doubleValue ?? point.value?.int64Value ?? 0);
+      const bytes = Number(
+        point.value?.doubleValue ?? point.value?.int64Value ?? 0,
+      );
       const value = convertBytesToKib(bytes);
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
@@ -205,7 +204,9 @@ const Bytes: React.FC = () => {
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const bytes = Number(point.value?.doubleValue ?? point.value?.int64Value ?? 0);
+      const bytes = Number(
+        point.value?.doubleValue ?? point.value?.int64Value ?? 0,
+      );
       const value = convertBytesToKib(bytes);
 
       if (!dataMap.has(dateKey)) {
