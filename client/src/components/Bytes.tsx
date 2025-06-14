@@ -76,26 +76,22 @@ const Bytes: React.FC = () => {
   const now = React.useMemo(() => new Date(), []);
   const { selectedCluster } = useCluster();
 
-  // Fetch metrics with cluster filtering
+  // Fetch metrics (instance-level metrics don't need cluster filtering)
   const { data: readData, loading: readLoading } = useFetchMetrics(
     'compute.googleapis.com/instance/disk/read_bytes_count',
     rangeToMinutes[range],
-    selectedCluster,
   );
   const { data: writeData, loading: writeLoading } = useFetchMetrics(
     'compute.googleapis.com/instance/disk/write_bytes_count',
     rangeToMinutes[range],
-    selectedCluster,
   );
   const { data: receivedData, loading: receivedLoading } = useFetchMetrics(
     'compute.googleapis.com/instance/network/received_bytes_count',
     rangeToMinutes[range],
-    selectedCluster,
   );
   const { data: sentData, loading: sentLoading } = useFetchMetrics(
     'compute.googleapis.com/instance/network/sent_bytes_count',
     rangeToMinutes[range],
-    selectedCluster,
   );
 
   // Combine and transform data
@@ -115,10 +111,9 @@ const Bytes: React.FC = () => {
       }
     >();
 
-    // Helper function to calculate Kib/s
-    const calculateKibPerSecond = (bytes: number, intervalSeconds: number) => {
-      if (intervalSeconds <= 0) return 0;
-      return bytes / 1024 / intervalSeconds; // Convert bytes to Kibibytes and then to per second
+    // Helper function to convert bytes to KiB (since GCP already provides rate data)
+    const convertBytesToKib = (bytes: number) => {
+      return bytes / 1024; // Convert bytes to Kibibytes
     };
 
     // Process disk read data
@@ -127,11 +122,8 @@ const Bytes: React.FC = () => {
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const bytes = Number(point.value?.int64Value ?? 0);
-      const intervalSeconds =
-        Number(point.interval?.endTime?.seconds) -
-          Number(point.interval?.startTime?.seconds) || 60;
-      const value = calculateKibPerSecond(bytes, intervalSeconds);
+      const bytes = Number(point.value?.doubleValue ?? point.value?.int64Value ?? 0);
+      const value = convertBytesToKib(bytes);
 
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
@@ -158,11 +150,8 @@ const Bytes: React.FC = () => {
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const bytes = Number(point.value?.int64Value ?? 0);
-      const intervalSeconds =
-        Number(point.interval?.endTime?.seconds) -
-          Number(point.interval?.startTime?.seconds) || 60;
-      const value = calculateKibPerSecond(bytes, intervalSeconds);
+      const bytes = Number(point.value?.doubleValue ?? point.value?.int64Value ?? 0);
+      const value = convertBytesToKib(bytes);
 
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
@@ -189,11 +178,8 @@ const Bytes: React.FC = () => {
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const bytes = Number(point.value?.int64Value ?? 0);
-      const intervalSeconds =
-        Number(point.interval?.endTime?.seconds) -
-          Number(point.interval?.startTime?.seconds) || 60;
-      const value = calculateKibPerSecond(bytes, intervalSeconds);
+      const bytes = Number(point.value?.doubleValue ?? point.value?.int64Value ?? 0);
+      const value = convertBytesToKib(bytes);
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
           date: dateKey,
@@ -219,11 +205,8 @@ const Bytes: React.FC = () => {
         Number(point.interval?.endTime?.seconds) * 1000,
       );
       const dateKey = timestamp.toISOString();
-      const bytes = Number(point.value?.int64Value ?? 0);
-      const intervalSeconds =
-        Number(point.interval?.endTime?.seconds) -
-          Number(point.interval?.startTime?.seconds) || 60;
-      const value = calculateKibPerSecond(bytes, intervalSeconds);
+      const bytes = Number(point.value?.doubleValue ?? point.value?.int64Value ?? 0);
+      const value = convertBytesToKib(bytes);
 
       if (!dataMap.has(dateKey)) {
         dataMap.set(dateKey, {
