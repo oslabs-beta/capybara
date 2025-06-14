@@ -12,42 +12,10 @@ import {
 } from 'lucide-react';
 import { useFetchMetrics } from '../hooks/hookMetric';
 import { motion } from 'motion/react';
-import axios from 'axios';
+import { useCluster } from '@/contexts/ClusterContext';
+import ClusterSelector from './ClusterSelector';
 
 const duration = 5;
-
-interface ClusterInfo {
-  name: string;
-  location: string;
-  status: string;
-  nodeCount: number;
-  network: string;
-}
-
-const useClusterInfo = () => {
-  const [data, setData] = useState<ClusterInfo | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchCluster = async () => {
-      setLoading(true);
-      try {
-        const baseUrl = import.meta.env.VITE_API_URL || '';
-        const res = await axios.get<ClusterInfo>(`${baseUrl}/api/gke/cluster`);
-        setData(res.data);
-      } catch (err) {
-        setError(`Failed to fetch cluster info, ${err}`);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCluster();
-  }, []);
-
-  return { data, loading, error };
-};
 
 const StatusBadge = ({ status }: { status: string }) => {
   const isRunning = status.toLowerCase() === 'running';
@@ -75,7 +43,7 @@ const StatusBadge = ({ status }: { status: string }) => {
 };
 
 const GKEClusterCard: React.FC = () => {
-  const { data: cluster, loading: clusterLoading } = useClusterInfo();
+  const { selectedCluster: cluster, loading: clusterLoading, error } = useCluster();
 
   const cpuMetric = 'kubernetes.io/container/cpu/limit_utilization';
   const memMetric = 'kubernetes.io/container/memory/request_utilization';
@@ -101,7 +69,8 @@ const GKEClusterCard: React.FC = () => {
   }, [cpuData, memData]);
 
   if (clusterLoading) return <p>Loading cluster info...</p>;
-  if (!cluster) return <p>Cluster data not available</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!cluster) return <p>No cluster selected</p>;
 
   const { name, location, status, nodeCount, network } = cluster;
 
@@ -113,22 +82,32 @@ const GKEClusterCard: React.FC = () => {
     >
       <Card className="overflow-hidden rounded-2xl border shadow-md transition-shadow duration-300 hover:shadow-lg">
         <CardHeader>
-          <div className="flex items-start justify-between">
-            <div>
-              <CardTitle className="from-primary to-secondary bg-gradient-to-r bg-clip-text text-base font-bold text-transparent md:text-2xl">
-                <span className="hidden md:inline">
-                  Google Kubernetes Engine Cluster Health
-                </span>
-                <span className="inline md:hidden">GKE Cluster Health</span>
-              </CardTitle>
-              {/* <p className="text-muted-foreground mt-1">
-                Real-time monitoring and metrics for your GKE cluster
-              </p> */}
-              <p className="text-muted-foreground text-sm">
-                Region: {location}
-              </p>
+          <div className="space-y-4">
+            <div className="flex items-start justify-between">
+              <div>
+                <CardTitle className="from-primary to-secondary bg-gradient-to-r bg-clip-text text-base font-bold text-transparent md:text-2xl">
+                  <span className="hidden md:inline">
+                    Google Kubernetes Engine Cluster Health
+                  </span>
+                  <span className="inline md:hidden">GKE Cluster Health</span>
+                </CardTitle>
+                {/* <p className="text-muted-foreground mt-1">
+                  Real-time monitoring and metrics for your GKE cluster
+                </p> */}
+                <p className="text-muted-foreground text-sm">
+                  Region: {location}
+                </p>
+              </div>
+              <StatusBadge status={status} />
             </div>
-            <StatusBadge status={status} />
+            {/* Cluster Selector */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <ClusterSelector />
+            </motion.div>
           </div>
         </CardHeader>
 
