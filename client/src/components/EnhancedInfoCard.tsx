@@ -55,10 +55,12 @@ const GKEClusterCard: React.FC = () => {
   const { data: cpuData, loading: cpuLoading } = useFetchMetrics(
     cpuMetric,
     duration,
+    cluster,
   );
   const { data: memData, loading: memLoading } = useFetchMetrics(
     memMetric,
     duration,
+    cluster,
   );
 
   const [cpu, setCpu] = useState('...');

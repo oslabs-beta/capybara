@@ -8,6 +8,8 @@ import type { TimeSeries, Point, Metric, Resource } from '../types/metricTypes';
 type FetchMetricOptions = {
   metricType: string;
   duration?: number;
+  clusterName?: string;
+  clusterLocation?: string;
 };
 
 // Create Monitoring client instance
@@ -16,6 +18,8 @@ const client = new Monitoring.MetricServiceClient();
 const fetchGCPMetric = async ({
   metricType, // ('container.googleapis.com/container/cpu/utilization')
   duration = 5,
+  clusterName,
+  clusterLocation,
 }: FetchMetricOptions): Promise<TimeSeries[]> => {
   try {
     const projectId = await client.getProjectId();
@@ -23,10 +27,19 @@ const fetchGCPMetric = async ({
     const endTimeSeconds = Math.floor(Date.now() / 1000);
     const startTimeSeconds = endTimeSeconds - duration * 60;
 
+    // Build filter with optional cluster filtering
+    let filter = `metric.type="${metricType}"`;
+    
+    // Add cluster filtering if cluster information is provided
+    if (clusterName && clusterLocation) {
+      filter += ` AND resource.labels.cluster_name="${clusterName}"`;
+      filter += ` AND resource.labels.location="${clusterLocation}"`;
+    }
+
     // Write time series data
     const [timeSeries] = await client.listTimeSeries({
       name: client.projectPath(projectId),
-      filter: `metric.type="${metricType}"`, // Filter by metric types
+      filter, // Filter by metric types and optionally by cluster
       interval: {
         startTime: { seconds: startTimeSeconds },
         endTime: { seconds: endTimeSeconds },

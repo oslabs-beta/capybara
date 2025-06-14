@@ -15,12 +15,14 @@ const router = express.Router();
 // * ATTACH EACH SUB-ROUTER UNDER ITS OWN PATH
 // ------------------------------------------------------------------------------------------------
 router.get('/metrics', async (req, res) => {
-  const { metricType, duration } = req.query;
+  const { metricType, duration, clusterName, clusterLocation } = req.query;
 
   try {
     const timeSeries = await fetchGCPMetric({
       metricType: String(metricType),
       duration: duration ? Number(duration) : 5,
+      clusterName: clusterName ? String(clusterName) : undefined,
+      clusterLocation: clusterLocation ? String(clusterLocation) : undefined,
     });
 
     res.json(timeSeries);
