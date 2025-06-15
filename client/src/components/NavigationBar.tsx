@@ -22,31 +22,28 @@ import {
 } from 'motion/react';
 import { useClerk, UserProfile } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
+import { ServerIcon } from 'lucide-react';
+import ClusterSelector from './ClusterSelector';
 
 const NavigationBar: React.FC = () => {
   const { signOut } = useClerk();
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isClusterModalOpen, setIsClusterModalOpen] = useState(false);
 
   const links = [
     {
       title: 'AI Assistant',
-      icon: (
-        <IconAi className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
-      ),
+      icon: <IconAi className="text-muted-foreground h-full w-full" />,
       href: '#',
     },
     {
       title: 'Notifications',
-      icon: (
-        <IconBellCheck className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
-      ),
+      icon: <IconBellCheck className="text-muted-foreground h-full w-full" />,
       href: '#',
     },
     {
       title: 'Historical Data',
-      icon: (
-        <IconHistory className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
-      ),
+      icon: <IconHistory className="text-muted-foreground h-full w-full" />,
       href: '/historical',
     },
     {
@@ -61,13 +58,26 @@ const NavigationBar: React.FC = () => {
       href: '/',
     },
     {
+      title: 'Select Cluster',
+      icon: (
+        <button
+          onClick={() => setIsClusterModalOpen(true)}
+          className="flex h-full w-full items-center justify-center"
+        >
+          <ServerIcon className="text-muted-foreground h-full w-full" />
+        </button>
+      ),
+      href: '#',
+      onClick: () => setIsClusterModalOpen(true),
+    },
+    {
       title: 'Profile',
       icon: (
         <button
           onClick={() => setIsProfileModalOpen(true)}
           className="flex h-full w-full items-center justify-center"
         >
-          <IconUser className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
+          <IconUser className="text-muted-foreground h-full w-full" />
         </button>
       ),
       href: '#',
@@ -75,9 +85,7 @@ const NavigationBar: React.FC = () => {
     },
     {
       title: 'Settings',
-      icon: (
-        <IconSettings className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
-      ),
+      icon: <IconSettings className="text-muted-foreground h-full w-full" />,
       href: '#',
     },
     {
@@ -91,7 +99,7 @@ const NavigationBar: React.FC = () => {
           }
           className="flex h-full w-full items-center justify-center"
         >
-          <IconLogout className="h-full w-full text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
+          <IconLogout className="text-muted-foreground h-full w-full" />
         </button>
       ),
       href: '#',
@@ -127,7 +135,7 @@ const NavigationBar: React.FC = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative z-10 max-h-[90vh] max-w-[90vw] overflow-auto rounded-2xl bg-[var(--background)] shadow-2xl dark:bg-[var(--background-dark)]"
+              className="bg-background relative z-10 max-h-[90vh] max-w-[90vw] overflow-auto rounded-2xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close button */}
@@ -139,9 +147,57 @@ const NavigationBar: React.FC = () => {
               </button>
 
               {/* UserProfile component */}
-              {/* <div className="p-10"> */}
               <UserProfile />
-              {/* </div> */}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Cluster Modal */}
+      <AnimatePresence>
+        {isClusterModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center"
+            onClick={() => setIsClusterModalOpen(false)}
+          >
+            {/* Background overlay */}
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+
+            {/* Modal content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="bg-background relative z-10 w-[90vw] max-w-md rounded-2xl p-6 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="mb-6 flex items-center justify-between">
+                <h2 className="text-xl font-semibold">Select Cluster</h2>
+                <button
+                  onClick={() => setIsClusterModalOpen(false)}
+                  className="text-muted-foreground hover:bg-muted rounded-full p-2 transition-colors"
+                >
+                  ×
+                </button>
+              </div>
+
+              {/* Cluster Selector */}
+              <ClusterSelector />
+
+              {/* Close button */}
+              <div className="mt-6 flex justify-end">
+                <button
+                  onClick={() => setIsClusterModalOpen(false)}
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-4 py-2 transition-colors"
+                >
+                  Done
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         )}
@@ -220,7 +276,7 @@ const FloatingDockMobile = ({
                       item.onClick?.();
                       setOpen(false);
                     }}
-                    className="bg-[var(--background)]/80 dark:bg-[var(--background-dark)]/80 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
+                    className="flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
                   >
                     <div className="h-7 w-7">{item.icon}</div>
                   </button>
@@ -228,7 +284,7 @@ const FloatingDockMobile = ({
                   <Link
                     to={item.href}
                     key={item.title}
-                    className="bg-[var(--background)]/80 dark:bg-[var(--background-dark)]/80 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
+                    className="flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
                   >
                     <div className="h-7 w-7">{item.icon}</div>
                   </Link>
@@ -240,9 +296,9 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="bg-[var(--background)]/80 dark:bg-[var(--background-dark)]/80 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
+        className="flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
       >
-        <IconLayoutNavbarCollapse className="h-7 w-7 text-[var(--foreground-muted)] dark:text-[var(--foreground-muted-dark)]" />
+        <IconLayoutNavbarCollapse className="text-muted-foreground h-7 w-7" />
       </button>
     </div>
   );
@@ -266,7 +322,7 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        'bg-[var(--background)]/80 dark:bg-[var(--background-dark)]/80 z-50 mx-auto hidden h-20 items-end gap-4 rounded-2xl px-4 pb-0 backdrop-blur-md md:flex',
+        'bg-background/80 z-50 mx-auto hidden h-20 items-end gap-4 rounded-2xl px-4 pb-0 backdrop-blur-md md:flex',
         className,
       )}
     >
@@ -352,7 +408,7 @@ function IconContainer({
         style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="bg-[var(--background-muted)]/50 dark:bg-[var(--background-muted-dark)]/50 relative flex aspect-square items-center justify-center rounded-full backdrop-blur-sm"
+        className="bg-muted/0 relative flex aspect-square items-center justify-center rounded-full backdrop-blur-sm"
       >
         <AnimatePresence>
           {hovered && (
@@ -360,7 +416,7 @@ function IconContainer({
               initial={{ opacity: 0, y: 10, x: '-50%' }}
               animate={{ opacity: 1, y: 0, x: '-50%' }}
               exit={{ opacity: 0, y: 2, x: '-50%' }}
-              className="absolute -top-8 left-1/2 w-fit whitespace-pre rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-0.5 text-xs text-[var(--foreground)] dark:border-[var(--border-dark)] dark:bg-[var(--background-dark)] dark:text-[var(--foreground-dark)]"
+              className="border-border bg-background text-foreground absolute -top-8 left-1/2 w-fit whitespace-pre rounded-md border px-2 py-0.5 text-xs"
             >
               {title}
             </motion.div>

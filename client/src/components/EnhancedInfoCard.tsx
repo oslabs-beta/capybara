@@ -13,7 +13,6 @@ import {
 import { useFetchMetrics } from '../hooks/hookMetric';
 import { motion } from 'motion/react';
 import { useCluster } from '@/contexts/ClusterContext';
-import ClusterSelector from './ClusterSelector';
 
 const duration = 5;
 
@@ -106,14 +105,6 @@ const GKEClusterCard: React.FC = () => {
               </div>
               <StatusBadge status={status} />
             </div>
-            {/* Cluster Selector */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <ClusterSelector />
-            </motion.div>
           </div>
         </CardHeader>
 
