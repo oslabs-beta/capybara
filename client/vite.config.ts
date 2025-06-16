@@ -30,6 +30,7 @@ async function loadConfig() {
           secure: false,
         },
       },
+      historyApiFallback: true,
     },
   });
 }
