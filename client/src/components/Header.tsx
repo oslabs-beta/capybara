@@ -35,14 +35,14 @@ const Header: React.FC = () => {
       ],
       morning: ['Good morning', 'Coffee time', 'Ready to perk up', 'Morning'],
       lunch: [
-        'Midday fuel-up',
+        'Midday fuel up',
         'Lunch break',
         'Refill time',
-        'Pick-me-up time',
+        'Time to charge up,',
       ],
       afternoon: [
         'Good afternoon',
-        'Post-lunch mode',
+        'Post lunch mode',
         'Energy flowing',
         'Afternoon',
       ],
@@ -74,9 +74,9 @@ const Header: React.FC = () => {
         'Time to perk up',
       ],
       lunch: [
-        'Midday fuel-up',
+        'Midday fuel up',
         'Lunch break monitoring',
-        'Afternoon pick-me-up time',
+        'Afternoon pick me up time',
         'Time to refill that cup',
         'Keeping things brewing',
       ],
@@ -171,9 +171,17 @@ const Header: React.FC = () => {
       timeBasedGreetings = greetings.night;
     }
 
-    // Randomly select a greeting from the appropriate time period
-    const randomGreeting =
-      timeBasedGreetings[Math.floor(Math.random() * timeBasedGreetings.length)];
+    // Create a stable key for this session and time period
+    const sessionKey = `greeting_${isMobile ? 'mobile' : 'desktop'}_${hour >= 0 && hour < 5 ? 'lateNight' : hour >= 5 && hour < 9 ? 'earlyMorning' : hour >= 9 && hour < 12 ? 'morning' : hour >= 12 && hour < 14 ? 'lunch' : hour >= 14 && hour < 18 ? 'afternoon' : hour >= 18 && hour < 22 ? 'evening' : 'night'}`;
+    
+    // Check if we already have a greeting for this session and time period
+    let randomGreeting = sessionStorage.getItem(sessionKey);
+    
+    if (!randomGreeting || !timeBasedGreetings.includes(randomGreeting)) {
+      // Generate a new greeting and store it
+      randomGreeting = timeBasedGreetings[Math.floor(Math.random() * timeBasedGreetings.length)];
+      sessionStorage.setItem(sessionKey, randomGreeting);
+    }
 
     return randomGreeting;
   };
