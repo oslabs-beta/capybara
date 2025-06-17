@@ -2,6 +2,8 @@
 // >> 404 & HEARTBREAKS << //
 // ----------------------------------------------------------
 import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 // Array of 404 images
 const images404 = [
@@ -14,6 +16,7 @@ const images404 = [
 
 const FourOhFour = () => {
   const [randomImage, setRandomImage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Select random image when component mounts
@@ -32,7 +35,7 @@ const FourOhFour = () => {
       {/* Large 404 Text with Overlaid Badge */}
       <div className="relative">
         <h1
-          className="text-9xl font-extrabold tracking-widest"
+          className="text-6xl font-extrabold tracking-widest sm:text-8xl md:text-9xl lg:text-[12rem] xl:text-[15rem]"
           style={{ color: 'var(--foreground)' }}
         >
           404
@@ -40,7 +43,7 @@ const FourOhFour = () => {
 
         {/* Rotated Badge positioned over the "0" */}
         <div
-          className="absolute left-1/2 top-2/3 -translate-x-1/2 rotate-12 transform rounded px-2 py-1 text-sm"
+          className="absolute left-1/2 top-2/3 -translate-x-1/2 rotate-12 transform rounded px-2 py-1 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl"
           style={{
             backgroundColor: 'var(--primary)',
             color: 'var(--primary-foreground)',
@@ -57,29 +60,29 @@ const FourOhFour = () => {
           <img
             src={randomImage}
             alt="Confused Coffybara"
-            className="h-auto w-full max-w-xs sm:max-w-sm"
+            className="h-auto w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
           />
         </div>
       )}
 
       {/* Description Text */}
       <p
-        className="mx-auto mb-8 max-w-2xl px-4 text-center text-lg leading-relaxed sm:text-xl"
+        className="mx-auto mb-8 max-w-2xl px-4 text-center text-lg leading-relaxed sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl"
         style={{ color: 'var(--muted-foreground)' }}
       >
         Don't worry, even the best explorers sometimes take unexpected detours.
         Let's get you back to where you need to be.
       </p>
 
-      {/* Dashboard Link */}
+      {/* Dashboard Button */}
       <div className="mt-5">
-        <a
-          href="/dashboard"
-          className="text-lg font-medium"
-          style={{ color: 'var(--foreground)' }}
+        <Button 
+          onClick={() => navigate('/')}
+          size="lg"
+          className="text-lg font-medium sm:text-xl md:text-2xl lg:text-3xl px-6 py-3 md:px-8 md:py-4 lg:px-10 lg:py-5"
         >
-          Dashboard
-        </a>
+          Go to Dashboard
+        </Button>
       </div>
     </main>
   );
