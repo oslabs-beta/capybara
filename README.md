@@ -94,6 +94,8 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 
 **The Solution**: Coffybara leverages advanced AI to predict and detect these anomalies in realtime, providing immediate, actionable insights directly to your development team through Slack and an intuitive dashboard.
 
+<br>
+
 ## ✨ Features
 
 ### 🧠 **AI-Powered Anomaly Detection**
@@ -126,6 +128,8 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 - **Slack Integration**: Formatted alerts with context and recommendations
 - **Dashboard Alerts**: Realtime notifications in the web interface
 - **Severity Levels**: Color-coded alerts based on event criticality
+
+<br>
 
 ## 🏗️ Architecture
 
@@ -178,6 +182,8 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 - **Vercel** - Frontend deployment
 - **Docker** - Containerization
 - **Vitest** - Testing framework
+
+<br>
 
 ## 🚀 Quick Start
 
@@ -272,6 +278,8 @@ npm run client
 - **Dashboard**: http://localhost:5173
 - **API**: http://localhost:3001
 
+<br>
+
 ## 🔧 Configuration
 
 ### GKE Cluster Connection
@@ -309,6 +317,8 @@ gcloud pubsub subscriptions create kubernetes-events-sub --topic=kubernetes-even
 3. Install the app to your workspace
 4. Copy the Bot User OAuth Token to your `.env`
 
+<br>
+
 ## 📊 Usage
 
 ### Dashboard Features
@@ -344,6 +354,8 @@ GET /api/health
 WS /socket.io
 ```
 
+<br>
+
 ## 🧪 Testing
 
 ```bash
@@ -356,6 +368,8 @@ npm run test:watch
 # Run tests with coverage
 npm run test:coverage
 ```
+
+<br>
 
 ## 🚀 Deployment
 
@@ -387,6 +401,8 @@ vercel --prod
 
 Ensure all production environment variables are set in your deployment platform.
 
+<br>
+
 ## 👥 Meet the Team
 
 | Team Member      | LinkedIn                                                                                                                      | GitHub                                                                                                           |
@@ -394,6 +410,8 @@ Ensure all production environment variables are set in your deployment platform.
 | **Wenjun Song**  | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/wsong0630/) | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/wsong0630)    |
 | **Steven Yeung** | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/syeungg/)   | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/stevenyeungg) |
 | **Amit Haror**   | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/amitharor/) | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/user0824)     |
+
+<br>
 
 ## 🛣️ Roadmap
 
@@ -410,6 +428,8 @@ Ensure all production environment variables are set in your deployment platform.
 - [ ] **Resource Usage Insights** - AI powered recommendations for cluster optimization
 - [ ] **Team Collaboration Features** - Comments, incident assignments, and shared workspaces
 
+<br>
+
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
@@ -420,6 +440,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
+<br>
+
 ## 📋 Documentation
 
 For developers and maintainers:
@@ -428,9 +450,13 @@ For developers and maintainers:
 - **[📝 Changelog](CHANGELOG.md)** - Version history and release notes
 - **[🤝 Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
 
+<br>
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+<br>
 
 ## 🙏 Acknowledgments
 
@@ -439,6 +465,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **The Kubernetes Community** for amazing orchestration tools
 - **Google** for powerful AI capabilities
 
+<br>
+
 ## 🐞 Issues & Support
 
 Found a bug? Have a feature request? We'd love to hear from you!
@@ -446,6 +474,10 @@ Found a bug? Have a feature request? We'd love to hear from you!
 - **Issues**: [GitHub Issues](https://github.com/oslabs-beta/capybara/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/oslabs-beta/capybara/discussions)
 
+<br><br>
+
 <div align="center">
 
 _Keep your clusters happy, keep your capybaras caffeinated!_
+
+</div>
