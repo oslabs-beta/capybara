@@ -25,7 +25,7 @@ _Keep your clusters caffeinated and your downtime minimized_ ☕
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)](https://ui.shadcn.com/)
 [![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chart.js&logoColor=white)](https://www.chartjs.org/)
-[![DaisyUI](https://img.shields.io/badge/DaisyUI-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=white)](https://daisyui.com/)
+[![DaisyUI](https://img.shields.io/badge/DaisyUI-FFC107?style=for-the-badge&logo=daisyui&logoColor=black)](https://daisyui.com/)
 
 <!-- Infrastructure & Cloud -->
 
@@ -67,7 +67,8 @@ _Keep your clusters caffeinated and your downtime minimized_ ☕
 
 [![Website](https://img.shields.io/badge/🌐-Website-blue?style=for-the-badge)](https://coffybara.com)
 [![LinkedIn Product](https://img.shields.io/badge/LinkedIn%20Product-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/company/coffybara)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+<!-- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT) -->
 
 Coffybara is your friendly neighborhood capybara that never sleeps, keeping watch over your Kubernetes clusters 24/7. Like a capybara lounging peacefully by the water, Coffybara maintains zen-like calmness while monitoring your infrastructure chaos.
 
