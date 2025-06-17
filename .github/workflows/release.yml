@@ -1,0 +1,92 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd client && npm ci
+          cd ../server && npm ci
+
+      - name: Build project
+        run: |
+          cd client && npm run build
+          cd ../server && npm run build
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Extract changelog for version
+        id: changelog
+        run: |
+          # Extract changelog section for this version
+          awk -v version="[${{ steps.version.outputs.VERSION }}]" '
+          $0 ~ "^## \\[" version {flag=1; next} 
+          /^## \[/ && flag {flag=0} 
+          flag {print}
+          ' CHANGELOG.md > release-notes.md
+
+          # Check if release notes were extracted
+          if [ ! -s release-notes.md ]; then
+            echo "Release notes for version ${{ steps.version.outputs.VERSION }} not found in CHANGELOG.md"
+            echo "Please update CHANGELOG.md with the new version before creating a release." > release-notes.md
+          fi
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Coffybara v${{ steps.version.outputs.VERSION }}
+          body_path: release-notes.md
+          draft: false
+          prerelease: ${{ !startsWith(steps.version.outputs.VERSION, '1.') }}
+
+      - name: Archive client build
+        run: cd client && tar -czf ../coffybara-client-${{ steps.version.outputs.VERSION }}.tar.gz dist/
+
+      - name: Upload Client Build Artifacts
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./coffybara-client-${{ steps.version.outputs.VERSION }}.tar.gz
+          asset_name: coffybara-client-${{ steps.version.outputs.VERSION }}.tar.gz
+          asset_content_type: application/gzip
+
+  deploy:
+    needs: create-release
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Production
+        run: |
+          echo "🚀 Deploying Coffybara v${GITHUB_REF#refs/tags/v} to production"
+          # Add your Cloud Run deployment commands here
+          # gcloud run deploy coffybara --source . --region us-central1

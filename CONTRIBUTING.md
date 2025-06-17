@@ -4,12 +4,12 @@ We're thrilled that you're interested in contributing to Coffybara! This documen
 
 ## 🎯 Ways to Contribute
 
-- 🐞 **Bug Reports**: Found a bug? Let us know!
-- ✨ **Feature Requests**: Have an idea? We'd love to hear it!
-- 📝 **Documentation**: Help improve our docs
-- 🔧 **Code Contributions**: Submit bug fixes or new features
-- 🧪 **Testing**: Help us test new features and find edge cases
-- 🎨 **Design**: Improve UI/UX and visual design
+🐞 **Bug Reports**: Found a bug? Let us know!  
+✨ **Feature Requests**: Have an idea? We'd love to hear it!  
+📝 **Documentation**: Help improve our docs  
+🔧 **Code Contributions**: Submit bug fixes or new features  
+🧪 **Testing**: Help us test new features and find edge cases  
+🎨 **Design**: Improve UI/UX and visual design
 
 ## 🚀 Getting Started
 
