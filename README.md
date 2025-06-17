@@ -163,7 +163,7 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/coffybara.git
+git clone https://github.com/oslabs-beta/capybara.git
 cd coffybara
 ```
 
