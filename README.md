@@ -380,15 +380,18 @@ Ensure all production environment variables are set in your deployment platform.
 
 ## 🛣️ Roadmap
 
-### Phase 1: Enhanced AI Capabilities
+### **Next Phase**
 
-- [ ] Advanced token management
-- [ ] Improved prompt engineering
-- [ ] Custom model fine-tuning
+- [ ] **Better Documentation** - Comprehensive setup guides and API documentation
+- [ ] **Custom Notifications** - Alternative notification channel for critical alerts
+- [ ] **Historical Analytics** - Enhanced data visualization and trend analysis
+- [ ] **Custom Alert Rules** - User-defined notification triggers and thresholds
 
-### Phase 2: Multi-Cloud Support
+### **Future Phase**
 
-- [ ] Multi-cluster monitoring
+- [ ] **Multi Cluster Support** - Monitor multiple Kubernetes clusters from one dashboard
+- [ ] **Resource Usage Insights** - AI-powered recommendations for cluster optimization
+- [ ] **Team Collaboration Features** - Comments, incident assignments, and shared workspaces
 
 ## 🤝 Contributing
 
