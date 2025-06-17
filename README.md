@@ -4,18 +4,14 @@
     <img src="client/public/header2.png" alt="Coffybara Logo"/>
 </p>
 
-</div>
+# **AI-Powered Real-Time Event Detection & Kubernetes Observability**
 
-> **AI-Powered Real-Time Event Detection & Kubernetes Observability**
-
-[![Latest Release](https://img.shields.io/github/v/release/oslabs-beta/capybara?style=for-the-badge&logo=github&color=blue)](https://github.com/oslabs-beta/capybara/releases/latest)
+[![Latest Release](https://img.shields.io/github/v/release/oslabs-beta/capybara?include_prereleases&style=for-the-badge&logo=github&color=blue)](https://github.com/oslabs-beta/capybara/releases/latest)
 [![License](https://img.shields.io/github/license/oslabs-beta/capybara?style=for-the-badge&color=green)](LICENSE)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/oslabs-beta/capybara/ci.yml?style=for-the-badge&logo=github-actions)](https://github.com/oslabs-beta/capybara/actions)
 [![Last Commit](https://img.shields.io/github/last-commit/oslabs-beta/capybara?style=for-the-badge&logo=git&color=orange)](https://github.com/oslabs-beta/capybara/commits/main)
 
-## 🏷️ Current Version: ![Version](https://img.shields.io/github/package-json/v/oslabs-beta/capybara?style=flat-square&color=blue)
-
-_Keep your clusters caffeinated and your downtime minimized_ ☕
+</div><br><br><br>
 
 <!-- Core Technologies -->
 
@@ -26,6 +22,8 @@ _Keep your clusters caffeinated and your downtime minimized_ ☕
 [![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 
+---
+
 <!-- UI & Styling -->
 
 **UI & Styling**  
@@ -33,6 +31,8 @@ _Keep your clusters caffeinated and your downtime minimized_ ☕
 [![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)](https://ui.shadcn.com/)
 [![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chart.js&logoColor=white)](https://www.chartjs.org/)
 [![DaisyUI](https://img.shields.io/badge/DaisyUI-FFC107?style=for-the-badge&logo=daisyui&logoColor=black)](https://daisyui.com/)
+
+---
 
 <!-- Infrastructure & Cloud -->
 
@@ -43,17 +43,23 @@ _Keep your clusters caffeinated and your downtime minimized_ ☕
 [![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io/)
 [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
+---
+
 <!-- AI & Data -->
 
 **AI & Data**  
 [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)](https://gemini.google.com/)
 [![Pinecone](https://img.shields.io/badge/Pinecone-000000?style=for-the-badge&logo=pinecone&logoColor=white)](https://www.pinecone.io/)
 
+---
+
 <!-- Real-time & Communication -->
 
 **Real-time & Communication**  
 [![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white)](https://socket.io/)
 [![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)](https://slack.com/)
+
+---
 
 <!-- Development Tools -->
 
@@ -62,13 +68,17 @@ _Keep your clusters caffeinated and your downtime minimized_ ☕
 [![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black)](https://prettier.io/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
+---
+
 <!-- Authentication -->
 
 **Authentication**  
 [![Clerk](https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)](https://clerk.com/)
 [![Google OAuth 2.0](https://img.shields.io/badge/Google%20OAuth%202.0-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://developers.google.com/identity/protocols/oauth2)
 
-## 🚀 What is Coffybara?
+<br><br><br>
+
+# 🚀 What is Coffybara?
 
 <!-- Project Status -->
 
