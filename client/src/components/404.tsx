@@ -12,53 +12,76 @@ const images404 = [
   '/coffybara404-4.png',
 ];
 
-const FourOhFour: React.FC = () => {
-  const [randomImage, setRandomImage] = useState<string>('');
+const FourOhFour = () => {
+  const [randomImage, setRandomImage] = useState('');
 
   useEffect(() => {
-    // Select a random image when component mounts
+    // Select random image when component mounts
     const randomIndex = Math.floor(Math.random() * images404.length);
     setRandomImage(images404[randomIndex]);
   }, []);
 
   return (
-    <div 
-      className="flex min-h-screen flex-col items-center justify-center px-4 py-8 sm:px-6 md:px-8"
+    <main
+      className="flex h-screen w-full flex-col items-center justify-center"
       style={{
         backgroundColor: 'var(--background)',
-        color: 'var(--foreground)'
+        fontFamily: 'var(--font-sans)',
       }}
     >
-      <h1 
-        className="mb-6 text-center text-2xl font-bold sm:mb-8 sm:text-3xl md:text-4xl lg:text-5xl"
-        style={{
-          color: 'var(--foreground)',
-          fontFamily: 'var(--font-sans)'
-        }}
-      >
-        404 - Oops, this is not what you were looking for.
-      </h1>
-      {randomImage && (
-        <img
-          src={randomImage}
-          alt="Confused Coffybara"
-          className="h-auto w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
+      {/* Large 404 Text with Overlaid Badge */}
+      <div className="relative">
+        <h1
+          className="text-9xl font-extrabold tracking-widest"
+          style={{ color: 'var(--foreground)' }}
+        >
+          404
+        </h1>
+
+        {/* Rotated Badge positioned over the "0" */}
+        <div
+          className="absolute left-1/2 top-2/3 -translate-x-1/2 rotate-12 transform rounded px-2 py-1 text-sm"
           style={{
-            borderRadius: 'var(--radius)',
-            boxShadow: 'var(--shadow-lg)'
+            backgroundColor: 'var(--primary)',
+            color: 'var(--primary-foreground)',
+            zIndex: 10,
           }}
-        />
+        >
+          Page Not Found
+        </div>
+      </div>
+
+      {/* Coffybara Image */}
+      {randomImage && (
+        <div className="mb-5 mt-8">
+          <img
+            src={randomImage}
+            alt="Confused Coffybara"
+            className="h-auto w-full max-w-xs sm:max-w-sm"
+          />
+        </div>
       )}
-      <p 
-        className="mt-4 text-center text-base sm:mt-6 sm:text-lg md:text-xl"
-        style={{
-          color: 'var(--muted-foreground)',
-          fontFamily: 'var(--font-sans)'
-        }}
+
+      {/* Description Text */}
+      <p
+        className="mx-auto mb-8 max-w-2xl px-4 text-center text-lg leading-relaxed sm:text-xl"
+        style={{ color: 'var(--muted-foreground)' }}
       >
-        Even our capybara is confused! Let's get you back on track.
+        Don't worry, even the best explorers sometimes take unexpected detours.
+        Let's get you back to where you need to be.
       </p>
-    </div>
+
+      {/* Dashboard Link */}
+      <div className="mt-5">
+        <a
+          href="/dashboard"
+          className="text-lg font-medium"
+          style={{ color: 'var(--foreground)' }}
+        >
+          Dashboard
+        </a>
+      </div>
+    </main>
   );
 };
 
