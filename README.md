@@ -6,15 +6,14 @@
 
 </div>
 
-# Coffybara
-
 > **AI-Powered Real-Time Event Detection & Kubernetes Observability**
 
 _Keep your clusters caffeinated and your downtime minimized_ ☕
 
 <!-- Project Status -->
 
-[![Live Demo](https://img.shields.io/badge/🌐-Live%20Demo-blue?style=for-the-badge)](https://coffybara.com)
+[![Website](https://img.shields.io/badge/🌐-Website-blue?style=for-the-badge)](https://coffybara.com)
+[![LinkedIn Product](https://img.shields.io/badge/LinkedIn%20Product-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/company/coffybara)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 <!-- Core Technologies -->
@@ -391,23 +390,11 @@ Ensure all production environment variables are set in your deployment platform.
 
 ## 👥 Meet the Team
 
-**🎯 Wenjun Song** | _Full-stack Engineer_
-
-- Backend architecture and Kubernetes integration
-- Real-time event streaming with Google Pub/Sub
-- Redis optimization and API development
-
-**🏗️ Steven Yeung** | _Full-stack Engineer_
-
-- Infrastructure setup and GKE management
-- Cloud Run deployment and CI/CD automation
-- GitHub Actions pipeline configuration
-
-**🎨 Amit Haror** | _Full-stack Engineer_
-
-- Frontend architecture and React development
-- UI/UX design and responsive layouts
-- Real-time notifications and data visualization
+| Team Member      | Role                | LinkedIn                                                                                                                      | GitHub                                                                                                           |
+| ---------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Wenjun Song**  | Full-stack Engineer | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/wsong0630/) | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/wsong0630)    |
+| **Steven Yeung** | Full-stack Engineer | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/syeungg/)   | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/stevenyeungg) |
+| **Amit Haror**   | Full-stack Engineer | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/amitharor/) | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/user0824)     |
 
 ---
 
