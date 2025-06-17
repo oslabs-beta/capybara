@@ -1,10 +1,10 @@
-# Contributing to Coffybara 🦫☕
+# Contributing to Coffybara ☕
 
 We're thrilled that you're interested in contributing to Coffybara! This document will help you get started and understand our development process.
 
 ## 🎯 Ways to Contribute
 
-- 🐛 **Bug Reports**: Found a bug? Let us know!
+- 🐞 **Bug Reports**: Found a bug? Let us know!
 - ✨ **Feature Requests**: Have an idea? We'd love to hear it!
 - 📝 **Documentation**: Help improve our docs
 - 🔧 **Code Contributions**: Submit bug fixes or new features
