@@ -1,7 +1,7 @@
 <div align='center'>
 
 <p align="center">
-    <img src="client/public/header2.png" alt="Coffybara Logo"/>
+    <img src="client/public/header4.svg" alt="Coffybara Logo"/>
 </p>
 
 # **AI-Powered Real-Time Event Detection & Kubernetes Observability**
