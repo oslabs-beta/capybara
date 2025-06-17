@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Welcome from './components/Welcome';
 import Dashboard from './components/Dashboard';
 import HistoricalData from './components/HistoricalData';
+import FourOhFour from './components/404';
 import NavigationBar from './components/NavigationBar';
 import sunIcon from './assets/sun.svg';
 // import moonIcon from './assets/moon.svg';
@@ -89,6 +90,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/historical" element={<HistoricalData />} />
+                <Route path="*" element={<FourOhFour />} />
               </Routes>
             </div>
           </div>
