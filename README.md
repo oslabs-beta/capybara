@@ -10,6 +10,8 @@
 
 _Keep your clusters caffeinated and your downtime minimized_ ☕
 
+[![GitHub release](https://img.shields.io/github/release/oslabs-beta/coffybara?style=for-the-badge)](https://github.com/oslabs-beta/coffybara/releases)
+
 <!-- Core Technologies -->
 
 **Core Technologies**  
@@ -66,15 +68,16 @@ _Keep your clusters caffeinated and your downtime minimized_ ☕
 <!-- Project Status -->
 
 [![Website](https://img.shields.io/badge/🌐-Website-blue?style=for-the-badge)](https://coffybara.com)
-[![LinkedIn Product](https://img.shields.io/badge/LinkedIn%20Product-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/company/coffybara)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/company/coffybara)
+[![Follow on X](https://img.shields.io/badge/Follow%20on%20X-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/aicoffybara)
 
 <!-- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT) -->
 
-Coffybara is your friendly neighborhood capybara that never sleeps, keeping watch over your Kubernetes clusters 24/7. Like a capybara lounging peacefully by the water, Coffybara maintains zen-like calmness while monitoring your infrastructure chaos.
+Coffybara is your friendly neighborhood capybara that never sleeps, keeping watch over your Kubernetes clusters 24/7. Like a capybara lounging peacefully by the water, Coffybara maintains zen like calmness while monitoring your infrastructure chaos.
 
 **The Problem**: Kubernetes infrastructure often leads to unexpected downtime from sneaky anomalies like resource exhaustion and pod instability.
 
-**The Solution**: Coffybara leverages advanced AI to predict and detect these anomalies in real-time, providing immediate, actionable insights directly to your development team through Slack and an intuitive dashboard.
+**The Solution**: Coffybara leverages advanced AI to predict and detect these anomalies in realtime, providing immediate, actionable insights directly to your development team through Slack and an intuitive dashboard.
 
 ## ✨ Features
 
@@ -84,10 +87,10 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 - **Pattern Recognition**: Learns from historical data to identify subtle anomalies before they become critical
 - **Smart Insights**: Provides actionable recommendations based on similar past events
 
-### ⚡ **Real-Time Monitoring**
+### ⚡ **Realtime Monitoring**
 
 - **Live Event Streaming**: Kubernetes events streamed through Google Pub/Sub
-- **Instant Notifications**: Real-time alerts via Socket.IO to dashboard and Slack
+- **Instant Notifications**: Realtime alerts via Socket.IO to dashboard and Slack
 - **Zero Latency**: Immediate response to critical infrastructure events
 
 ### 🎯 **Smart Filtering & Deduplication**
@@ -99,14 +102,14 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 ### 📊 **Beautiful Dashboard**
 
 - **Responsive Design**: Works seamlessly on desktop and mobile
-- **Real-Time Updates**: Live event feed with instant notifications
+- **Realtime Updates**: Live event feed with instant notifications
 - **Historical Analytics**: Comprehensive event history and trend analysis
 - **Dark/Light Mode**: Because we care about your eyes
 
 ### 🔔 **Multi-Channel Notifications**
 
 - **Slack Integration**: Formatted alerts with context and recommendations
-- **Dashboard Alerts**: Real-time notifications in the web interface
+- **Dashboard Alerts**: Realtime notifications in the web interface
 - **Severity Levels**: Color-coded alerts based on event criticality
 
 ## 🏗️ Architecture
@@ -136,17 +139,17 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 #### **Frontend**
 
 - **React 18** - Modern UI framework
-- **TypeScript** - Type-safe development
-- **Vite** - Lightning-fast build tool
-- **Tailwind CSS** - Utility-first styling
+- **TypeScript** - Typesafe development
+- **Vite** - Lightning fast build tool
+- **Tailwind CSS** - Utility first styling
 - **ShadCN** - Beautiful component library
-- **Socket.IO Client** - Real-time communication
+- **Socket.IO Client** - Realtime communication
 
 #### **Backend API**
 
 - **Node.js** - Runtime environment
 - **Express** - Web framework
-- **Socket.IO** - Real-time websockets
+- **Socket.IO** - Realtime websockets
 - **Axios** - HTTP client
 
 #### **Authentication & Security**
@@ -202,7 +205,7 @@ gcloud secrets create gemini-api-key --data-file=<(echo "your-gemini-key")
 
 # Slack Integration
 gcloud secrets create slack-bot-token --data-file=<(echo "your-slack-bot-token")
-gcloud secrets create slack-channel --data-file=<(echo "your-channel-id")
+gcloud secrets create slack-channel --data-file=<(echo "your-channeltd")
 
 # Redis (if using external Redis)
 gcloud secrets create redis-url --data-file=<(echo "your-redis-url")
@@ -295,7 +298,7 @@ gcloud pubsub subscriptions create kubernetes-events-sub --topic=kubernetes-even
 
 ### Dashboard Features
 
-**🔴 Live Events**: Real-time stream of Kubernetes events  
+**🔴 Live Events**: Realtime stream of Kubernetes events  
 **📈 Analytics**: Historical event trends and patterns  
 **🎯 Filtered Views**: Focus on specific namespaces or event types  
 **🔍 Search**: Find specific events quickly  
@@ -371,11 +374,11 @@ Ensure all production environment variables are set in your deployment platform.
 
 ## 👥 Meet the Team
 
-| Team Member      | Role                | LinkedIn                                                                                                                      | GitHub                                                                                                           |
-| ---------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Wenjun Song**  | Full-stack Engineer | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/wsong0630/) | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/wsong0630)    |
-| **Steven Yeung** | Full-stack Engineer | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/syeungg/)   | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/stevenyeungg) |
-| **Amit Haror**   | Full-stack Engineer | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/amitharor/) | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/user0824)     |
+| Team Member      | LinkedIn                                                                                                                      | GitHub                                                                                                           |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Wenjun Song**  | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/wsong0630/) | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/wsong0630)    |
+| **Steven Yeung** | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/syeungg/)   | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/stevenyeungg) |
+| **Amit Haror**   | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/amitharor/) | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/user0824)     |
 
 ## 🛣️ Roadmap
 
@@ -384,12 +387,12 @@ Ensure all production environment variables are set in your deployment platform.
 - [ ] **Better Documentation** - Comprehensive setup guides and API documentation
 - [ ] **Custom Notifications** - Alternative notification channel for critical alerts
 - [ ] **Historical Analytics** - Enhanced data visualization and trend analysis
-- [ ] **Custom Alert Rules** - User-defined notification triggers and thresholds
+- [ ] **Custom Alert Rules** - User defined notification triggers and thresholds
 
 ### **Future Phase**
 
 - [ ] **Multi Cluster Support** - Monitor multiple Kubernetes clusters from one dashboard
-- [ ] **Resource Usage Insights** - AI-powered recommendations for cluster optimization
+- [ ] **Resource Usage Insights** - AI powered recommendations for cluster optimization
 - [ ] **Team Collaboration Features** - Comments, incident assignments, and shared workspaces
 
 ## 🤝 Contributing
@@ -417,13 +420,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Found a bug? Have a feature request? We'd love to hear from you!
 
-- **Issues**: [GitHub Issues](https://github.com/your-username/coffybara/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/coffybara/discussions)
+- **Issues**: [GitHub Issues](https://github.com/oslabs-beta/capybara/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/oslabs-beta/capybara/discussions)
 
 <div align="center">
 
 _Keep your clusters happy, keep your capybaras caffeinated!_
-
-[⭐ Star us on GitHub](https://github.com/oslabs-beta/capybara) | [🌐 Visit coffybara.com](https://coffybara.com)
-
-</div>
