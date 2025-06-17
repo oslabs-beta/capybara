@@ -26,7 +26,7 @@ const FourOhFour = () => {
 
   return (
     <main
-      className="flex w-full flex-col items-center justify-center px-4 py-4"
+      className="duration-800 flex w-full flex-col items-center justify-center px-4 py-4 transition-colors"
       style={{
         backgroundColor: 'var(--background)',
         fontFamily: 'var(--font-sans)',
@@ -46,7 +46,7 @@ const FourOhFour = () => {
 
         {/* Rotated Badge positioned over the "0" */}
         <div
-          className="absolute left-1/2 top-2/3 -translate-x-1/2 rotate-12 transform rounded px-2 py-1 text-xs sm:text-sm md:text-base lg:text-lg"
+          className="absolute left-1/2 top-2/3 -translate-x-1/2 rotate-12 transform rounded px-2 py-1 text-xs whitespace-nowrap sm:text-sm md:text-base lg:text-lg"
           style={{
             backgroundColor: 'var(--primary)',
             color: 'var(--primary-foreground)',

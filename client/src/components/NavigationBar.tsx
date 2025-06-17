@@ -276,7 +276,7 @@ const FloatingDockMobile = ({
                       item.onClick?.();
                       setOpen(false);
                     }}
-                    className="flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
+                    className="duration-800 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md transition-colors"
                   >
                     <div className="h-7 w-7">{item.icon}</div>
                   </button>
@@ -284,7 +284,7 @@ const FloatingDockMobile = ({
                   <Link
                     to={item.href}
                     key={item.title}
-                    className="flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
+                    className="duration-800 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md transition-colors"
                   >
                     <div className="h-7 w-7">{item.icon}</div>
                   </Link>
@@ -296,7 +296,7 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md"
+        className="duration-800 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md transition-colors"
       >
         <IconLayoutNavbarCollapse className="text-muted-foreground h-7 w-7" />
       </button>
@@ -322,7 +322,7 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        'bg-background/80 z-50 mx-auto hidden h-20 items-end gap-4 rounded-2xl px-4 pb-0 backdrop-blur-md md:flex',
+        'bg-background/80 duration-800 z-50 mx-auto hidden h-20 items-end gap-4 rounded-2xl px-4 pb-0 backdrop-blur-md transition-colors md:flex',
         className,
       )}
     >
@@ -416,7 +416,7 @@ function IconContainer({
               initial={{ opacity: 0, y: 10, x: '-50%' }}
               animate={{ opacity: 1, y: 0, x: '-50%' }}
               exit={{ opacity: 0, y: 2, x: '-50%' }}
-              className="border-border bg-background text-foreground absolute -top-8 left-1/2 w-fit whitespace-pre rounded-md border px-2 py-0.5 text-xs"
+              className="border-border bg-background text-foreground duration-800 absolute -top-8 left-1/2 w-fit whitespace-pre rounded-md border px-2 py-0.5 text-xs transition-colors"
             >
               {title}
             </motion.div>
