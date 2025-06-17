@@ -26,16 +26,19 @@ const FourOhFour = () => {
 
   return (
     <main
-      className="flex h-screen w-full flex-col items-center justify-center"
+      className="flex w-full flex-col items-center justify-center px-4 py-4"
       style={{
         backgroundColor: 'var(--background)',
         fontFamily: 'var(--font-sans)',
+        minHeight: 'calc(100vh - 64px - 120px)', // Account for header (64px) and navbar area (120px)
+        height: 'calc(100vh - 64px - 120px)',
+        maxHeight: 'calc(100vh - 64px - 120px)', // Ensure it never exceeds available space
       }}
     >
       {/* Large 404 Text with Overlaid Badge */}
-      <div className="relative">
+      <div className="relative flex-shrink-0">
         <h1
-          className="text-6xl font-extrabold tracking-widest sm:text-8xl md:text-9xl lg:text-[12rem] xl:text-[15rem]"
+          className="text-4xl font-extrabold tracking-widest sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem]"
           style={{ color: 'var(--foreground)' }}
         >
           404
@@ -43,7 +46,7 @@ const FourOhFour = () => {
 
         {/* Rotated Badge positioned over the "0" */}
         <div
-          className="absolute left-1/2 top-2/3 -translate-x-1/2 rotate-12 transform rounded px-2 py-1 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl"
+          className="absolute left-1/2 top-2/3 -translate-x-1/2 rotate-12 transform rounded px-2 py-1 text-xs sm:text-sm md:text-base lg:text-lg"
           style={{
             backgroundColor: 'var(--primary)',
             color: 'var(--primary-foreground)',
@@ -56,18 +59,18 @@ const FourOhFour = () => {
 
       {/* Coffybara Image */}
       {randomImage && (
-        <div className="mb-5 mt-8">
+        <div className="my-4 flex-shrink-0 sm:my-6">
           <img
             src={randomImage}
             alt="Confused Coffybara"
-            className="h-auto w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
+            className="h-auto w-full max-w-[200px] sm:max-w-[250px] md:max-w-xs lg:max-w-sm xl:max-w-md"
           />
         </div>
       )}
 
       {/* Description Text */}
       <p
-        className="mx-auto mb-8 max-w-2xl px-4 text-center text-lg leading-relaxed sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl"
+        className="mx-auto mb-4 max-w-2xl text-center text-sm leading-relaxed sm:mb-6 sm:text-base md:text-lg lg:text-xl xl:text-2xl"
         style={{ color: 'var(--muted-foreground)' }}
       >
         Don't worry, even the best explorers sometimes take unexpected detours.
@@ -75,11 +78,11 @@ const FourOhFour = () => {
       </p>
 
       {/* Dashboard Button */}
-      <div className="mt-5">
+      <div className="flex-shrink-0">
         <Button 
           onClick={() => navigate('/')}
           size="lg"
-          className="text-lg font-medium sm:text-xl md:text-2xl lg:text-3xl px-6 py-3 md:px-8 md:py-4 lg:px-10 lg:py-5"
+          className="text-sm font-medium sm:text-base md:text-lg lg:text-xl px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4"
         >
           Go to Dashboard
         </Button>
