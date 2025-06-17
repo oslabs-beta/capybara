@@ -92,7 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Wenjun Song** - Backend development and Kubernetes integration
 - **Steven Yeung** - Infrastructure setup and deployment automation
-- **Amit Haror** - Full-stack development with backend API integration, real-time WebSocket implementation, and frontend architecture
+- **Amit Haror** - Backend API integration, real-time WebSocket implementation, and frontend architecture
 
 ---
 
