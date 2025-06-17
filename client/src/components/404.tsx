@@ -12,6 +12,8 @@ const images404 = [
   '/coffybara404-2.png',
   '/coffybara404-3.png',
   '/coffybara404-4.png',
+  '/coffybara404-5.png',
+  '/coffybara404-6.png',
 ];
 
 const FourOhFour = () => {
@@ -46,7 +48,7 @@ const FourOhFour = () => {
 
         {/* Rotated Badge positioned over the "0" */}
         <div
-          className="absolute left-1/2 top-2/3 -translate-x-1/2 rotate-12 transform rounded px-2 py-1 text-xs whitespace-nowrap sm:text-sm md:text-base lg:text-lg"
+          className="absolute left-1/2 top-2/3 -translate-x-1/2 rotate-12 transform whitespace-nowrap rounded px-2 py-1 text-xs sm:text-sm md:text-base lg:text-lg"
           style={{
             backgroundColor: 'var(--primary)',
             color: 'var(--primary-foreground)',
@@ -57,13 +59,13 @@ const FourOhFour = () => {
         </div>
       </div>
 
-      {/* Coffybara Image */}
+      {/* Capybara Image */}
       {randomImage && (
-        <div className="my-4 flex-shrink-0 sm:my-6">
+        <div className="mb-5 mt-8">
           <img
             src={randomImage}
             alt="Confused Coffybara"
-            className="h-auto w-full max-w-[200px] sm:max-w-[250px] md:max-w-xs lg:max-w-sm xl:max-w-md"
+            className="mx-auto h-80 w-80 object-contain sm:h-96 sm:w-96 md:h-[28rem] md:w-[28rem]"
           />
         </div>
       )}
@@ -79,10 +81,10 @@ const FourOhFour = () => {
 
       {/* Dashboard Button */}
       <div className="flex-shrink-0">
-        <Button 
+        <Button
           onClick={() => navigate('/')}
           size="lg"
-          className="text-sm font-medium sm:text-base md:text-lg lg:text-xl px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4"
+          className="px-4 py-2 text-sm font-medium sm:px-6 sm:py-3 sm:text-base md:px-8 md:py-4 md:text-lg lg:text-xl"
         >
           Go to Dashboard
         </Button>
