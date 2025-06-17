@@ -101,20 +101,9 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 
 ## 🏗️ Architecture
 
-```mermaid
-graph TB
-    K8s[Kubernetes Cluster] --> PubSub[Google Pub/Sub]
-    PubSub --> CloudRun[Cloud Run Backend]
-    CloudRun --> Redis[(Redis Cache)]
-    CloudRun --> Pinecone[(Pinecone Vector DB)]
-    CloudRun --> Gemini[Gemini AI API]
-    CloudRun --> SocketIO[Socket.IO]
-    CloudRun --> SlackAPI[Slack API]
-    SocketIO --> Dashboard[React Dashboard]
-    SlackAPI --> Slack[Slack Notifications]
-    Dashboard --> Users[Development Team]
-    Slack --> Users
-```
+<p align="center">
+    <img src="client/public/appArchitecture.png" alt="Coffybara App Architecture"/>
+</p>
 
 ### **Tech Stack**
 
