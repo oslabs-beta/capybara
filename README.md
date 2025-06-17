@@ -8,9 +8,14 @@
 
 > **AI-Powered Real-Time Event Detection & Kubernetes Observability**
 
-_Keep your clusters caffeinated and your downtime minimized_ ☕
+[![Latest Release](https://img.shields.io/github/v/release/oslabs-beta/capybara?style=for-the-badge&logo=github&color=blue)](https://github.com/oslabs-beta/capybara/releases/latest)
+[![License](https://img.shields.io/github/license/oslabs-beta/capybara?style=for-the-badge&color=green)](LICENSE)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/oslabs-beta/capybara/ci.yml?style=for-the-badge&logo=github-actions)](https://github.com/oslabs-beta/capybara/actions)
+[![Last Commit](https://img.shields.io/github/last-commit/oslabs-beta/capybara?style=for-the-badge&logo=git&color=orange)](https://github.com/oslabs-beta/capybara/commits/main)
 
-[![GitHub release](https://img.shields.io/github/release/oslabs-beta/coffybara?style=for-the-badge)](https://github.com/oslabs-beta/coffybara/releases)
+## 🏷️ Current Version: ![Version](https://img.shields.io/github/package-json/v/oslabs-beta/capybara?style=flat-square&color=blue)
+
+_Keep your clusters caffeinated and your downtime minimized_ ☕
 
 <!-- Core Technologies -->
 
