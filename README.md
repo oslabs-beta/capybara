@@ -10,12 +10,6 @@
 
 _Keep your clusters caffeinated and your downtime minimized_ ☕
 
-<!-- Project Status -->
-
-[![Website](https://img.shields.io/badge/🌐-Website-blue?style=for-the-badge)](https://coffybara.com)
-[![LinkedIn Product](https://img.shields.io/badge/LinkedIn%20Product-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/company/coffybara)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-
 <!-- Core Technologies -->
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -58,17 +52,19 @@ _Keep your clusters caffeinated and your downtime minimized_ ☕
 
 [![Clerk](https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)](https://clerk.com/)
 
----
-
 ## 🚀 What is Coffybara?
+
+<!-- Project Status -->
+
+[![Website](https://img.shields.io/badge/🌐-Website-blue?style=for-the-badge)](https://coffybara.com)
+[![LinkedIn Product](https://img.shields.io/badge/LinkedIn%20Product-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/company/coffybara)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 Coffybara is your friendly neighborhood capybara that never sleeps, keeping watch over your Kubernetes clusters 24/7. Like a capybara lounging peacefully by the water, Coffybara maintains zen-like calmness while monitoring your infrastructure chaos.
 
 **The Problem**: Kubernetes infrastructure often leads to unexpected downtime from sneaky anomalies like resource exhaustion and pod instability.
 
 **The Solution**: Coffybara leverages advanced AI to predict and detect these anomalies in real-time, providing immediate, actionable insights directly to your development team through Slack and an intuitive dashboard.
-
----
 
 ## ✨ Features
 
@@ -102,8 +98,6 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 - **Slack Integration**: Formatted alerts with context and recommendations
 - **Dashboard Alerts**: Real-time notifications in the web interface
 - **Severity Levels**: Color-coded alerts based on event criticality
-
----
 
 ## 🏗️ Architecture
 
@@ -167,8 +161,6 @@ graph TB
 - **Vercel** - Frontend deployment
 - **Docker** - Containerization
 - **Vitest** - Testing framework
-
----
 
 ## 🚀 Quick Start
 
@@ -263,8 +255,6 @@ npm run client
 - **Dashboard**: http://localhost:5173
 - **API**: http://localhost:3001
 
----
-
 ## 🔧 Configuration
 
 ### GKE Cluster Connection
@@ -302,8 +292,6 @@ gcloud pubsub subscriptions create kubernetes-events-sub --topic=kubernetes-even
 3. Install the app to your workspace
 4. Copy the Bot User OAuth Token to your `.env`
 
----
-
 ## 📊 Usage
 
 ### Dashboard Features
@@ -339,8 +327,6 @@ GET /api/health
 WS /socket.io
 ```
 
----
-
 ## 🧪 Testing
 
 ```bash
@@ -353,8 +339,6 @@ npm run test:watch
 # Run tests with coverage
 npm run test:coverage
 ```
-
----
 
 ## 🚀 Deployment
 
@@ -386,8 +370,6 @@ vercel --prod
 
 Ensure all production environment variables are set in your deployment platform.
 
----
-
 ## 👥 Meet the Team
 
 | Team Member      | Role                | LinkedIn                                                                                                                      | GitHub                                                                                                           |
@@ -395,8 +377,6 @@ Ensure all production environment variables are set in your deployment platform.
 | **Wenjun Song**  | Full-stack Engineer | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/wsong0630/) | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/wsong0630)    |
 | **Steven Yeung** | Full-stack Engineer | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/syeungg/)   | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/stevenyeungg) |
 | **Amit Haror**   | Full-stack Engineer | [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/amitharor/) | [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/user0824)     |
-
----
 
 ## 🛣️ Roadmap
 
@@ -410,8 +390,6 @@ Ensure all production environment variables are set in your deployment platform.
 
 - [ ] Multi-cluster monitoring
 
----
-
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
@@ -422,13 +400,9 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
----
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
 
 ## 🙏 Acknowledgments
 
@@ -437,16 +411,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **The Kubernetes Community** for amazing orchestration tools
 - **Google** for powerful AI capabilities
 
----
-
 ## 🐞 Issues & Support
 
 Found a bug? Have a feature request? We'd love to hear from you!
 
 - **Issues**: [GitHub Issues](https://github.com/your-username/coffybara/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/your-username/coffybara/discussions)
-
----
 
 <div align="center">
 

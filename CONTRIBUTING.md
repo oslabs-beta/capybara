@@ -386,7 +386,7 @@ We appreciate all contributions! Contributors will be:
 - **Listed** in our README
 - **Mentioned** in release notes
 
-## 📞 Getting Help
+## 💬 Getting Help
 
 Need help? Reach out to us:
 
