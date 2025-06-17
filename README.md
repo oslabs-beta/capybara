@@ -285,13 +285,11 @@ gcloud pubsub subscriptions create kubernetes-events-sub --topic=kubernetes-even
 
 ### Dashboard Features
 
-<ul style="list-style-type: none; padding-left: 0;">
-  <li><strong>🔴 Live Events</strong>: Real-time stream of Kubernetes events</li>
-  <li><strong>📈 Analytics</strong>: Historical event trends and patterns</li>
-  <li><strong>🎯 Filtered Views</strong>: Focus on specific namespaces or event types</li>
-  <li><strong>🔍 Search</strong>: Find specific events quickly</li>
-  <li><strong>⚙️ Settings</strong>: Configure notification preferences</li>
-</ul>
+**🔴 Live Events**: Real-time stream of Kubernetes events  
+**📈 Analytics**: Historical event trends and patterns  
+**🎯 Filtered Views**: Focus on specific namespaces or event types  
+**🔍 Search**: Find specific events quickly  
+**⚙️ Settings**: Configure notification preferences
 
 ### Slack Notifications
 
