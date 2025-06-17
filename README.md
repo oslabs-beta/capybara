@@ -410,6 +410,14 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
+## 📋 Documentation
+
+For developers and maintainers:
+
+- **[📋 Release Process](RELEASE_PROCESS.md)** - Step-by-step guide for creating new releases
+- **[📝 Changelog](CHANGELOG.md)** - Version history and release notes
+- **[🤝 Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
