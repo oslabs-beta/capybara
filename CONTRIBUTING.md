@@ -29,14 +29,14 @@ Before you begin, ensure you have:
 
    ```bash
    # Click the "Fork" button on GitHub, then clone your fork
-   git clone https://github.com/YOUR_USERNAME/coffybara.git
+   git clone https://github.com/oslabs-beta/capybara.git
    cd coffybara
    ```
 
 2. **Add upstream remote**
 
    ```bash
-   git remote add upstream https://github.com/oslabs-beta/coffybara.git
+   git remote add upstream https://github.com/oslabs-beta/capybara.git
    ```
 
 3. **Set up Google Cloud Secrets** (for testing)
@@ -55,7 +55,7 @@ Before you begin, ensure you have:
 
 5. **Verify everything works**
    - Dashboard: http://localhost:5173
-   - API: http://localhost:3001
+   - API: http://localhost:3000
    - Run tests: `npm test`
 
 ## 🔄 Development Workflow
