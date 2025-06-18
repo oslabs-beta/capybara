@@ -1,10 +1,10 @@
 <div align='center'>
 
 <p align="center" style="margin-bottom: 0;">
-    <img src="client/public/header4.svg" alt="Coffybara Logo"/>
+    <img src="client/public/header7.svg" alt="Coffybara Logo"/>
 </p>
 
-<h1 align="center" style="margin-top: -30;"><strong>AI Powered Real-Time Event Detection & Kubernetes Observability</strong></h1>
+<!-- <h1 align="center" style="margin-top: -30;"><strong>AI Powered Real-Time Event Detection & Kubernetes Observability</strong></h1> -->
 
 [![Latest Release](https://img.shields.io/github/v/release/oslabs-beta/capybara?include_prereleases&style=for-the-badge&logo=github&color=blue)](https://github.com/oslabs-beta/capybara/releases/latest)
 [![License](https://img.shields.io/github/license/oslabs-beta/capybara?style=for-the-badge&color=green)](LICENSE)
