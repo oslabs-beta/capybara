@@ -4,16 +4,16 @@
     <img src="client/public/header4.svg" alt="Coffybara Logo"/>
 </p>
 
-<h1 align="center" style="margin-top: 0;"><strong>AI-Powered Real-Time Event Detection & Kubernetes Observability</strong></h1>
+<h1 align="center" style="margin-top: -30;"><strong>AI Powered Real-Time Event Detection & Kubernetes Observability</strong></h1>
 
 [![Latest Release](https://img.shields.io/github/v/release/oslabs-beta/capybara?include_prereleases&style=for-the-badge&logo=github&color=blue)](https://github.com/oslabs-beta/capybara/releases/latest)
 [![License](https://img.shields.io/github/license/oslabs-beta/capybara?style=for-the-badge&color=green)](LICENSE)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/oslabs-beta/capybara/ci.yml?style=for-the-badge&logo=github-actions)](https://github.com/oslabs-beta/capybara/actions)
 [![Last Commit](https://img.shields.io/github/last-commit/oslabs-beta/capybara?style=for-the-badge&logo=git&color=orange)](https://github.com/oslabs-beta/capybara/commits/main)
 
-</div><br><br><br>
+</div>
 
-<!-- Core Technologies -->
+## <br><br><br>
 
 **Core Technologies**  
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -24,8 +24,6 @@
 
 ---
 
-<!-- UI & Styling -->
-
 **UI & Styling**  
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)](https://ui.shadcn.com/)
@@ -33,8 +31,6 @@
 [![DaisyUI](https://img.shields.io/badge/DaisyUI-FFC107?style=for-the-badge&logo=daisyui&logoColor=black)](https://daisyui.com/)
 
 ---
-
-<!-- Infrastructure & Cloud -->
 
 **Infrastructure & Cloud**  
 [![Google Cloud](https://img.shields.io/badge/Google%20Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
@@ -45,15 +41,11 @@
 
 ---
 
-<!-- AI & Data -->
-
 **AI & Data**  
 [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)](https://gemini.google.com/)
 [![Pinecone](https://img.shields.io/badge/Pinecone-000000?style=for-the-badge&logo=pinecone&logoColor=white)](https://www.pinecone.io/)
 
 ---
-
-<!-- Real-time & Communication -->
 
 **Real-time & Communication**  
 [![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white)](https://socket.io/)
@@ -61,16 +53,12 @@
 
 ---
 
-<!-- Development Tools -->
-
 **Development Tools**  
 [![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
 [![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black)](https://prettier.io/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
 ---
-
-<!-- Authentication -->
 
 **Authentication**  
 [![Clerk](https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)](https://clerk.com/)
@@ -94,7 +82,7 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 
 **The Solution**: Coffybara leverages advanced AI to predict and detect these anomalies in realtime, providing immediate, actionable insights directly to your development team through Slack and an intuitive dashboard.
 
-<br>
+<br><br>
 
 ## ✨ Features
 
@@ -112,7 +100,7 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 
 ### 🎯 **Smart Filtering & Deduplication**
 
-- **Rate Limiting**: Redis-powered intelligent event throttling
+- **Rate Limiting**: Redis powered intelligent event throttling
 - **Deduplication**: Eliminates noise from repetitive events
 - **Priority Scoring**: Focuses on events that actually matter
 
@@ -127,61 +115,7 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 
 - **Slack Integration**: Formatted alerts with context and recommendations
 - **Dashboard Alerts**: Realtime notifications in the web interface
-- **Severity Levels**: Color-coded alerts based on event criticality
-
-<br>
-
-## 🏗️ Architecture
-
-<p align="center">
-    <img src="client/public/appArchitecture.png" alt="Coffybara App Architecture"/>
-</p>
-
-### **Tech Stack**
-
-#### **Backend & Infrastructure**
-
-- **Kubernetes** - Container orchestration
-- **Google Kubernetes Engine (GKE)** - Managed Kubernetes
-- **Google Cloud Monitoring** - Infrastructure monitoring
-- **Google Pub/Sub** - Event streaming
-- **Cloud Run** - Serverless container platform
-- **Redis** - Caching and rate limiting
-- **Google Secrets Manager** - Secure credential management
-
-#### **AI & Data**
-
-- **Pinecone** - Vector database for semantic search
-- **Gemini AI API** - Intelligent event analysis
-- **Vector Embeddings** - Semantic event similarity
-
-#### **Frontend**
-
-- **React 18** - Modern UI framework
-- **TypeScript** - Typesafe development
-- **Vite** - Lightning fast build tool
-- **Tailwind CSS** - Utility first styling
-- **ShadCN** - Beautiful component library
-- **Socket.IO Client** - Realtime communication
-
-#### **Backend API**
-
-- **Node.js** - Runtime environment
-- **Express** - Web framework
-- **Socket.IO** - Realtime websockets
-- **Axios** - HTTP client
-
-#### **Authentication & Security**
-
-- **Clerk** - OAuth 2.0 authentication
-- **Google OAuth** - Secure user management
-
-#### **DevOps & CI/CD**
-
-- **GitHub Actions** - Automated workflows
-- **Vercel** - Frontend deployment
-- **Docker** - Containerization
-- **Vitest** - Testing framework
+- **Severity Levels**: Color coded alerts based on event criticality
 
 <br>
 
@@ -190,216 +124,20 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 ### Prerequisites
 
 - Node.js 18+
-- Google Cloud Account with existing GKE cluster
-- Google Cloud CLI (`gcloud`) installed and configured
-- Slack workspace (for notifications)
+- Google Cloud Account with GKE cluster
+- Slack workspace
 
-### 1. Clone the Repository
+### Installation
 
 ```bash
 git clone https://github.com/oslabs-beta/capybara.git
-cd coffybara
-```
-
-### 2. Google Cloud Setup
-
-Coffybara uses **Google Cloud Secrets Manager** to securely store all configuration. No local `.env` files needed!
-
-**Enable required APIs:**
-
-```bash
-gcloud services enable secretmanager.googleapis.com
-gcloud services enable pubsub.googleapis.com
-gcloud services enable run.googleapis.com
-gcloud services enable container.googleapis.com
-```
-
-**Create secrets in Google Cloud Secrets Manager:**
-
-```bash
-# Pinecone Configuration
-gcloud secrets create pinecone-api-key --data-file=<(echo "your-pinecone-key")
-gcloud secrets create pinecone-index-name --data-file=<(echo "your-index-name")
-
-# Gemini AI
-gcloud secrets create gemini-api-key --data-file=<(echo "your-gemini-key")
-
-# Slack Integration
-gcloud secrets create slack-bot-token --data-file=<(echo "your-slack-bot-token")
-gcloud secrets create slack-channel --data-file=<(echo "your-channeltd")
-
-# Redis (if using external Redis)
-gcloud secrets create redis-url --data-file=<(echo "your-redis-url")
-
-# Clerk Authentication
-gcloud secrets create clerk-publishable-key --data-file=<(echo "your-clerk-key")
-```
-
-### 3. Connect to Your GKE Cluster
-
-Coffybara automatically connects to your existing GKE clusters. Ensure your `gcloud` CLI is authenticated and has access to your clusters:
-
-```bash
-# Authenticate with Google Cloud
-gcloud auth login
-
-# Set your project
-gcloud config set project YOUR_PROJECT_ID
-
-# Get cluster credentials (if needed)
-gcloud container clusters get-credentials YOUR_CLUSTER_NAME --region=YOUR_REGION
-```
-
-### 4. Start the Application
-
-From the root directory, simply run:
-
-```bash
+cd capybara
 npm start
 ```
 
-This single command will:
+**That's it!** Coffybara will automatically discover your GKE clusters and start monitoring.
 
-- Install dependencies for root, client, and server
-- Start both the client and server concurrently
-
-**Alternative commands:**
-
-```bash
-# Start only the server
-npm run server
-
-# Start only the client
-npm run client
-```
-
-### 5. Access the Application
-
-- **Dashboard**: http://localhost:5173
-- **API**: http://localhost:3001
-
-<br>
-
-## 🔧 Configuration
-
-### GKE Cluster Connection
-
-Coffybara automatically discovers and connects to your existing GKE clusters. The application will:
-
-1. **Auto-detect** clusters in your Google Cloud project
-2. **Stream events** from all accessible clusters via Google Pub/Sub
-3. **Monitor** pod lifecycle, resource usage, and system events
-4. **Analyze** events using AI and provide intelligent insights
-
-**Required Permissions:**
-Ensure your Google Cloud service account has these IAM roles:
-
-- `Kubernetes Engine Viewer` (to access cluster information)
-- `Pub/Sub Editor` (for event streaming)
-- `Secret Manager Secret Accessor` (to read configuration secrets)
-
-### Google Cloud Pub/Sub Setup
-
-Create the required Pub/Sub infrastructure:
-
-```bash
-# Create Pub/Sub topic for Kubernetes events
-gcloud pubsub topics create kubernetes-events
-
-# Create subscription for event processing
-gcloud pubsub subscriptions create kubernetes-events-sub --topic=kubernetes-events
-```
-
-### Slack Integration
-
-1. Create a Slack app at https://api.slack.com/apps
-2. Add the `chat:write` bot scope
-3. Install the app to your workspace
-4. Copy the Bot User OAuth Token to your `.env`
-
-<br>
-
-## 📊 Usage
-
-### Dashboard Features
-
-**🔴 Live Events**: Realtime stream of Kubernetes events  
-**📈 Analytics**: Historical event trends and patterns  
-**🎯 Filtered Views**: Focus on specific namespaces or event types  
-**🔍 Search**: Find specific events quickly  
-**⚙️ Settings**: Configure notification preferences
-
-### Slack Notifications
-
-Coffybara sends intelligent Slack notifications with:
-
-- **Event Context**: Pod, namespace, and timing information
-- **AI Analysis**: Root cause analysis and recommendations
-- **Historical Context**: Similar past events for reference
-- **Action Items**: Specific steps to resolve the issue
-
-### API Endpoints
-
-```typescript
-// Get recent events
-GET /api/events?limit=50&namespace=default
-
-// Get event analytics
-GET /api/analytics?timeRange=24h
-
-// Health check
-GET /api/health
-
-// WebSocket connection
-WS /socket.io
-```
-
-<br>
-
-## 🧪 Testing
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
-```
-
-<br>
-
-## 🚀 Deployment
-
-### Production Deployment
-
-1. **Build the application:**
-
-```bash
-npm run build
-```
-
-2. **Deploy to Cloud Run:**
-
-```bash
-gcloud run deploy coffybara-backend \
-  --source=./server \
-  --platform=managed \
-  --region=us-central1 \
-  --allow-unauthenticated
-```
-
-3. **Deploy frontend to Vercel:**
-
-```bash
-vercel --prod
-```
-
-### Environment Variables for Production
-
-Ensure all production environment variables are set in your deployment platform.
+For detailed setup instructions, see our **[Setup Guide](docs/setup.md)**.
 
 <br>
 
@@ -413,42 +151,37 @@ Ensure all production environment variables are set in your deployment platform.
 
 <br>
 
+## 📚 Documentation
+
+- **[📋 Setup Guide](docs/setup.md)** - Detailed installation and configuration
+- **[📖 User Guide](docs/user-guide.md)** - How to use Coffybara effectively
+- **[🚀 Deployment Guide](docs/deployment.md)** - Production deployment instructions
+- **[🏗️ Architecture](docs/architecture.md)** - System design and tech stack details
+- **[📋 Release Process](docs/release-process.md)** - How we create new releases
+- **[🤝 Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
+- **[📝 Changelog](CHANGELOG.md)** - Version history and release notes
+
+<br>
+
 ## 🛣️ Roadmap
 
 ### **Next Phase**
 
-- [ ] **Better Documentation** - Comprehensive setup guides and API documentation
-- [ ] **Custom Notifications** - Alternative notification channel for critical alerts
-- [ ] **Historical Analytics** - Enhanced data visualization and trend analysis
-- [ ] **Custom Alert Rules** - User defined notification triggers and thresholds
+- [ ] Custom notification channels
+- [ ] Enhanced analytics dashboard
+- [ ] User defined alert rules
 
 ### **Future Phase**
 
-- [ ] **Multi Cluster Support** - Monitor multiple Kubernetes clusters from one dashboard
-- [ ] **Resource Usage Insights** - AI powered recommendations for cluster optimization
-- [ ] **Team Collaboration Features** - Comments, incident assignments, and shared workspaces
+- [ ] Multi cluster support
+- [ ] Resource optimization insights
+- [ ] Team collaboration features
 
 <br>
 
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
-
-<br>
-
-## 📋 Documentation
-
-For developers and maintainers:
-
-- **[📋 Release Process](RELEASE_PROCESS.md)** - Step-by-step guide for creating new releases
-- **[📝 Changelog](CHANGELOG.md)** - Version history and release notes
-- **[🤝 Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
 
 <br>
 
@@ -458,23 +191,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <br>
 
-## 🙏 Acknowledgments
-
-- **Capybaras** for being the most chill animals and inspiring our mascot
-- **Google Cloud** for providing robust infrastructure
-- **The Kubernetes Community** for amazing orchestration tools
-- **Google** for powerful AI capabilities
-
-<br>
-
 ## 🐞 Issues & Support
-
-Found a bug? Have a feature request? We'd love to hear from you!
 
 - **Issues**: [GitHub Issues](https://github.com/oslabs-beta/capybara/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/oslabs-beta/capybara/discussions)
 
-<br><br>
+## <br><br>
 
 <div align="center">
 
