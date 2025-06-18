@@ -15,8 +15,7 @@
 
 ## <br><br><br>
 
-### <span style="color: #c39e88;">**Core Technologies**</span>
-
+**Core Technologies**  
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -25,8 +24,7 @@
 
 ---
 
-### <span style="color: #c39e88;">**UI & Styling**</span>
-
+**UI & Styling**  
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)](https://ui.shadcn.com/)
 [![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chart.js&logoColor=white)](https://www.chartjs.org/)
@@ -34,8 +32,7 @@
 
 ---
 
-### <span style="color: #c39e88;">**Infrastructure & Cloud**</span>
-
+**Infrastructure & Cloud**  
 [![Google Cloud](https://img.shields.io/badge/Google%20Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
@@ -44,36 +41,32 @@
 
 ---
 
-### <span style="color: #c39e88;">**AI & Data**</span>
-
+**AI & Data**  
 [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)](https://gemini.google.com/)
 [![Pinecone](https://img.shields.io/badge/Pinecone-000000?style=for-the-badge&logo=pinecone&logoColor=white)](https://www.pinecone.io/)
 
 ---
 
-### <span style="color: #c39e88;">**Real-time & Communication**</span>
-
+**Real-time & Communication**  
 [![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white)](https://socket.io/)
 [![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)](https://slack.com/)
 
 ---
 
-### <span style="color: #c39e88;">**Development Tools**</span>
-
+**Development Tools**  
 [![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
 [![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black)](https://prettier.io/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
 ---
 
-### <span style="color: #c39e88;">**Authentication**</span>
-
+**Authentication**  
 [![Clerk](https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)](https://clerk.com/)
 [![Google OAuth 2.0](https://img.shields.io/badge/Google%20OAuth%202.0-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://developers.google.com/identity/protocols/oauth2)
 
 <br><br><br>
 
-# <span style="color: #c39e88;">🚀 What is Coffybara?</span>
+# 🚀 What is Coffybara?
 
 <!-- Project Status -->
 
@@ -91,7 +84,7 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 
 <br><br>
 
-## <span style="color: #c39e88;">✨ Features</span>
+## ✨ Features
 
 ### 🧠 **AI-Powered Anomaly Detection**
 
@@ -126,7 +119,7 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 
 <br>
 
-## <span style="color: #c39e88;">🚀 Quick Start</span>
+## 🚀 Quick Start
 
 ### Prerequisites
 
@@ -148,7 +141,7 @@ For detailed setup instructions, see our **[Setup Guide](docs/setup.md)**.
 
 <br>
 
-## <span style="color: #c39e88;">👥 Meet the Team</span>
+## 👥 Meet the Team
 
 | Team Member      | LinkedIn                                                                                                                      | GitHub                                                                                                           |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -158,7 +151,7 @@ For detailed setup instructions, see our **[Setup Guide](docs/setup.md)**.
 
 <br>
 
-## <span style="color: #c39e88;">📚 Documentation</span>
+## 📚 Documentation
 
 - **[📋 Setup Guide](docs/setup.md)** - Detailed installation and configuration
 - **[📖 User Guide](docs/user-guide.md)** - How to use Coffybara effectively
@@ -170,7 +163,7 @@ For detailed setup instructions, see our **[Setup Guide](docs/setup.md)**.
 
 <br>
 
-## <span style="color: #c39e88;">🛣️ Roadmap</span>
+## 🛣️ Roadmap
 
 ### **Next Phase**
 
@@ -186,19 +179,19 @@ For detailed setup instructions, see our **[Setup Guide](docs/setup.md)**.
 
 <br>
 
-## <span style="color: #c39e88;">🤝 Contributing</span>
+## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 <br>
 
-## <span style="color: #c39e88;">📝 License</span>
+## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 <br>
 
-## <span style="color: #c39e88;">🐞 Issues & Support</span>
+## 🐞 Issues & Support
 
 - **Issues**: [GitHub Issues](https://github.com/oslabs-beta/capybara/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/oslabs-beta/capybara/discussions)
