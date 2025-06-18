@@ -1,13 +1,13 @@
 <div align='center'>
 
 <p align="center" style="margin-bottom: 0;">
-    <img src="client/public/header4.svg" alt="Coffybara Logo"/>
+    <img src="client/public/header7.svg" alt="Coffybara Logo"/>
 </p>
 
-<h1 align="center" style="margin-top: -30;"><strong>AI Powered Real-Time Event Detection & Kubernetes Observability</strong></h1>
+<!-- <h1 align="center" style="margin-top: -30;"><strong>AI Powered Real-Time Event Detection & Kubernetes Observability</strong></h1> -->
 
-[![Latest Release](https://img.shields.io/github/v/release/oslabs-beta/capybara?include_prereleases&style=for-the-badge&logo=github&color=blue)](https://github.com/oslabs-beta/capybara/releases/latest)
-[![License](https://img.shields.io/github/license/oslabs-beta/capybara?style=for-the-badge&color=green)](LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/oslabs-beta/capybara?include_prereleases&style=for-the-badge&logo=github&color=a37764)](https://github.com/oslabs-beta/capybara/releases/latest)
+[![License](https://img.shields.io/github/license/oslabs-beta/capybara?style=for-the-badge&color=a37764)](LICENSE)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/oslabs-beta/capybara/ci.yml?style=for-the-badge&logo=github-actions)](https://github.com/oslabs-beta/capybara/actions)
 [![Last Commit](https://img.shields.io/github/last-commit/oslabs-beta/capybara?style=for-the-badge&logo=git&color=orange)](https://github.com/oslabs-beta/capybara/commits/main)
 
@@ -70,9 +70,9 @@
 
 <!-- Project Status -->
 
-[![Website](https://img.shields.io/badge/🌐-Website-blue?style=for-the-badge)](https://coffybara.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/company/coffybara)
-[![Follow on X](https://img.shields.io/badge/Follow%20on%20X-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/aicoffybara)
+[![Website](https://img.shields.io/badge/🌐-Website-a37764?style=for-the-badge)](https://coffybara.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-a37764?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/company/coffybara)
+[![Follow on X](https://img.shields.io/badge/Follow%20on%20X-a37764?style=for-the-badge&logo=x&logoColor=white)](https://x.com/aicoffybara)
 
 <!-- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT) -->
 
