@@ -82,7 +82,7 @@ Coffybara is your friendly neighborhood capybara that never sleeps, keeping watc
 
 **The Solution**: Coffybara leverages advanced AI to predict and detect these anomalies in realtime, providing immediate, actionable insights directly to your development team through Slack and an intuitive dashboard.
 
-<br>
+<br><br>
 
 ## ✨ Features
 
@@ -196,7 +196,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Issues**: [GitHub Issues](https://github.com/oslabs-beta/capybara/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/oslabs-beta/capybara/discussions)
 
----
+## <br><br>
 
 <div align="center">
 
