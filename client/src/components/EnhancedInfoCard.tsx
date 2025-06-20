@@ -1,5 +1,6 @@
-// Enhanced InfoCard.tsx - Keeping your original theme with gradient header
-'use client';
+// ----------------------------------------------------------
+// >> KUBERNETES CLUSTER HEALTH DATA<< //
+// ----------------------------------------------------------
 
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -85,10 +86,15 @@ const GKEClusterCard: React.FC = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <Card className="overflow-hidden rounded-2xl border shadow-md transition-shadow duration-300 hover:shadow-lg">
+      <Card className="relative rounded-2xl border shadow-md transition-shadow duration-300 hover:shadow-lg">
+        {/* Status badge positioned absolutely in top-right corner */}
+        <div className="top- absolute right-4 z-10">
+          <StatusBadge status={status} />
+        </div>
+
         <CardHeader>
-          <div className="space-y-4">
-            <div className="flex items-start justify-between">
+          <div className="-mb-2 flex items-center justify-between">
+            <div className="flex items-start justify-between pr-20">
               <div>
                 <CardTitle className="from-primary to-secondary bg-gradient-to-r bg-clip-text text-base font-bold text-transparent md:text-2xl">
                   <span className="hidden md:inline">
@@ -103,7 +109,6 @@ const GKEClusterCard: React.FC = () => {
                   Region: {location}
                 </p>
               </div>
-              <StatusBadge status={status} />
             </div>
           </div>
         </CardHeader>

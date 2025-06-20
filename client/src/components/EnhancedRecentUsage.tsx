@@ -1,5 +1,5 @@
 // ----------------------------------------------------------
-// >> GCP KUBERNETES METRICS WITH REAL PEAK CALCULATION << //
+// >> GCP CLOUD METRICS WITH REAL PEAK CALCULATION << //
 // ----------------------------------------------------------
 
 import {
@@ -133,14 +133,12 @@ const EnhancedOriginalMetricCard = ({
       className="flex flex-col"
     >
       <Card className="relative overflow-hidden transition-all duration-300 hover:shadow-lg">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
-
         <CardContent className="flex-1">
           <ChartContainer
             config={chartConfig}
             className="mx-auto aspect-square max-h-[180px]"
           >
-            <ResponsiveContainer width="10%" height="10%">
+            <ResponsiveContainer width="100%" height="100%">
               <RadialBarChart
                 data={chartData}
                 startAngle={180}
@@ -224,13 +222,25 @@ const EnhancedOriginalMetricCard = ({
 
 const ResourceUsageRadialCharts: React.FC = () => {
   const { selectedCluster } = useCluster();
-  
+
   // Fetch metrics using the custom hook for each metric (24 hours = 1440 minutes)
   // Apply cluster filtering only to Kubernetes metrics, not instance metrics
   const cpuMetrics = useFetchMetrics(metricConfigs[0].metricType, 1440); // Instance metric - no cluster filtering
-  const memoryMetrics = useFetchMetrics(metricConfigs[1].metricType, 1440, selectedCluster); // Kubernetes metric
-  const requestMetrics = useFetchMetrics(metricConfigs[2].metricType, 1440, selectedCluster); // Kubernetes metric
-  const limitMetrics = useFetchMetrics(metricConfigs[3].metricType, 1440, selectedCluster); // Kubernetes metric
+  const memoryMetrics = useFetchMetrics(
+    metricConfigs[1].metricType,
+    1440,
+    selectedCluster,
+  ); // Kubernetes metric
+  const requestMetrics = useFetchMetrics(
+    metricConfigs[2].metricType,
+    1440,
+    selectedCluster,
+  ); // Kubernetes metric
+  const limitMetrics = useFetchMetrics(
+    metricConfigs[3].metricType,
+    1440,
+    selectedCluster,
+  ); // Kubernetes metric
 
   // Process metrics data
   const metricsData = metricConfigs.map((config, index) => {
@@ -283,15 +293,13 @@ const ResourceUsageRadialCharts: React.FC = () => {
     >
       <Card className="rounded-2xl border shadow-md transition-shadow duration-300 hover:shadow-lg">
         <CardHeader>
-          <div className="flex items-start justify-between">
+          <div className="-mb-2 flex items-center justify-between">
             <div>
               <CardTitle className="from-primary to-secondary bg-gradient-to-r bg-clip-text text-base font-bold text-transparent md:text-2xl">
                 <span className="hidden md:inline">
                   GCP Cloud Monitoring System Resource Utilization
                 </span>
-                <span className="inline md:hidden">
-                  System Resource Utilization
-                </span>
+                <span className="inline md:hidden">Sys Res Util</span>
               </CardTitle>
             </div>
             <div className="text-muted-foreground text-sm">

@@ -688,3 +688,24 @@ html {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
+
+.main-content-wrapper {
+  max-width: 1500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Theme toggle positioned within content area */
+.theme-toggle-constrained {
+  position: fixed;
+  top: 1rem;
+  right: calc(50% - 750px + 1rem);
+  z-index: 50;
+}
+
+/* Fallback for smaller screens */
+@media (max-width: 1500px) {
+  .theme-toggle-constrained {
+    right: 1rem;
+  }
+}

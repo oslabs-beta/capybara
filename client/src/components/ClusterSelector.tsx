@@ -28,9 +28,11 @@ const ConnectedStatusBadge = ({
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 2, repeat: Infinity }}
       />
-      <span className="font-medium">{clusterName}</span>
+      <span className="text-sm">{clusterName}</span>
       {location && (
-        <span className="text-green-600 dark:text-green-300">({location})</span>
+        <span className="text-sm text-green-600 dark:text-green-300">
+          ({location})
+        </span>
       )}
     </motion.div>
   );
@@ -90,8 +92,8 @@ const ClusterSelector: React.FC = () => {
 
       {/* CONNECTED TO - Updated with Status Badge */}
       {selectedCluster && (
-        <div className="mb-3 flex items-center gap-2">
-          <span className="text-muted-foreground text-sm">Connected to:</span>
+        <div className="mb-1 flex items-center gap-2">
+          <span className="text-muted-foreground text-sm">Connection:</span>
           <ConnectedStatusBadge
             clusterName={selectedCluster.name}
             location={selectedCluster.location}

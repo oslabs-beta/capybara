@@ -8,8 +8,8 @@ import {
   IconLogout,
   IconSettings,
   IconUser,
-  IconAi,
-  IconHistory,
+  IconHome,
+  IconAnalyze,
   IconBellCheck,
 } from '@tabler/icons-react';
 import {
@@ -24,6 +24,7 @@ import { useClerk, UserProfile } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
 import { ServerIcon } from 'lucide-react';
 import ClusterSelector from './ClusterSelector';
+import Orb from './ui/orb';
 
 const NavigationBar: React.FC = () => {
   const { signOut } = useClerk();
@@ -32,30 +33,34 @@ const NavigationBar: React.FC = () => {
 
   const links = [
     {
-      title: 'AI Assistant',
-      icon: <IconAi className="text-muted-foreground h-full w-full" />,
-      href: '#',
+      title: 'Dashboard',
+      icon: <IconHome className="text-muted-foreground h-full w-full" />,
+      href: '/',
+    },
+    {
+      title: 'Performance Analytics',
+      icon: <IconAnalyze className="text-muted-foreground h-full w-full" />,
+      href: '/historical',
     },
     {
       title: 'Notifications',
       icon: <IconBellCheck className="text-muted-foreground h-full w-full" />,
       href: '#',
     },
+
     {
-      title: 'Historical Data',
-      icon: <IconHistory className="text-muted-foreground h-full w-full" />,
-      href: '/historical',
-    },
-    {
-      title: 'Home',
+      title: 'AI',
       icon: (
-        <img
-          src="/coffybara2.png"
-          alt="Home Icon"
-          className="scale-200 h-full w-full object-contain"
-        />
+        <div className="scale-250 h-full w-full object-contain">
+          <Orb
+            hoverIntensity={0.6}
+            rotateOnHover={true}
+            hue={0}
+            forceHoverState={false}
+          />
+        </div>
       ),
-      href: '/',
+      href: '#',
     },
     {
       title: 'Cluster Connector',
@@ -88,22 +93,22 @@ const NavigationBar: React.FC = () => {
       icon: <IconSettings className="text-muted-foreground h-full w-full" />,
       href: '#',
     },
-    {
-      title: 'Log Out',
-      icon: (
-        <button
-          onClick={() =>
-            signOut(() => {
-              window.location.href = '/';
-            })
-          }
-          className="flex h-full w-full items-center justify-center"
-        >
-          <IconLogout className="text-muted-foreground h-full w-full" />
-        </button>
-      ),
-      href: '#',
-    },
+    // {
+    //   title: 'Log Out',
+    //   icon: (
+    //     <button
+    //       onClick={() =>
+    //         signOut(() => {
+    //           window.location.href = '/';
+    //         })
+    //       }
+    //       className="flex h-full w-full items-center justify-center"
+    //     >
+    //       <IconLogout className="text-muted-foreground h-full w-full" />
+    //     </button>
+    //   ),
+    //   href: '#',
+    // },
   ];
 
   return (
@@ -111,8 +116,8 @@ const NavigationBar: React.FC = () => {
       <div className="flex flex-col items-center justify-center">
         <FloatingDock
           items={links}
-          desktopClassName="fixed bottom-4"
-          mobileClassName="fixed bottom-4 right-4"
+          desktopClassName="fixed bottom-6"
+          mobileClassName="fixed bottom-4 right-2"
         />
       </div>
 
@@ -182,9 +187,9 @@ const NavigationBar: React.FC = () => {
               <div className="mt-6 flex justify-end">
                 <button
                   onClick={() => setIsClusterModalOpen(false)}
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-4 py-2 transition-colors"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-1.5 py-1 text-sm font-semibold transition-colors"
                 >
-                  accept
+                  CONFIRM
                 </button>
               </div>
             </motion.div>
@@ -265,7 +270,7 @@ const FloatingDockMobile = ({
                       item.onClick?.();
                       setOpen(false);
                     }}
-                    className="duration-800 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md transition-colors"
+                    className="duration-800 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-sm transition-colors"
                   >
                     <div className="h-7 w-7">{item.icon}</div>
                   </button>
@@ -273,7 +278,7 @@ const FloatingDockMobile = ({
                   <Link
                     to={item.href}
                     key={item.title}
-                    className="duration-800 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md transition-colors"
+                    className="duration-800 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-sm transition-colors"
                   >
                     <div className="h-7 w-7">{item.icon}</div>
                   </Link>
@@ -285,7 +290,7 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="duration-800 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-md transition-colors"
+        className="duration-800 flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-sm transition-colors"
       >
         <IconLayoutNavbarCollapse className="text-muted-foreground h-7 w-7" />
       </button>
@@ -311,7 +316,7 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        'bg-background/80 duration-800 z-50 mx-auto hidden h-20 items-end gap-4 rounded-2xl px-4 pb-0 backdrop-blur-md transition-colors md:flex',
+        'duration-800 z-50 mx-auto hidden h-20 items-end gap-4 rounded-2xl px-10 backdrop-blur-sm transition-colors md:flex',
         className,
       )}
     >

@@ -144,7 +144,7 @@ const CpuMemoryUtilization: React.FC = () => {
 
   return (
     <Card className="pt-0">
-      <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
+      <CardHeader className="flex items-center gap-2 space-y-0 border-b py-3 sm:flex-row">
         <div className="grid flex-1 gap-1">
           <CardTitle>CPU and Memory Utilization</CardTitle>
         </div>
@@ -155,7 +155,6 @@ const CpuMemoryUtilization: React.FC = () => {
           >
             <SelectValue placeholder="Last 2 Weeks" />
           </SelectTrigger>
-
           <SelectContent className="rounded-xl">
             <SelectItem value="14d" className="rounded-lg">
               Last 14 days
@@ -164,21 +163,21 @@ const CpuMemoryUtilization: React.FC = () => {
               Last 7 days
             </SelectItem>
             <SelectItem value="1d" className="rounded-lg">
-              Last 1 days
+              Last 1 day
             </SelectItem>
           </SelectContent>
         </Select>
       </CardHeader>
 
-      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
+      <CardContent className="px-2 pt-2 sm:px-4 sm:pt-3">
         {memoryLoading || utilizationLoading ? (
-          <div className="text-muted-foreground flex h-[250px] items-center justify-center text-sm">
+          <div className="text-muted-foreground flex h-[160px] items-center justify-center text-sm">
             Loading metrics...
           </div>
         ) : (
           <ChartContainer
             config={chartConfig}
-            className="aspect-auto h-[250px] w-full"
+            className="aspect-auto h-[120px] w-full sm:h-[140px] lg:h-[160px]"
           >
             <AreaChart data={chartData}>
               <defs>

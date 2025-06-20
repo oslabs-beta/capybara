@@ -1,5 +1,5 @@
 // ----------------------------------------------------------
-// >> HEADER << //
+// >> COMPACT HEADER << //
 // ----------------------------------------------------------
 
 import {
@@ -200,53 +200,58 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className="duration-800 fixed left-0 right-0 top-0 z-50 flex items-center justify-between gap-4 px-4 py-4 transition-colors"
+      className="duration-800 fixed left-0 right-0 top-0 z-50 flex items-center justify-between gap-4 px-4 pt-2 transition-colors"
       style={{
         backgroundColor: 'var(--background)',
         color: 'var(--primary)',
       }}
     >
-      <SignedOut>
-        <div
-          className="flex gap-4 text-lg font-bold sm:text-xl"
-          style={{
-            color: 'var(--primary)',
-          }}
-        >
-          <SignInButton
-            mode="modal" // opens in popup
-            // afterSignInUrl="/" // redirect
-            // redirectUrl="/" // Optional redirect
-          />{' '}
-          /
-          <SignUpButton
-            mode="modal" // opens in popup
-            // afterSignUpUrl="/" // redirect
-            // redirectUrl="/" // Optional redirect
-          />
+      <div className="main-content-wrapper">
+        <div className="flex items-center justify-between py-1">
+          {' '}
+          {/* Reduced from py-3 to py-1 */}
+          <SignedOut>
+            <div
+              className="flex gap-4 text-base font-bold sm:text-lg"
+              style={{
+                color: 'var(--primary)',
+              }}
+            >
+              <SignInButton
+                mode="modal" // opens in popup
+                // afterSignInUrl="/" // redirect
+                // redirectUrl="/" // Optional redirect
+              />{' '}
+              /
+              <SignUpButton
+                mode="modal" // opens in popup
+                // afterSignUpUrl="/" // redirect
+                // redirectUrl="/" // Optional redirect
+              />
+            </div>
+            {/* Empty div to maintain layout */}
+            <div></div>
+          </SignedOut>
+          <SignedIn>
+            {/* Left side - Enhanced Responsive Greeting */}
+            <div
+              className="text-lg font-semibold italic sm:text-xl md:text-xl lg:text-2xl xl:text-2xl" // Reduced max sizes
+              style={{
+                color: 'var(--primary)',
+              }}
+            >
+              {/* Mobile version - shorter greeting */}
+              <span className="block sm:hidden">
+                {getWhimsicalGreeting(true)}, {getDisplayName()}!
+              </span>
+              {/* Desktop version - full greeting */}
+              <span className="hidden sm:block">
+                {getWhimsicalGreeting(false)}, {getDisplayName()}!
+              </span>
+            </div>
+          </SignedIn>
         </div>
-        {/* Empty div to maintain layout */}
-        <div></div>
-      </SignedOut>
-
-      <SignedIn>
-        {/* Left side - Enhanced Responsive Greeting */}
-        <div
-          className="text-xl font-semibold italic sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl"
-          style={{
-            color: 'var(--primary)',
-          }}
-        >
-          {/* Mobile version - shorter greeting */}
-          <span className="block sm:hidden">
-            {getWhimsicalGreeting(true)}, {getDisplayName()}!
-          </span>
-          {/* Desktop version - full greeting */}
-          <span className="hidden sm:block">
-            {getWhimsicalGreeting(false)}, {getDisplayName()}!
-          </span>
-        </div>
-      </SignedIn>
+      </div>
     </header>
   );
 };
