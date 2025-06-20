@@ -11,7 +11,7 @@ import Header from './components/Header';
 import { SignedIn, SignedOut, useClerk } from '@clerk/clerk-react';
 import { Routes, Route } from 'react-router-dom';
 import { ClusterProvider } from './contexts/ClusterContext';
-import { IconMoon, IconSun, IconLogout } from '@tabler/icons-react';
+import { IconMoon, IconSun } from '@tabler/icons-react';
 
 const App = () => {
   const { signOut } = useClerk();
@@ -56,7 +56,7 @@ const App = () => {
                   window.location.href = '/';
                 })
               }
-              className="duration-800 text-muted-foreground flex h-10 w-10 items-center justify-center rounded-full font-semibold shadow-sm transition-all transition-colors hover:text-red-700 hover:shadow-lg"
+              className="duration-800 text-muted-foreground flex h-10 w-10 items-center justify-center rounded-full font-semibold shadow-sm transition-colors hover:text-red-700 hover:shadow-lg"
               title="Sign Out"
             >
               LOGOUT
