@@ -7,9 +7,9 @@ import EnhancedMetrics from './EnhancedMetrics';
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="mx-10 mt-2 flex max-w-full flex-col">
+    <div className="mx-8 flex max-w-full flex-col">
       {/* Remove height constraints and let it flow naturally in the scroll container */}
-      <div className="space-y-3">
+      <div>
         <EnhancedMetrics />
       </div>
     </div>
