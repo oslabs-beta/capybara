@@ -709,3 +709,11 @@ html {
     right: 1rem;
   }
 }
+
+.max-w-8xl {
+  max-width: 88rem; /* 1408px */
+}
+
+.max-w-9xl {
+  max-width: 96rem; /* 1536px */
+}
