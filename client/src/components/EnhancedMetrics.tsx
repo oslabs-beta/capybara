@@ -1,4 +1,6 @@
-// Optimized EnhancedMetrics.tsx - Compact layout for viewport fit
+// ----------------------------------------------------------
+// >> METRICS CARD << //
+// ----------------------------------------------------------
 import { motion } from 'motion/react';
 import EnhancedRecentUsage from './EnhancedRecentUsage';
 import EnhancedGKEClusterCard from './EnhancedInfoCard';
@@ -25,7 +27,7 @@ const EnhancedMetrics: React.FC = () => {
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="min-h-0 flex-1"
+        className="flex-0 min-h-0"
       >
         <EnhancedRecentUsage />
       </motion.div>
