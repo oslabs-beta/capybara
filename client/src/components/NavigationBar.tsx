@@ -1,7 +1,7 @@
 // ----------------------------------------------------------
 // >> NAVIGATION BAR << //
 // ----------------------------------------------------------
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import {
   IconLayoutNavbarCollapse,
@@ -29,26 +29,34 @@ const NavigationBar: React.FC = () => {
   // const { signOut } = useClerk();
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isClusterModalOpen, setIsClusterModalOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Add the useEffect for handling resize
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const links = [
     {
       title: 'Dashboard',
       icon: (
-        <IconHome className="text-primary hover:text-secondary h-full w-full" />
+        <IconHome className="text-primary active:text-secondary h-full w-full" />
       ),
       href: '/',
     },
     {
       title: 'Performance Analytics',
       icon: (
-        <IconAnalyze className="text-primary hover:text-secondary h-full w-full" />
+        <IconAnalyze className="text-primary active:text-secondary h-full w-full" />
       ),
       href: '/historical',
     },
     {
       title: 'Notifications',
       icon: (
-        <IconBellCheck className="text-primary hover:text-secondary h-full w-full" />
+        <IconBellCheck className="text-primary active:text-secondary h-full w-full" />
       ),
       href: '#',
     },
@@ -56,13 +64,11 @@ const NavigationBar: React.FC = () => {
     {
       title: 'AI',
       icon: (
-        <div className="scale-250 h-full w-full object-contain">
-          <Orb
-            hoverIntensity={0.6}
-            rotateOnHover={true}
-            hue={0}
-            forceHoverState={false}
-          />
+        <div
+          key={windowWidth}
+          className="h-full w-full scale-150 sm:h-auto sm:w-auto sm:scale-50"
+        >
+          <Orb />
         </div>
       ),
       href: '#',
@@ -74,7 +80,7 @@ const NavigationBar: React.FC = () => {
           onClick={() => setIsClusterModalOpen(true)}
           className="flex h-full w-full items-center justify-center"
         >
-          <ServerIcon className="text-primary hover:text-secondary h-full w-full" />
+          <ServerIcon className="text-primary active:text-secondary h-full w-full" />
         </button>
       ),
       href: '#',
@@ -87,7 +93,7 @@ const NavigationBar: React.FC = () => {
           onClick={() => setIsProfileModalOpen(true)}
           className="flex h-full w-full items-center justify-center"
         >
-          <IconUser className="text-primary hover:text-secondary h-full w-full" />
+          <IconUser className="text-primary active:text-secondary h-full w-full" />
         </button>
       ),
       href: '#',
@@ -96,7 +102,7 @@ const NavigationBar: React.FC = () => {
     {
       title: 'Settings',
       icon: (
-        <IconSettings className="text-primary hover:text-secondary h-full w-full" />
+        <IconSettings className="text-primary active:text-secondary h-full w-full" />
       ),
       href: '#',
     },
@@ -111,12 +117,18 @@ const NavigationBar: React.FC = () => {
     //       }
     //       className="flex h-full w-full items-center justify-center"
     //     >
-    //       <IconLogout className="text-primary hover:text-secondary h-full w-full" />
+    //       <IconLogout className="text-primary active:text-secondary h-full w-full" />
     //     </button>
     //   ),
     //   href: '#',
     // },
   ];
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <>
