@@ -173,13 +173,16 @@ const Header: React.FC = () => {
 
     // Create a stable key for this session and time period
     const sessionKey = `greeting_${isMobile ? 'mobile' : 'desktop'}_${hour >= 0 && hour < 5 ? 'lateNight' : hour >= 5 && hour < 9 ? 'earlyMorning' : hour >= 9 && hour < 12 ? 'morning' : hour >= 12 && hour < 14 ? 'lunch' : hour >= 14 && hour < 18 ? 'afternoon' : hour >= 18 && hour < 22 ? 'evening' : 'night'}`;
-    
+
     // Check if we already have a greeting for this session and time period
     let randomGreeting = sessionStorage.getItem(sessionKey);
-    
+
     if (!randomGreeting || !timeBasedGreetings.includes(randomGreeting)) {
       // Generate a new greeting and store it
-      randomGreeting = timeBasedGreetings[Math.floor(Math.random() * timeBasedGreetings.length)];
+      randomGreeting =
+        timeBasedGreetings[
+          Math.floor(Math.random() * timeBasedGreetings.length)
+        ];
       sessionStorage.setItem(sessionKey, randomGreeting);
     }
 
@@ -229,7 +232,7 @@ const Header: React.FC = () => {
       <SignedIn>
         {/* Left side - Enhanced Responsive Greeting */}
         <div
-          className="text-sm font-medium italic sm:text-lg md:text-xl lg:text-2xl xl:text-3xl"
+          className="text-xl font-semibold italic sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl"
           style={{
             color: 'var(--primary)',
           }}

@@ -4,20 +4,68 @@
 // * Added to navigation bar for better UX
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useCluster } from '@/contexts/ClusterContext';
-import { ServerIcon, ChevronDownIcon, CheckIcon } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { ServerIcon } from 'lucide-react';
+import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
+
+// Status Badge Component for Connected Cluster
+const ConnectedStatusBadge = ({
+  clusterName,
+  location,
+}: {
+  clusterName: string;
+  location?: string;
+}) => {
+  return (
+    <motion.div
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      className="inline-flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700 dark:bg-green-900/20 dark:text-green-400"
+    >
+      <motion.div
+        className="h-2 w-2 rounded-full bg-green-500"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+      <span className="font-medium">{clusterName}</span>
+      {location && (
+        <span className="text-green-600 dark:text-green-300">({location})</span>
+      )}
+    </motion.div>
+  );
+};
 
 const ClusterSelector: React.FC = () => {
   const { clusters, selectedCluster, setSelectedCluster, loading } =
     useCluster();
-  const [isOpen, setIsOpen] = useState(false);
+  const [selectedKey, setSelectedKey] = useState<string | number | null>(null);
+
+  // Convert clusters to the format expected by HeroUI Autocomplete
+  const clusterItems = clusters.map((cluster) => ({
+    key: `${cluster.name}-${cluster.location || 'default'}`,
+    label: cluster.name,
+    description: cluster.location || 'No location specified',
+    cluster: cluster, // Keep reference to original cluster object
+  }));
+
+  const onSelectionChange = (key: string | number | null) => {
+    setSelectedKey(key);
+    if (key) {
+      const selectedItem = clusterItems.find((item) => item.key === key);
+      if (selectedItem) {
+        setSelectedCluster(selectedItem.cluster);
+      }
+    }
+  };
+
+  const onInputChange = () => {};
 
   if (loading) {
     return (
       <div className="flex items-center gap-3 py-4">
         <ServerIcon className="text-primary h-5 w-5" />
-        <span className="text-muted-foreground">Loading clusters...</span>
+        <span className="text-muted-foreground">fetching clusters...</span>
       </div>
     );
   }
@@ -31,81 +79,114 @@ const ClusterSelector: React.FC = () => {
     );
   }
 
-  const handleClusterSelect = (cluster: any) => {
-    setSelectedCluster(cluster);
-    setIsOpen(false);
-  };
-
   return (
-    <div className="space-y-3">
-      {/* Label */}
-      {/* <div className="flex items-center gap-2 text-sm font-medium">
-        <ServerIcon className="text-primary h-4 w-4" />
-        <span>Connected to</span>
-      </div> */}
-
-      {/* Custom Dropdown */}
-      <div className="relative">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="border-input shadow-xs hover:bg-accent hover:text-accent-foreground focus:border-ring focus:ring-ring/50 flex w-full items-center justify-between rounded-md border bg-transparent px-3 py-2 text-sm transition-colors focus:outline-none focus:ring-2"
-        >
-          <div className="flex items-center gap-2">
-            {selectedCluster ? (
-              <div className="flex flex-col items-start">
-                <span className="font-medium">{selectedCluster.name}</span>
-              </div>
-            ) : (
-              <span className="text-muted-foreground">Select a cluster</span>
-            )}
-          </div>
-          <ChevronDownIcon
-            className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
-          />
-        </button>
-
-        {/* Dropdown Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="border-input bg-popover absolute left-0 right-0 top-full z-50 mt-1 max-h-60 overflow-auto rounded-md border shadow-md"
-            >
-              {clusters.map((cluster) => {
-                const isSelected =
-                  selectedCluster?.name === cluster.name &&
-                  selectedCluster?.location === cluster.location;
-
-                return (
-                  <button
-                    key={`${cluster.name}-${cluster.location}`}
-                    onClick={() => handleClusterSelect(cluster)}
-                    className="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex w-full items-center gap-2 px-3 py-2 text-left text-sm focus:outline-none"
-                  >
-                    <div className="flex flex-1 flex-col">
-                      <span className="font-medium">{cluster.name}</span>
-                    </div>
-                    {isSelected && (
-                      <CheckIcon className="text-primary h-4 w-4" />
-                    )}
-                  </button>
-                );
-              })}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Overlay to close dropdown when clicking outside */}
-        {isOpen && (
-          <div
-            className="fixed inset-0 z-40"
-            onClick={() => setIsOpen(false)}
-          />
-        )}
+    <div>
+      {/* HEADER */}
+      <div className="mb-4 flex items-center">
+        <h2 className="from-primary to-secondary bg-gradient-to-r bg-clip-text text-2xl font-bold text-transparent md:text-4xl">
+          Connect to Cluster
+        </h2>
       </div>
+
+      {/* CONNECTED TO - Updated with Status Badge */}
+      {selectedCluster && (
+        <div className="mb-3 flex items-center gap-2">
+          <span className="text-muted-foreground text-sm">Connected to:</span>
+          <ConnectedStatusBadge
+            clusterName={selectedCluster.name}
+            location={selectedCluster.location}
+          />
+        </div>
+      )}
+
+      <Autocomplete
+        allowsCustomValue={false}
+        isClearable={false}
+        className="max-w-full"
+        defaultItems={clusterItems}
+        placeholder="search clusters..."
+        variant="faded"
+        labelPlacement="outside"
+        onInputChange={onInputChange}
+        onSelectionChange={onSelectionChange}
+        selectedKey={selectedKey}
+        classNames={{
+          base: 'w-full',
+          listboxWrapper: 'max-h-60 overflow-auto',
+          listbox: 'bg-popover border-0',
+          popoverContent:
+            'bg-popover border border-input rounded-md shadow-md p-0 mt-1',
+          endContentWrapper: 'text-foreground',
+          clearButton: 'text-foreground hover:text-foreground',
+          selectorButton: 'text-foreground hover:text-foreground',
+        }}
+        popoverProps={{
+          classNames: {
+            base: 'bg-popover',
+            content: 'bg-popover border border-input rounded-md shadow-md p-0',
+          },
+        }}
+        listboxProps={{
+          classNames: {
+            base: 'bg-popover',
+            list: 'bg-popover',
+            emptyContent: 'text-muted-foreground p-3',
+          },
+        }}
+        inputProps={{
+          classNames: {
+            base: 'bg-transparent',
+            input:
+              'text-base sm:text-md text-foreground placeholder:text-muted-foreground focus:outline-none',
+            inputWrapper: [
+              'bg-transparent',
+              'border',
+              'border-input',
+              'rounded-md',
+              'shadow-xs',
+              'focus-within:border-ring',
+              'focus-within:ring-2',
+              'focus-within:ring-ring/50',
+              'transition-colors',
+              'h-[34px] sm:h-[38px]',
+              'py-2',
+              'px-3',
+            ].join(' '),
+            label: 'hidden',
+          },
+        }}
+      >
+        {(item) => (
+          <AutocompleteItem
+            key={item.key}
+            textValue={item.label}
+            classNames={{
+              base: [
+                'rounded-none',
+                'py-2',
+                'px-3',
+                'data-[hover=true]:bg-accent',
+                'data-[hover=true]:text-accent-foreground',
+                'data-[selectable=true]:focus:bg-accent',
+                'data-[selectable=true]:focus:text-accent-foreground',
+                'data-[focus=true]:bg-accent',
+                'data-[focus=true]:text-accent-foreground',
+                'transition-colors',
+                'focus:outline-none',
+              ].join(' '),
+              selectedIcon: 'text-primary h-4 w-4',
+              title: 'text-base sm:text-md font-medium',
+              description: 'hidden',
+            }}
+          >
+            <div className="flex w-full flex-col items-start">
+              <span className="sm:text-md text-base font-medium">
+                {item.label}
+              </span>
+            </div>
+          </AutocompleteItem>
+        )}
+      </Autocomplete>
     </div>
   );
 };
