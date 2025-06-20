@@ -8,13 +8,11 @@ import Dashboard from './components/Dashboard';
 import HistoricalData from './components/HistoricalData';
 import NavigationBar from './components/NavigationBar';
 import Header from './components/Header';
-import { SignedIn, SignedOut, useClerk } from '@clerk/clerk-react';
+import { SignedIn, SignedOut } from '@clerk/clerk-react';
 import { Routes, Route } from 'react-router-dom';
 import { ClusterProvider } from './contexts/ClusterContext';
-import { IconMoon, IconSun } from '@tabler/icons-react';
 
 const App = () => {
-  const { signOut } = useClerk();
   const [isDark, setIsDark] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -23,6 +21,9 @@ const App = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
+  // ----------------------------------------------------------
+  // * USEEFFECT for light/dark mode toggle
+  // ----------------------------------------------------------
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add('dark');
@@ -48,38 +49,8 @@ const App = () => {
       >
         {/* Global width constraint container */}
         <div className="max-w-9xl relative mx-auto px-10">
-          {/* TOP RIGHT CONTROLS */}
-          <div className="absolute right-3 top-3 z-[60] flex items-center justify-end gap-8">
-            {/* SIGN OUT BUTTON - Only visible when signed in */}
-            <SignedIn>
-              <button
-                onClick={() =>
-                  signOut(() => {
-                    window.location.href = '/';
-                  })
-                }
-                className="duration-800 text-muted-foreground flex justify-center text-lg font-semibold transition-colors hover:text-red-500/70"
-                title="Sign Out"
-              >
-                logout
-              </button>
-            </SignedIn>
-
-            {/* DARK MODE TOGGLE */}
-            <label className="swap swap-rotate cursor-pointer hover:[&_.swap-off]:text-amber-500 hover:[&_.swap-on]:text-yellow-200/90">
-              <input
-                type="checkbox"
-                checked={isDark}
-                onChange={toggleTheme}
-                className="sr-only"
-              />
-              <IconMoon className="duration-800 text-muted-foreground swap-on h-6 w-6 transition-all" />
-              <IconSun className="duration-800 text-muted-foreground swap-off h-6 w-6 transition-all" />
-            </label>
-          </div>
-
-          {/* CLERK AUTH CONTROLS */}
-          <Header />
+          {/* CLERK AUTH CONTROLS WITH THEME TOGGLE */}
+          <Header isDark={isDark} toggleTheme={toggleTheme} />
 
           {/* CONDITIONAL CONTENT WITH ROUTES */}
           <SignedOut>
