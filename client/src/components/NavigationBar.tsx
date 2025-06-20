@@ -5,7 +5,6 @@ import React, { useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import {
   IconLayoutNavbarCollapse,
-  IconLogout,
   IconSettings,
   IconUser,
   IconHome,
@@ -20,14 +19,14 @@ import {
   useTransform,
   MotionValue,
 } from 'motion/react';
-import { useClerk, UserProfile } from '@clerk/clerk-react';
+import { UserProfile } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
 import { ServerIcon } from 'lucide-react';
 import ClusterSelector from './ClusterSelector';
 import Orb from './ui/orb';
 
 const NavigationBar: React.FC = () => {
-  const { signOut } = useClerk();
+  // const { signOut } = useClerk();
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isClusterModalOpen, setIsClusterModalOpen] = useState(false);
 
