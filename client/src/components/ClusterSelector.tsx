@@ -9,7 +9,7 @@ import { useCluster } from '@/contexts/ClusterContext';
 import { ServerIcon } from 'lucide-react';
 import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
 
-// Status Badge Component for Connected Cluster
+// * Status Badge Component for Connected Cluster
 const ConnectedStatusBadge = ({
   clusterName,
   location,
