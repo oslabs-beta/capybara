@@ -8,11 +8,19 @@ import {
   SignInButton,
   SignUpButton,
   useUser,
+  useClerk,
 } from '@clerk/clerk-react';
 import React from 'react';
+import { IconMoon, IconSun } from '@tabler/icons-react';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  isDark: boolean;
+  toggleTheme: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
   const { user } = useUser();
+  const { signOut } = useClerk();
 
   const getWhimsicalGreeting = (isMobile = false) => {
     const hour = new Date().getHours();
@@ -92,77 +100,68 @@ const Header: React.FC = () => {
         'Winding down with monitoring',
         'Evening cluster zen',
         'Time to relax and monitor',
-        'Evening brew master',
+        'Smooth sailing this evening',
       ],
       night: [
-        'Late evening session',
-        'Night time monitoring',
-        'Almost bedtime',
+        'Night shift activated',
+        'Late night monitoring',
+        'Almost time for bed',
         'Final cluster check',
-        'Ready to call it a day',
+        'Keeping watch tonight',
       ],
-    };
-
-    // Weekend variations (shorter for mobile)
-    const weekendGreetings = {
-      mobile: {
-        lateNight: [
-          'Weekend night owl',
-          'Saturday night coding',
-          'Weekend warrior',
-        ],
-        morning: ['Weekend vibes', 'Lazy morning', 'Weekend coffee time'],
-        afternoon: ['Weekend bliss', 'Chill monitoring', 'Weekend check'],
-        evening: ['Weekend wind-down', 'Sunday prep', 'Weekend wrap-up'],
-      },
-      desktop: {
-        lateNight: [
-          'Weekend night owl',
-          'Saturday night coding session',
-          'Weekend warrior mode',
-        ],
-        morning: [
-          'Weekend vibes',
-          'Lazy morning monitoring',
-          'Weekend coffee time',
-        ],
-        afternoon: [
-          'Weekend afternoon bliss',
-          'Relaxed weekend monitoring',
-          'Weekend maintenance mode',
-        ],
-        evening: [
-          'Weekend wind-down',
-          'Sunday evening prep',
-          'Weekend cluster check',
-        ],
-      },
     };
 
     const greetings = isMobile ? mobileGreetings : desktopGreetings;
-    const weekendVariations = isMobile
-      ? weekendGreetings.mobile
-      : weekendGreetings.desktop;
 
-    let timeBasedGreetings;
+    // Weekend variations
+    const weekendVariations = {
+      morning: isWeekend
+        ? isMobile
+          ? ['Weekend vibes', 'Lazy Saturday', 'Sunday funday']
+          : [
+              'Weekend monitoring mode',
+              'Lazy Saturday cluster check',
+              'Sunday funday monitoring',
+            ]
+        : [],
+      afternoon: isWeekend
+        ? isMobile
+          ? ['Weekend mode', 'Chill Saturday', 'Sunday relaxation']
+          : [
+              'Weekend afternoon vibes',
+              'Saturday chill monitoring',
+              'Sunday relaxation mode',
+            ]
+        : [],
+      evening: isWeekend
+        ? isMobile
+          ? ['Weekend evening', 'Saturday night', 'Sunday night']
+          : [
+              'Saturday night monitoring',
+              'Sunday evening wind down',
+              'Weekend evening cluster zen',
+            ]
+        : [],
+    };
 
-    // Determine time period and get appropriate greetings
+    let timeBasedGreetings: string[] = [];
+
     if (hour >= 0 && hour < 5) {
-      timeBasedGreetings = isWeekend
-        ? [...greetings.lateNight, ...weekendVariations.lateNight]
-        : greetings.lateNight;
+      timeBasedGreetings = greetings.lateNight;
     } else if (hour >= 5 && hour < 9) {
-      timeBasedGreetings = greetings.earlyMorning;
+      timeBasedGreetings = [
+        ...greetings.earlyMorning,
+        ...weekendVariations.morning,
+      ];
     } else if (hour >= 9 && hour < 12) {
-      timeBasedGreetings = isWeekend
-        ? [...greetings.morning, ...weekendVariations.morning]
-        : greetings.morning;
+      timeBasedGreetings = [...greetings.morning, ...weekendVariations.morning];
     } else if (hour >= 12 && hour < 14) {
       timeBasedGreetings = greetings.lunch;
     } else if (hour >= 14 && hour < 18) {
-      timeBasedGreetings = isWeekend
-        ? [...greetings.afternoon, ...weekendVariations.afternoon]
-        : greetings.afternoon;
+      timeBasedGreetings = [
+        ...greetings.afternoon,
+        ...weekendVariations.afternoon,
+      ];
     } else if (hour >= 18 && hour < 22) {
       timeBasedGreetings = isWeekend
         ? [...greetings.evening, ...weekendVariations.evening]
@@ -208,48 +207,68 @@ const Header: React.FC = () => {
     >
       <div className="main-content-wrapper">
         <div className="flex items-center justify-between py-1">
-          {' '}
-          {/* Reduced from py-3 to py-1 */}
-          <SignedOut>
-            <div
-              className="flex gap-4 text-base font-bold sm:text-lg"
-              style={{
-                color: 'var(--primary)',
-              }}
-            >
-              <SignInButton
-                mode="modal" // opens in popup
-                // afterSignInUrl="/" // redirect
-                // redirectUrl="/" // Optional redirect
-              />{' '}
-              /
-              <SignUpButton
-                mode="modal" // opens in popup
-                // afterSignUpUrl="/" // redirect
-                // redirectUrl="/" // Optional redirect
+          {/* Left side content */}
+          <div className="flex-1">
+            <SignedOut>
+              <div
+                className="flex gap-4 text-base font-bold sm:text-lg"
+                style={{
+                  color: 'var(--primary)',
+                }}
+              >
+                <SignInButton mode="modal" /> /
+                <SignUpButton mode="modal" />
+              </div>
+            </SignedOut>
+            <SignedIn>
+              {/* Enhanced Responsive Greeting */}
+              <div
+                className="text-lg font-semibold italic sm:text-xl md:text-xl lg:text-2xl xl:text-2xl"
+                style={{
+                  color: 'var(--primary)',
+                }}
+              >
+                {/* Mobile version - shorter greeting */}
+                <span className="block sm:hidden">
+                  {getWhimsicalGreeting(true)}, {getDisplayName()}!
+                </span>
+                {/* Desktop version - full greeting */}
+                <span className="hidden sm:block">
+                  {getWhimsicalGreeting(false)}, {getDisplayName()}!
+                </span>
+              </div>
+            </SignedIn>
+          </div>
+
+          {/* Right side controls - Always present */}
+          <div className="flex flex-shrink-0 items-center gap-6">
+            {/* SIGN OUT BUTTON - Only visible when signed in */}
+            <SignedIn>
+              <button
+                onClick={() =>
+                  signOut(() => {
+                    window.location.href = '/';
+                  })
+                }
+                className="duration-800 text-muted-foreground flex justify-center text-sm font-semibold transition-colors hover:text-red-500/70 sm:text-lg"
+                title="Sign Out"
+              >
+                logout
+              </button>
+            </SignedIn>
+
+            {/* DARK MODE TOGGLE - Always visible */}
+            <label className="swap swap-rotate cursor-pointer hover:[&_.swap-off]:text-amber-500 hover:[&_.swap-on]:text-yellow-200/90">
+              <input
+                type="checkbox"
+                checked={isDark}
+                onChange={toggleTheme}
+                className="sr-only"
               />
-            </div>
-            {/* Empty div to maintain layout */}
-            <div></div>
-          </SignedOut>
-          <SignedIn>
-            {/* Left side - Enhanced Responsive Greeting */}
-            <div
-              className="text-lg font-semibold italic sm:text-xl md:text-xl lg:text-2xl xl:text-2xl" // Reduced max sizes
-              style={{
-                color: 'var(--primary)',
-              }}
-            >
-              {/* Mobile version - shorter greeting */}
-              <span className="block sm:hidden">
-                {getWhimsicalGreeting(true)}, {getDisplayName()}!
-              </span>
-              {/* Desktop version - full greeting */}
-              <span className="hidden sm:block">
-                {getWhimsicalGreeting(false)}, {getDisplayName()}!
-              </span>
-            </div>
-          </SignedIn>
+              <IconMoon className="duration-800 text-muted-foreground swap-on transition-all" />
+              <IconSun className="duration-800 text-muted-foreground swap-off transition-all" />
+            </label>
+          </div>
         </div>
       </div>
     </header>
