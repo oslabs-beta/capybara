@@ -23,6 +23,9 @@ const App = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
+  // ----------------------------------------------------------
+  // * USEEFFECT for light/dark mode toggle
+  // ----------------------------------------------------------
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add('dark');
@@ -46,38 +49,42 @@ const App = () => {
           color: 'var(--foreground)',
         }}
       >
+        {/* Fixed Top Right Controls - Using your existing constrained approach */}
+        <div className="fixed left-0 right-0 top-3 z-[60]">
+          <div className="max-w-9xl mx-auto px-4">
+            <div className="flex items-center justify-end gap-8">
+              {/* SIGN OUT BUTTON - Only visible when signed in */}
+              <SignedIn>
+                <button
+                  onClick={() =>
+                    signOut(() => {
+                      window.location.href = '/';
+                    })
+                  }
+                  className="duration-800 text-muted-foreground flex justify-center text-sm font-semibold transition-colors hover:text-red-500/70 sm:text-lg"
+                  title="Sign Out"
+                >
+                  logout
+                </button>
+              </SignedIn>
+
+              {/* DARK MODE TOGGLE */}
+              <label className="swap swap-rotate cursor-pointer hover:[&_.swap-off]:text-amber-500 hover:[&_.swap-on]:text-yellow-200/90">
+                <input
+                  type="checkbox"
+                  checked={isDark}
+                  onChange={toggleTheme}
+                  className="sr-only"
+                />
+                <IconMoon className="duration-800 text-muted-foreground swap-on transition-all" />
+                <IconSun className="duration-800 text-muted-foreground swap-off transition-all" />
+              </label>
+            </div>
+          </div>
+        </div>
+
         {/* Global width constraint container */}
         <div className="max-w-9xl relative mx-auto px-10">
-          {/* TOP RIGHT CONTROLS */}
-          <div className="absolute right-3 top-3 z-[60] flex items-center justify-end gap-8">
-            {/* SIGN OUT BUTTON - Only visible when signed in */}
-            <SignedIn>
-              <button
-                onClick={() =>
-                  signOut(() => {
-                    window.location.href = '/';
-                  })
-                }
-                className="duration-800 text-muted-foreground flex justify-center text-lg font-semibold transition-colors hover:text-red-500/70"
-                title="Sign Out"
-              >
-                logout
-              </button>
-            </SignedIn>
-
-            {/* DARK MODE TOGGLE */}
-            <label className="swap swap-rotate cursor-pointer hover:[&_.swap-off]:text-amber-500 hover:[&_.swap-on]:text-white">
-              <input
-                type="checkbox"
-                checked={isDark}
-                onChange={toggleTheme}
-                className="sr-only"
-              />
-              <IconMoon className="duration-800 text-muted-foreground swap-on h-6 w-6 transition-all" />
-              <IconSun className="duration-800 text-muted-foreground swap-off h-6 w-6 transition-all" />
-            </label>
-          </div>
-
           {/* CLERK AUTH CONTROLS */}
           <Header />
 
@@ -88,10 +95,10 @@ const App = () => {
             </div>
           </SignedOut>
           <SignedIn>
-            {/* Create a fixed viewport container that accounts for header and nav */}
-            <div className="fixed bottom-0 left-0 right-0 top-16 flex flex-col">
-              {/* Scrollable content area that stops at navigation bar */}
-              <div className="flex-1 overflow-y-auto pb-24">
+            {/* Create a fixed viewport container that starts from top (overlaps with header) */}
+            <div className="fixed bottom-0 left-0 right-0 top-0 flex flex-col">
+              {/* Scrollable content area with top padding to account for header */}
+              <div className="flex-1 overflow-y-auto pb-24 pt-16">
                 <div className="max-w-9xl mx-auto">
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
