@@ -12,6 +12,7 @@ import { SignedIn, SignedOut, useClerk } from '@clerk/clerk-react';
 import { Routes, Route } from 'react-router-dom';
 import { ClusterProvider } from './contexts/ClusterContext';
 import { IconMoon, IconSun } from '@tabler/icons-react';
+import FourOhFour from './components/404';
 
 const App = () => {
   const { signOut } = useClerk();
@@ -46,8 +47,8 @@ const App = () => {
           color: 'var(--foreground)',
         }}
       >
-        {/* TOP RIGHT CONTROLS */}
-        <div className="fixed right-4 top-2 z-[60] flex items-center gap-8">
+        {/* TOP RIGHT CONTROLS - Fixed positioning with consistent z-index */}
+        <div className="fixed right-4 top-4 z-[60] flex items-center gap-8">
           {/* SIGN OUT BUTTON - Only visible when signed in */}
           <SignedIn>
             <button
@@ -56,7 +57,7 @@ const App = () => {
                   window.location.href = '/';
                 })
               }
-              className="duration-800 text-muted-foreground flex h-10 w-10 items-center justify-center rounded-full font-semibold shadow-sm transition-colors hover:text-red-700 hover:shadow-lg"
+              className="duration-800 text-muted-foreground flex justify-center font-semibold transition-colors hover:text-red-700"
               title="Sign Out"
             >
               LOGOUT
@@ -64,10 +65,15 @@ const App = () => {
           </SignedIn>
 
           {/* DARK MODE TOGGLE */}
-          <label className="swap swap-rotate text-foreground">
-            <input type="checkbox" checked={isDark} onChange={toggleTheme} />
-            <IconMoon className="duration-800 text-muted-foreground swap-on flex h-6 w-6 items-center justify-center rounded-full shadow-sm transition-all hover:shadow-lg" />
-            <IconSun className="duration-800 text-muted-foreground swap-off flex h-6 w-6 items-center justify-center rounded-full shadow-sm transition-all hover:shadow-lg" />
+          <label className="swap swap-rotate cursor-pointer">
+            <input
+              type="checkbox"
+              checked={isDark}
+              onChange={toggleTheme}
+              className="sr-only"
+            />
+            <IconMoon className="duration-800 text-muted-foreground swap-on h-6 w-6 transition-all" />
+            <IconSun className="duration-800 text-muted-foreground swap-off h-6 w-6 transition-all" />
           </label>
         </div>
 
@@ -88,6 +94,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/historical" element={<HistoricalData />} />
+                <Route path="*" element={<FourOhFour />} />
               </Routes>
             </div>
           </div>
