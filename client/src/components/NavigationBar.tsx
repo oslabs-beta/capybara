@@ -58,7 +58,7 @@ const NavigationBar: React.FC = () => {
       href: '/',
     },
     {
-      title: 'Select Cluster',
+      title: 'Cluster Connector',
       icon: (
         <button
           onClick={() => setIsClusterModalOpen(true)}
@@ -175,17 +175,6 @@ const NavigationBar: React.FC = () => {
               className="bg-background relative z-10 w-[90vw] max-w-md rounded-2xl p-6 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Header */}
-              <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-xl font-semibold">Select Cluster</h2>
-                <button
-                  onClick={() => setIsClusterModalOpen(false)}
-                  className="text-muted-foreground hover:bg-muted rounded-full p-2 transition-colors"
-                >
-                  ×
-                </button>
-              </div>
-
               {/* Cluster Selector */}
               <ClusterSelector />
 
@@ -195,7 +184,7 @@ const NavigationBar: React.FC = () => {
                   onClick={() => setIsClusterModalOpen(false)}
                   className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-4 py-2 transition-colors"
                 >
-                  Done
+                  accept
                 </button>
               </div>
             </motion.div>
