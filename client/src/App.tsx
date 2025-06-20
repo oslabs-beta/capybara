@@ -12,7 +12,6 @@ import { SignedIn, SignedOut, useClerk } from '@clerk/clerk-react';
 import { Routes, Route } from 'react-router-dom';
 import { ClusterProvider } from './contexts/ClusterContext';
 import { IconMoon, IconSun } from '@tabler/icons-react';
-import FourOhFour from './components/404';
 
 const App = () => {
   const { signOut } = useClerk();
@@ -47,59 +46,63 @@ const App = () => {
           color: 'var(--foreground)',
         }}
       >
-        {/* TOP RIGHT CONTROLS - Fixed positioning with consistent z-index */}
-        <div className="fixed right-4 top-4 z-[60] flex items-center gap-8">
-          {/* SIGN OUT BUTTON - Only visible when signed in */}
-          <SignedIn>
-            <button
-              onClick={() =>
-                signOut(() => {
-                  window.location.href = '/';
-                })
-              }
-              className="duration-800 text-muted-foreground flex justify-center font-semibold transition-colors hover:text-red-700"
-              title="Sign Out"
-            >
-              LOGOUT
-            </button>
-          </SignedIn>
+        {/* Global width constraint container */}
+        <div className="max-w-9xl relative mx-auto px-10">
+          {/* TOP RIGHT CONTROLS */}
+          <div className="absolute right-3 top-3 z-[60] flex items-center justify-end gap-8">
+            {/* SIGN OUT BUTTON - Only visible when signed in */}
+            <SignedIn>
+              <button
+                onClick={() =>
+                  signOut(() => {
+                    window.location.href = '/';
+                  })
+                }
+                className="duration-800 text-muted-foreground flex justify-center text-lg font-semibold transition-colors hover:text-red-500/70"
+                title="Sign Out"
+              >
+                logout
+              </button>
+            </SignedIn>
 
-          {/* DARK MODE TOGGLE */}
-          <label className="swap swap-rotate cursor-pointer">
-            <input
-              type="checkbox"
-              checked={isDark}
-              onChange={toggleTheme}
-              className="sr-only"
-            />
-            <IconMoon className="duration-800 text-muted-foreground swap-on h-6 w-6 transition-all" />
-            <IconSun className="duration-800 text-muted-foreground swap-off h-6 w-6 transition-all" />
-          </label>
-        </div>
-
-        {/* CLERK AUTH CONTROLS */}
-        <Header />
-
-        {/* CONDITIONAL CONTENT WITH ROUTES */}
-        <SignedOut>
-          <div className="pt-16">
-            <Welcome />
+            {/* DARK MODE TOGGLE */}
+            <label className="swap swap-rotate cursor-pointer hover:[&_.swap-off]:text-amber-500 hover:[&_.swap-on]:text-white">
+              <input
+                type="checkbox"
+                checked={isDark}
+                onChange={toggleTheme}
+                className="sr-only"
+              />
+              <IconMoon className="duration-800 text-muted-foreground swap-on h-6 w-6 transition-all" />
+              <IconSun className="duration-800 text-muted-foreground swap-off h-6 w-6 transition-all" />
+            </label>
           </div>
-        </SignedOut>
-        <SignedIn>
-          {/* Create a fixed viewport container that accounts for header and nav */}
-          <div className="fixed bottom-0 left-0 right-0 top-16 flex flex-col">
-            {/* Scrollable content area that stops at navigation bar */}
-            <div className="flex-1 overflow-y-auto pb-24">
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/historical" element={<HistoricalData />} />
-                <Route path="*" element={<FourOhFour />} />
-              </Routes>
+
+          {/* CLERK AUTH CONTROLS */}
+          <Header />
+
+          {/* CONDITIONAL CONTENT WITH ROUTES */}
+          <SignedOut>
+            <div className="pt-16">
+              <Welcome />
             </div>
-          </div>
-          <NavigationBar />
-        </SignedIn>
+          </SignedOut>
+          <SignedIn>
+            {/* Create a fixed viewport container that accounts for header and nav */}
+            <div className="fixed bottom-0 left-0 right-0 top-16 flex flex-col">
+              {/* Scrollable content area that stops at navigation bar */}
+              <div className="flex-1 overflow-y-auto pb-24">
+                <div className="max-w-9xl mx-auto">
+                  <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/historical" element={<HistoricalData />} />
+                  </Routes>
+                </div>
+              </div>
+            </div>
+            <NavigationBar />
+          </SignedIn>
+        </div>
       </div>
     </ClusterProvider>
   );
