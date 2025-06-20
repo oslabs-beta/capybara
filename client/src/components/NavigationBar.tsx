@@ -196,7 +196,7 @@ const NavigationBar: React.FC = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="bg-background relative z-10 w-[90vw] max-w-md rounded-2xl p-6 shadow-2xl"
+              className="bg-background relative z-10 w-[90vw] max-w-md rounded-2xl p-4 pb-3 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Cluster Selector */}
@@ -206,9 +206,10 @@ const NavigationBar: React.FC = () => {
               <div className="mt-6 flex justify-end">
                 <button
                   onClick={() => setIsClusterModalOpen(false)}
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-1.5 py-1 text-sm font-semibold transition-colors"
+                  className="duration-800 text-primary hover:text-secondary flex justify-center text-sm font-semibold transition-colors sm:text-lg"
+                  title="Confirm"
                 >
-                  CONFIRM
+                  confirm
                 </button>
               </div>
             </motion.div>
