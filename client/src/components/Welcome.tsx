@@ -67,7 +67,7 @@ const Welcome: React.FC = () => {
           </div>
           <div className="w-full px-4 text-center">
             <p
-              className="mb-4 text-4xl font-extrabold sm:text-6xl"
+              className="mb-4 text-6xl font-extrabold sm:text-7xl"
               style={{ color: 'var(--primary)' }}
             >
               coffybara
@@ -75,7 +75,7 @@ const Welcome: React.FC = () => {
                 <span className="ml-2 inline-block h-3 w-3 rounded-full bg-pink-200"></span>
               )}
             </p>
-            <p className="text-lg sm:text-xl">
+            <p className="text-md sm:text-lg">
               {showTypewriter && (
                 <span
                   className="ml-1 mt-2 block font-bold"
@@ -108,7 +108,7 @@ const Welcome: React.FC = () => {
         </div>
 
         {/* Desktop Layout - Side by Side */}
-        <div className="hidden md:grid md:h-full md:grid-cols-2 md:items-center md:justify-center md:gap-8">
+        <div className="hidden md:-mx-10 md:grid md:h-full md:grid-cols-2 md:items-center md:justify-center">
           <div className="flex justify-center lg:justify-end">
             <img
               src="/coffybara.png"
@@ -126,7 +126,7 @@ const Welcome: React.FC = () => {
                 <span className="ml-2 inline-block h-4 w-4 rounded-full bg-pink-200"></span>
               )}
             </p>
-            <p className="ml-1 text-left text-xl lg:text-2xl">
+            <p className="xxl:text-2xl text-md ml-1 text-left xl:text-xl">
               {showTypewriter && (
                 <span
                   className="ml-1 font-bold"

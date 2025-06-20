@@ -33,17 +33,23 @@ const NavigationBar: React.FC = () => {
   const links = [
     {
       title: 'Dashboard',
-      icon: <IconHome className="text-muted-foreground h-full w-full" />,
+      icon: (
+        <IconHome className="text-primary hover:text-secondary h-full w-full" />
+      ),
       href: '/',
     },
     {
       title: 'Performance Analytics',
-      icon: <IconAnalyze className="text-muted-foreground h-full w-full" />,
+      icon: (
+        <IconAnalyze className="text-primary hover:text-secondary h-full w-full" />
+      ),
       href: '/historical',
     },
     {
       title: 'Notifications',
-      icon: <IconBellCheck className="text-muted-foreground h-full w-full" />,
+      icon: (
+        <IconBellCheck className="text-primary hover:text-secondary h-full w-full" />
+      ),
       href: '#',
     },
 
@@ -68,7 +74,7 @@ const NavigationBar: React.FC = () => {
           onClick={() => setIsClusterModalOpen(true)}
           className="flex h-full w-full items-center justify-center"
         >
-          <ServerIcon className="text-muted-foreground h-full w-full" />
+          <ServerIcon className="text-primary hover:text-secondary h-full w-full" />
         </button>
       ),
       href: '#',
@@ -81,7 +87,7 @@ const NavigationBar: React.FC = () => {
           onClick={() => setIsProfileModalOpen(true)}
           className="flex h-full w-full items-center justify-center"
         >
-          <IconUser className="text-muted-foreground h-full w-full" />
+          <IconUser className="text-primary hover:text-secondary h-full w-full" />
         </button>
       ),
       href: '#',
@@ -89,7 +95,9 @@ const NavigationBar: React.FC = () => {
     },
     {
       title: 'Settings',
-      icon: <IconSettings className="text-muted-foreground h-full w-full" />,
+      icon: (
+        <IconSettings className="text-primary hover:text-secondary h-full w-full" />
+      ),
       href: '#',
     },
     // {
@@ -103,7 +111,7 @@ const NavigationBar: React.FC = () => {
     //       }
     //       className="flex h-full w-full items-center justify-center"
     //     >
-    //       <IconLogout className="text-muted-foreground h-full w-full" />
+    //       <IconLogout className="text-primary hover:text-secondary h-full w-full" />
     //     </button>
     //   ),
     //   href: '#',
