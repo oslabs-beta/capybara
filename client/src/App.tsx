@@ -12,6 +12,7 @@ import { SignedIn, SignedOut } from '@clerk/clerk-react';
 import { Routes, Route } from 'react-router-dom';
 import { ClusterProvider } from './contexts/ClusterContext';
 import { Toaster } from './components/ui/sonner';
+import ToastNotifications from './components/ToastNotifications';
 
 const App = () => {
   const [isDark, setIsDark] = useState(() => {
@@ -74,6 +75,8 @@ const App = () => {
                     duration={5000}
                     closeButton={false}
                   />
+                  {/* SIMPLE WEBSOCKET TOAST NOTIFICATIONS */}
+                  <ToastNotifications />
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/historical" element={<HistoricalData />} />
