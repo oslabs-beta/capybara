@@ -16,7 +16,7 @@ import { sendNotifications } from './notificationService';
 
 // ! Prevent processing of past events and throttle Slack notifications !
 const SUBSCRIPTION_START_TIME = Date.now();
-const RATE_LIMIT_INTERVAL = 60 * 1 * 1000; // 15 minutes
+const RATE_LIMIT_INTERVAL = 60 * 15 * 1000; // 15 minutes
 
 let lastNotificationTime = 0;
 
