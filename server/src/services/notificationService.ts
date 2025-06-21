@@ -14,14 +14,24 @@ interface K8sEvent {
   timestamp: string;
 }
 
+// Extended notification interface for better toast control
+interface ExtendedK8sNotification extends K8sNotification {
+  toastConfig?: {
+    duration?: number;
+    dismissible?: boolean;
+    showAction?: boolean;
+    priority?: 'low' | 'medium' | 'high' | 'critical';
+  };
+}
+
 export const sendNotifications = async (
   event: K8sEvent,
   aiResponse: string,
   similarEvents: any,
 ) => {
   try {
-    // Create unified notification object
-    const notification: K8sNotification = {
+    // Create unified notification object with toast configuration
+    const notification: ExtendedK8sNotification = {
       id: uuidv4(),
       type: determineNotificationType(event.reason),
       title: `Kubernetes ${event.reason} Detected`,
@@ -35,11 +45,26 @@ export const sendNotifications = async (
       },
       aiAnalysis: aiResponse,
       similarEventsCount: similarEvents.matches?.length || 0,
+      // Toast-specific configuration
+      toastConfig: {
+        duration: getToastDuration(event.reason),
+        dismissible: true,
+        showAction: shouldShowAction(event.reason),
+        priority: determineSeverity(event.reason) as
+          | 'low'
+          | 'medium'
+          | 'high'
+          | 'critical',
+      },
     };
 
-    // Send to dashboard via WebSocket
+    // Send to dashboard via WebSocket (includes toast data)
     broadcastNotification(notification);
-    console.log(chalk.green('[Notifications] Sent to dashboard via WebSocket'));
+    console.log(
+      chalk.green(
+        '[Notifications] Sent to dashboard via WebSocket with toast config',
+      ),
+    );
 
     // Send to Slack (existing functionality)
     const slackMessage = formatSlackMessage(event, aiResponse, similarEvents);
@@ -76,6 +101,21 @@ const determineSeverity = (
   return 'low';
 };
 
+// Helper function to determine toast duration based on event type
+const getToastDuration = (reason: string): number => {
+  if (reason.includes('OOMKilled')) return 15000; // 15 seconds for critical
+  if (reason.includes('CrashLoopBackOff')) return 10000; // 10 seconds for high
+  if (reason.includes('Failed')) return 7000; // 7 seconds for medium
+  return 5000; // 5 seconds for low priority
+};
+
+// Helper function to determine if toast should show action button
+const shouldShowAction = (reason: string): boolean => {
+  // Show action button for events that typically require immediate attention
+  const criticalReasons = ['OOMKilled', 'CrashLoopBackOff', 'Failed'];
+  return criticalReasons.some((r) => reason.includes(r));
+};
+
 const formatSlackMessage = (
   event: K8sEvent,
   aiResponse: string,
@@ -99,5 +139,9 @@ ${event.message}
 *AI Analysis and Resolution:*
 ${aiResponse}
 
-${similarEventCount > 0 ? `_Note: Found ${similarEventCount} similar past events that informed this analysis._` : '_Note: No similar past events found in the database._'}`;
+${
+  similarEventCount > 0
+    ? `_Note: Found ${similarEventCount} similar past events that informed this analysis._`
+    : '_Note: No similar past events found in the database._'
+}`;
 };

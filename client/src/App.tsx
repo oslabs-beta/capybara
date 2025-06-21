@@ -11,6 +11,7 @@ import Header from './components/Header';
 import { SignedIn, SignedOut } from '@clerk/clerk-react';
 import { Routes, Route } from 'react-router-dom';
 import { ClusterProvider } from './contexts/ClusterContext';
+import { Toaster } from './components/ui/sonner';
 
 const App = () => {
   const [isDark, setIsDark] = useState(() => {
@@ -64,6 +65,15 @@ const App = () => {
               {/* Scrollable content area with top padding to account for header */}
               <div className="flex-1 overflow-y-auto pb-24 pt-16">
                 <div className="max-w-9xl mx-auto">
+                  {/* SONNER TOAST NOTIFICATIONS */}
+                  <Toaster
+                    theme={isDark ? 'dark' : 'light'}
+                    position="bottom-right"
+                    richColors={true}
+                    expand={false}
+                    duration={5000}
+                    closeButton={false}
+                  />
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/historical" element={<HistoricalData />} />
