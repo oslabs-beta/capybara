@@ -23,6 +23,9 @@ const App = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
+  // Toast position state for responsive behavior
+  const [toastPosition, setToastPosition] = useState('top-center');
+
   // ----------------------------------------------------------
   // * USEEFFECT for light/dark mode toggle
   // ----------------------------------------------------------
@@ -35,6 +38,26 @@ const App = () => {
       localStorage.setItem('theme', 'light');
     }
   }, [isDark]);
+
+  // ----------------------------------------------------------
+  // * USEEFFECT for responsive toast positioning
+  // ----------------------------------------------------------
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 640px)');
+
+    const updateToastPosition = (e) => {
+      setToastPosition(e.matches ? 'bottom-right' : 'top-center');
+    };
+
+    // Set initial position
+    updateToastPosition(mediaQuery);
+
+    // Listen for screen size changes
+    mediaQuery.addEventListener('change', updateToastPosition);
+
+    // Cleanup listener
+    return () => mediaQuery.removeEventListener('change', updateToastPosition);
+  }, []);
 
   const toggleTheme = () => {
     setIsDark((prevIsDark) => !prevIsDark);
@@ -61,20 +84,22 @@ const App = () => {
             </div>
           </SignedOut>
           <SignedIn>
+            {/* SONNER TOAST NOTIFICATIONS - Moved outside to same stacking context as Header */}
+            <Toaster
+              theme={isDark ? 'dark' : 'light'}
+              position={toastPosition}
+              className="z-[60]" // Higher than header's z-50
+              richColors={true}
+              expand={false}
+              duration={5000}
+              closeButton={false}
+            />
+
             {/* Create a fixed viewport container that starts from top (overlaps with header) */}
             <div className="fixed bottom-0 left-0 right-0 top-0 flex flex-col">
               {/* Scrollable content area with top padding to account for header */}
               <div className="flex-1 overflow-y-auto pb-24 pt-16">
                 <div className="max-w-9xl mx-auto">
-                  {/* SONNER TOAST NOTIFICATIONS */}
-                  <Toaster
-                    theme={isDark ? 'dark' : 'light'}
-                    position="bottom-right"
-                    richColors={true}
-                    expand={false}
-                    duration={5000}
-                    closeButton={false}
-                  />
                   {/* SIMPLE WEBSOCKET TOAST NOTIFICATIONS */}
                   <ToastNotifications />
                   <Routes>
