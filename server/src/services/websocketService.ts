@@ -16,6 +16,7 @@ export const initializeWebSocket = (server: HttpServer) => {
         'https://capybara.vercel.app',
         'https://capybara-git-main.vercel.app',
         'https://capybara-frontend.vercel.app',
+        'https://coffybara.com',
         /https:\/\/.*\.vercel\.app$/,
       ],
       methods: ['GET', 'POST'],
