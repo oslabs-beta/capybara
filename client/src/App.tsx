@@ -24,7 +24,9 @@ const App = () => {
   });
 
   // Toast position state for responsive behavior
-  const [toastPosition, setToastPosition] = useState('top-center');
+  const [toastPosition, setToastPosition] = useState<
+    'top-center' | 'bottom-right'
+  >('top-center');
 
   // ----------------------------------------------------------
   // * USEEFFECT for light/dark mode toggle
@@ -45,7 +47,11 @@ const App = () => {
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 640px)');
 
-    const updateToastPosition = (e) => {
+    interface MediaQueryEvent {
+      matches: boolean;
+    }
+
+    const updateToastPosition = (e: MediaQueryEvent) => {
       setToastPosition(e.matches ? 'bottom-right' : 'top-center');
     };
 
