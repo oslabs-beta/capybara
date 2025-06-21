@@ -23,9 +23,14 @@ interface K8sNotification {
 
 const ToastNotifications = () => {
   useEffect(() => {
-    console.log('[Toast] 🚀 Component mounted, attempting WebSocket connection...');
-    console.log('[Toast] 🔗 Connecting to:', import.meta.env.VITE_API_URL || 'http://localhost:3000');
-    
+    console.log(
+      '[Toast] 🚀 Component mounted, attempting WebSocket connection...',
+    );
+    console.log(
+      '[Toast] 🔗 Connecting to:',
+      import.meta.env.VITE_API_URL || 'http://localhost:3000',
+    );
+
     // Connect to WebSocket server with more options
     const socket = io(import.meta.env.VITE_API_URL || 'http://localhost:3000', {
       reconnection: true,
@@ -45,7 +50,10 @@ const ToastNotifications = () => {
     });
 
     socket.on('disconnect', (reason) => {
-      console.log('[Toast] ❌ Disconnected from WebSocket server. Reason:', reason);
+      console.log(
+        '[Toast] ❌ Disconnected from WebSocket server. Reason:',
+        reason,
+      );
       toast.warning('Disconnected from monitoring server');
     });
 
@@ -63,13 +71,17 @@ const ToastNotifications = () => {
         title: notification.title,
         severity: notification.metadata.severity,
         namespace: notification.metadata.namespace,
-        pod: notification.metadata.pod
+        pod: notification.metadata.pod,
       });
 
       // Create toast message
       const message = `${notification.title}\n${notification.metadata.namespace}/${notification.metadata.pod}\n${notification.message}`;
-      
-      console.log('[Toast] 🍞 Showing toast for:', notification.type, notification.metadata.severity);
+
+      console.log(
+        '[Toast] 🍞 Showing toast for:',
+        notification.type,
+        notification.metadata.severity,
+      );
 
       // Show toast based on type and severity
       switch (notification.type) {
@@ -98,7 +110,10 @@ const ToastNotifications = () => {
           toast.info(message, { duration: 5000 });
           break;
         default:
-          console.log('[Toast] ❓ Unknown notification type:', notification.type);
+          console.log(
+            '[Toast] ❓ Unknown notification type:',
+            notification.type,
+          );
           toast.info(message, { duration: 5000 });
       }
     });
@@ -113,9 +128,9 @@ const ToastNotifications = () => {
       console.log('[Toast] 🧪 Connection status check:');
       console.log('[Toast] 🔌 Connected:', socket.connected);
       console.log('[Toast] 🆔 Socket ID:', socket.id);
-      
+
       // Test toast to make sure Sonner is working
-      toast.info('Toast component loaded and ready!');
+      toast.info('Coffybara loaded and ready!');
     }, 2000);
 
     // Cleanup on unmount
