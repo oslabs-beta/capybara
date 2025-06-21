@@ -10,11 +10,17 @@ let io: SocketIOServer | null = null;
 export const initializeWebSocket = (server: HttpServer) => {
   io = new SocketIOServer(server, {
     cors: {
-      origin:
-        process.env.NODE_ENV === 'production'
-          ? ['https://your-frontend-domain.com']
-          : ['http://localhost:5173'],
+      origin: [
+        'http://localhost:5173',
+        'http://localhost:3000',
+        'https://capybara.vercel.app',
+        'https://capybara-git-main.vercel.app',
+        'https://capybara-frontend.vercel.app',
+        'https://coffybara.com',
+        /https:\/\/.*\.vercel\.app$/,
+      ],
       methods: ['GET', 'POST'],
+      credentials: true,
     },
   });
 
